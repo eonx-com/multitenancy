@@ -1,0 +1,38 @@
+{
+  "name": "loyaltycorp/multitenancy",
+  "description": "Library for handling multiple tenants within a single code base",
+  "keywords": [
+    "loyaltycorp",
+    "multitenancy"
+  ],
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "require": {
+    "php": ">=7.3"
+  },
+  "require-dev": {
+    "eoneopay/standards": "dev-master",
+    "phpmd/phpmd": "^2.6",
+    "phpstan/phpstan": "^0.11",
+    "phpstan/phpstan-phpunit": "^0.11",
+    "phpstan/phpstan-strict-rules": "^0.11",
+    "phpunit/phpunit": "^8.0",
+    "roave/security-advisories": "dev-master",
+    "sebastian/phpcpd": "^4.0",
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "LoyaltyCorp\\Mulitenancy\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\LoyaltyCorp\\Multitenancy\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable",
+  "config": {
+    "optimize-autoloader": true
+  }
+}

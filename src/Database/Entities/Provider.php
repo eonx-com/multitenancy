@@ -6,6 +6,8 @@ namespace LoyaltyCorp\Mulitenancy\Database\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Provider represents a customer of Loyalty Corp in this product.
+ *
  * @ORM\Entity()
  *
  * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $tenantId.

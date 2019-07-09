@@ -5,19 +5,30 @@ namespace LoyaltyCorp\Mulitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity()
+ */
 class Tenant
 {
     /**
+     * @ORM\Column(type="integer", name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id()
+     *
      * @var int Internal Database ID.
      */
-    private $id;
+    private $tenantId;
 
     /**
+     * @ORM\Column(type="string", nullable=false, unique=true)
+     *
      * @var string The immutable external ID.
      */
     private $externalId;
 
     /**
+     * @ORM\Column(type="string", nullable=false)
+     *
      * @var string Common name of provider.
      */
     private $name;

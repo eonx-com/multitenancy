@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $tenantId.
  */
-class Tenant
+class Provider
 {
     /**
      * @ORM\Column(type="integer", name="id")
@@ -19,7 +19,7 @@ class Tenant
      *
      * @var int Internal Database ID.
      */
-    private $tenantId;
+    private $providerId;
 
     /**
      * @ORM\Column(type="string", nullable=false, unique=true)

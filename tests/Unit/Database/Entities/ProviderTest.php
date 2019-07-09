@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
-use LoyaltyCorp\Mulitenancy\Database\Entities\Tenant;
+use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
 use Tests\LoyaltyCorp\Multitenancy\TestCase;
 
 /**
- * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Tenant
+ * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Provider
  */
-class TenantTest extends TestCase
+class ProviderTest extends TestCase
 {
     /**
      * Test that getters return text in constructor.
@@ -18,7 +18,7 @@ class TenantTest extends TestCase
      */
     public function testState(): void
     {
-        $entity = new Tenant('abc1235zxc', 'Acme Example Corp');
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
 
         self::assertSame('abc1235zxc', $entity->getExternalId());
         self::assertSame('Acme Example Corp', $entity->getName());
@@ -31,7 +31,7 @@ class TenantTest extends TestCase
      */
     public function testNameSet(): void
     {
-        $entity = new Tenant('0x0x0x123', 'Foo');
+        $entity = new Provider('0x0x0x123', 'Foo');
 
         $entity->setName('Bob');
 

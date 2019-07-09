@@ -19,9 +19,13 @@ class TenantTest extends DoctrineTestCase
     public function testPersistence(): void
     {
         $entity = new Tenant('99999991111111aaaaabbbbccccc', 'Acme Corp');
-
         $this->getEntityManager()->persist($entity);
+        $this->getEntityManager()->flush();
+        $this->getEntityManager()->clear(Tenant::class);
+        $repository = $this->getEntityManager()->getRepository(Tenant::class);
 
-        $this->addToAssertionCount(1);
+        $actual = $repository->findOneBy(['externalId' => '99999991111111aaaaabbbbccccc']);
+
+        $this->assertEquals($entity, $actual);
     }
 }

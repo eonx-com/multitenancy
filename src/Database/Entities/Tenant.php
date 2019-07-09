@@ -39,7 +39,8 @@ class Tenant
      * @param string $externalId External ID to find this tenant by.
      * @param string $name Common name of the tenant.
      */
-    public function __construct(string $externalId, string $name) {
+    public function __construct(string $externalId, string $name)
+    {
         $this->externalId = $externalId;
         $this->name = $name;
     }
@@ -49,7 +50,8 @@ class Tenant
      *
      * @return string
      */
-    public function getExternalId(): string {
+    public function getExternalId(): string
+    {
         return $this->externalId;
     }
 
@@ -58,16 +60,20 @@ class Tenant
      *
      * @return string
      */
-    public function getName(): string {
+    public function getName(): string
+    {
         return $this->name;
     }
 
     /**
      * Update common name of the tenant.
      *
-     * @param string $name
+     * @param string $name Name to change on tenant.
+     *
+     * @return void
      */
-    public function setName(string $name): void {
+    public function setName(string $name): void
+    {
         $this->name = $name;
     }
 }

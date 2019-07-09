@@ -11,6 +11,11 @@ use Tests\LoyaltyCorp\Multitenancy\DoctrineTestCase;
  */
 class TenantTest extends DoctrineTestCase
 {
+    /**
+     * Test that Tenants can be successfully persisted to the database.
+     *
+     * @return void
+     */
     public function testPersistence(): void
     {
         $entity = new Tenant('99999991111111aaaaabbbbccccc', 'Acme Corp');

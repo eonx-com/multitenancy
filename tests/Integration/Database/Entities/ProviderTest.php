@@ -26,6 +26,6 @@ class ProviderTest extends DoctrineTestCase
 
         $actual = $repository->findOneBy(['externalId' => '99999991111111aaaaabbbbccccc']);
 
-        $this->assertEquals($entity, $actual);
+        self::assertEquals($entity, $actual);
     }
 }

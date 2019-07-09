@@ -15,4 +15,13 @@ class TenantTest extends TestCase
         self::assertSame('abc1235zxc', $entity->getExternalId());
         self::assertSame('Acme Example Corp', $entity->getName());
     }
+
+    public function testNameSet(): void
+    {
+        $entity = new Tenant('0x0x0x123', 'Foo');
+
+        $entity->setName('Bob');
+
+        self::assertSame('Bob', $entity->getName());
+    }
 }

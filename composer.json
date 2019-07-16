@@ -9,7 +9,8 @@
   "type": "library",
   "require": {
     "php": ">=7.3",
-    "doctrine/orm": "^2.6.3"
+    "doctrine/orm": "^2.6.3",
+    "loyaltycorp/requesthandlers": "^1.1"
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",

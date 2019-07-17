@@ -5,9 +5,22 @@ namespace Tests\LoyaltyCorp\Multitenancy\TestCases;
 
 use DateInterval;
 use DateTime;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManagerInterface;
+use EoneoPay\Externals\Bridge\Laravel\Validator;
+use EoneoPay\Externals\Validator\Interfaces\ValidatorInterface;
+use EoneoPay\Utils\Interfaces\Exceptions\ExceptionInterface;
+use EoneoPay\Utils\Interfaces\Exceptions\ValidationExceptionInterface;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Validation\Factory;
+use Laravel\Lumen\Application;
 use Laravel\Lumen\Testing\TestCase as BaseTestCase;
-use Tests\LoyaltyCorp\Multitenancy\Helpers\ApplicationInstantiator;
+use PHPUnit\Framework\Constraint\Exception as ExceptionConstraint;
+use PHPUnit\Framework\TestResult;
+use RuntimeException;
+use Tests\LoyaltyCorp\Multitenancy\Helpers\ApplicationBootstrapper;
 use Tests\LoyaltyCorp\Multitenancy\Helpers\DateIntervalFormatter;
+use Throwable;
 
 /**
  * @noinspection EfferentObjectCouplingInspection
@@ -27,6 +40,41 @@ class TestCase extends BaseTestCase
      * @var \Doctrine\Common\Cache\Cache
      */
     private static $metadataCache;
+
+    /**
+     * Expected exception class (for exception testing).
+     *
+     * @var string
+     */
+    private $exceptionClass;
+
+    /**
+     * Expected exception message (for exception testing).
+     *
+     * @var string
+     */
+    private $exceptionMessage;
+
+    /**
+     * Expected exception message parameters (for exception testing).
+     *
+     * @var mixed[]
+     */
+    private $exceptionParameters = [];
+
+    /**
+     * Expected exception validation failure keys (for exception testing).
+     *
+     * @var mixed[]
+     */
+    private $exceptionValidation = [];
+
+    /**
+     * Validator instance.
+     *
+     * @var \EoneoPay\Externals\Bridge\Laravel\Validator
+     */
+    private $validator;
 
     /**
      * Uses assertSame on $expected and $actual arrays after converting DateTime and DateInterval
@@ -72,6 +120,164 @@ class TestCase extends BaseTestCase
      */
     public function createApplication()
     {
-        return ApplicationInstantiator::create();
+        $app = ApplicationBootstrapper::create();
+
+        // Make sure it's an app
+        if (($app instanceof Application) === false) {
+            new RuntimeException('Unable to create application, can not continue');
+        }
+
+        if (self::$metadataCache === null) {
+            self::$metadataCache = new ArrayCache();
+        }
+
+        $app->make('registry')->getManager()->getMetadataFactory()->setCacheDriver(self::$metadataCache);
+
+        return $app;
+    }
+
+    /**
+     * Get doctrine entity manager instance.
+     *
+     * @return \Doctrine\ORM\EntityManagerInterface
+     */
+    protected function getDoctrineEntityManager(): DoctrineEntityManagerInterface
+    {
+        // Extract entity manager from registry
+        return $this->app->make('registry')->getManager();
+    }
+
+    /**
+     * Get validator instance.
+     *
+     * @return \EoneoPay\Externals\Validator\Interfaces\ValidatorInterface
+     */
+    protected function getValidator(): ValidatorInterface
+    {
+        if ($this->validator !== null) {
+            return $this->validator;
+        }
+
+        // Get validator factory from app so the extensions are loaded by app service provider
+        try {
+            $this->validator = new Validator($this->app->make(Factory::class));
+        } catch (BindingResolutionException $exception) {
+            self::fail(\sprintf('Unable to create validator instance: %s', $exception->getMessage()));
+        }
+
+        return $this->validator;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity) Complexity required to fully test exceptions
+     */
+    protected function runTest(): ?TestResult
+    {
+        // Run parent
+        try {
+            $testResult = parent::runTest();
+        } catch (Throwable $exception) {
+            // If no expectations are set, throw original exception
+            if ($this->expectsExpectations() === false) {
+                throw $exception;
+            }
+
+            // Verify exception class matches expectation
+            if ($this->exceptionClass !== null) {
+                self::assertInstanceOf(
+                    $this->exceptionClass,
+                    $exception,
+                    \sprintf('Failed asserting that exception is instance of %s.', $this->exceptionClass)
+                );
+            }
+
+            // Verify exception message matches expectation
+            if ($this->exceptionMessage !== null) {
+                self::assertSame(
+                    $this->exceptionMessage,
+                    $exception->getMessage(),
+                    \sprintf(
+                        'Failed asserting that exception message %s is %s.',
+                        $exception->getMessage(),
+                        $this->exceptionMessage
+                    )
+                );
+            }
+
+            /**
+             * @var \EoneoPay\Utils\Interfaces\Exceptions\ExceptionInterface|\Throwable $exception
+             *
+             * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
+             */
+            // Test parameters if requested
+            if (($exception instanceof ExceptionInterface) === true && \count($this->exceptionParameters) > 0) {
+                self::assertSame(
+                    $exception->getMessageParameters(),
+                    $this->exceptionParameters,
+                    'Failed asserting that exception parameters match expectation.'
+                );
+            }
+
+            /**
+             * @var \EoneoPay\Utils\Interfaces\Exceptions\ValidationExceptionInterface|\Throwable $exception
+             *
+             * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
+             */
+            // Test validation keys if requested
+            if (($exception instanceof ValidationExceptionInterface) === true &&
+                \count($this->exceptionValidation) > 0) {
+                self::assertSame(
+                    \array_keys($exception->getErrors()),
+                    $this->exceptionValidation,
+                    'Failed asserting that keys from exception validation match expectation.'
+                );
+            }
+
+            return null;
+        }
+
+        // If expectations are set, fail as they should've thrown
+        if ($this->expectsExpectations() === true) {
+            self::assertThat(
+                null,
+                new ExceptionConstraint($this->exceptionClass)
+            );
+        }
+
+        return $testResult;
+    }
+
+    /**
+     * @param string $class The exception class
+     * @param string $message The exception message
+     * @param mixed[]|null $parameters Parameters for the exception message
+     * @param mixed[]|null $validationKeys Keys returned for a validation failure
+     *
+     * @return void
+     */
+    protected function setExpectedException(
+        string $class,
+        string $message,
+        ?array $parameters = null,
+        ?array $validationKeys = null
+    ): void {
+        $this->exceptionClass = $class;
+        $this->exceptionMessage = $message;
+        $this->exceptionParameters = $parameters ?? [];
+        $this->exceptionValidation = $validationKeys ?? [];
+    }
+
+    /**
+     * Determine if we are checking for exceptions.
+     *
+     * @return bool
+     */
+    private function expectsExpectations(): bool
+    {
+        return $this->exceptionClass !== null ||
+            $this->exceptionMessage !== null ||
+            \count($this->exceptionParameters) > 0;
     }
 }

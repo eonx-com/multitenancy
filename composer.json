@@ -11,7 +11,9 @@
     "php": ">=7.3",
     "doctrine/orm": "^2.6.3",
     "loyaltycorp/requesthandlers": "^1.1",
-    "eoneopay/externals": "^1.0@RC"
+    "symfony/validator": "^4.3",
+    "eoneopay/utils": "^0.2.8",
+    "eoneopay/framework": "dev-master"
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",

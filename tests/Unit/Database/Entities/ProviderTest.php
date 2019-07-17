@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
-use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use Tests\LoyaltyCorp\Multitenancy\TestCase;
 
 /**
- * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Provider
+ * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
  */
 class ProviderTest extends TestCase
 {

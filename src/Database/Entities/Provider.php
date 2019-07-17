@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Database\Entities;
+namespace LoyaltyCorp\Multitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity()
  *
- * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $tenantId.
+ * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $providerId.
  */
 class Provider
 {

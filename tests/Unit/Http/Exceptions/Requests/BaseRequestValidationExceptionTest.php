@@ -5,13 +5,13 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Exceptions\Requests;
 
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
+use Tests\LoyaltyCorp\Multitenancy\BaseTestCase;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests\BaseRequestValidationExceptionStub;
-use Tests\LoyaltyCorp\Multitenancy\TestCase;
 
 /**
  * @covers \LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\BaseRequestValidationException
  */
-class BaseRequestValidationExceptionTest extends TestCase
+class BaseRequestValidationExceptionTest extends BaseTestCase
 {
     /**
      * Tests the base exception method.

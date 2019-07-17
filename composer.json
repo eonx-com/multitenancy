@@ -10,7 +10,8 @@
   "require": {
     "php": ">=7.3",
     "doctrine/orm": "^2.6.3",
-    "loyaltycorp/requesthandlers": "^1.1"
+    "loyaltycorp/requesthandlers": "^1.1",
+    "eoneopay/externals": "^1.0@RC"
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",
@@ -33,7 +34,8 @@
       "Tests\\LoyaltyCorp\\Multitenancy\\": "tests/"
     }
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
     "optimize-autoloader": true
   }

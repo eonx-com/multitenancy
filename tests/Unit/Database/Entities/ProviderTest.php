@@ -4,26 +4,13 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
 use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\BaseTestCase;
 
 /**
  * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Provider
  */
-class ProviderTest extends TestCase
+class ProviderTest extends BaseTestCase
 {
-    /**
-     * Test that getters return text in constructor.
-     *
-     * @return void
-     */
-    public function testState(): void
-    {
-        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
-
-        self::assertSame('abc1235zxc', $entity->getExternalId());
-        self::assertSame('Acme Example Corp', $entity->getName());
-    }
-
     /**
      * Test that the name can be overridden.
      *
@@ -36,5 +23,18 @@ class ProviderTest extends TestCase
         $entity->setName('Bob');
 
         self::assertSame('Bob', $entity->getName());
+    }
+
+    /**
+     * Test that getters return text in constructor.
+     *
+     * @return void
+     */
+    public function testState(): void
+    {
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
+
+        self::assertSame('abc1235zxc', $entity->getExternalId());
+        self::assertSame('Acme Example Corp', $entity->getName());
     }
 }

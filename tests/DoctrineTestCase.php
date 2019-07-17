@@ -12,7 +12,7 @@ use Exception;
 /**
  * @coversNothing
  */
-class DoctrineTestCase extends TestCase
+class DoctrineTestCase extends BaseTestCase
 {
     /**
      * SQL queries to create database schema.
@@ -44,7 +44,7 @@ class DoctrineTestCase extends TestCase
      */
     protected function getDoctrineEntityManager(): EntityManagerInterface
     {
-        $paths = [__DIR__.'/../src'];
+        $paths = [__DIR__ . '/../src'];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
         $dbParams = ['driver' => 'pdo_sqlite', 'memory' => true];

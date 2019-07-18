@@ -8,6 +8,8 @@ use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderS
 use Tests\LoyaltyCorp\Multitenancy\Integration\TestCases\HasProviderTestCase;
 
 /**
+ * This test class tests an entity stub which is using HasProvider trait.
+ *
  * @covers \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub
  */
 class HasProviderTest extends HasProviderTestCase

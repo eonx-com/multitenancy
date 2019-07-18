@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 
 /**
+ * This Stub entity is to test HasProvider trait.
+ *
  * @ORM\Entity()
  * @ORM\Table(name="entity_stub")
  *

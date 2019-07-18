@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests;
 
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest;
+use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\RequestTestCase;
 
-class ProviderCreateRequestTest extends RequestTestCase
+class ProviderModifyRequestTest extends RequestTestCase
 {
     /**
      * Returns the class to be tested.
@@ -15,7 +15,7 @@ class ProviderCreateRequestTest extends RequestTestCase
      */
     public function getRequestClass(): string
     {
-        return ProviderCreateRequest::class;
+        return ProviderModifyRequest::class;
     }
 
     /**
@@ -30,9 +30,6 @@ class ProviderCreateRequestTest extends RequestTestCase
 JSON;
 
         $expected = [
-            'id' => [
-                'This value should not be blank.'
-            ],
             'name' => [
                 'This value should not be blank.'
             ]
@@ -52,15 +49,11 @@ JSON;
     {
         $json = <<<JSON
 {
-    "id": false,
     "name": false
 }
 JSON;
 
         $expected = [
-            'id' => [
-                'This value should be of type string.'
-            ],
             'name' => [
                 'This value should be of type string.'
             ]
@@ -78,20 +71,15 @@ JSON;
      */
     public function testFailingLengths(): void
     {
-        $longId = \str_repeat('x', 101);
         $longName = \str_repeat('x', 256);
 
         $json = <<<JSON
 {
-    "id": "{$longId}",
     "name": "{$longName}" 
 }
 JSON;
 
         $expected = [
-            'id' => [
-                'This value is too long. It should have 100 characters or less.'
-            ],
             'name' => [
                 'This value is too long. It should have 255 characters or less.'
             ]

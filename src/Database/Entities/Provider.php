@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Mulitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use EoneoPay\Framework\Database\Entities\Entity;
 
 /**
  * Provider represents a customer of Loyalty Corp in this product.
@@ -12,17 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $tenantId.
  */
-class Provider
+class Provider extends Entity
 {
-    /**
-     * @ORM\Column(type="integer", name="id")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Id()
-     *
-     * @var int Internal Database ID.
-     */
-    private $providerId;
-
     /**
      * @ORM\Column(type="string", nullable=false, unique=true)
      *
@@ -36,6 +28,15 @@ class Provider
      * @var string Common name of provider.
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="integer", name="id")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Id()
+     *
+     * @var int Internal Database ID.
+     */
+    private $providerId;
 
     /**
      * Tenant constructor.
@@ -79,5 +80,28 @@ class Provider
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * Serialize entity as an array
+     *
+     * @return mixed[]
+     */
+    public function toArray(): array
+    {
+        return [
+            'externalId' => $this->getId(),
+            'name' => $this->getName()
+        ];
+    }
+
+    /**
+     * Get the id property for this entity
+     *
+     * @return string
+     */
+    protected function getIdProperty(): string
+    {
+        return 'externalId';
     }
 }

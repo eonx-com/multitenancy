@@ -7,10 +7,16 @@ use DateInterval;
 use DateTime;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManagerInterface;
+use Doctrine\ORM\Tools\SchemaTool;
+use EoneoPay\Externals\Bridge\Laravel\Container;
 use EoneoPay\Externals\Bridge\Laravel\Validator;
+use EoneoPay\Externals\Container\Interfaces\ContainerInterface;
+use EoneoPay\Externals\ORM\EntityManager;
+use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use EoneoPay\Externals\Validator\Interfaces\ValidatorInterface;
 use EoneoPay\Utils\Interfaces\Exceptions\ExceptionInterface;
 use EoneoPay\Utils\Interfaces\Exceptions\ValidationExceptionInterface;
+use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\Factory;
 use Laravel\Lumen\Application;
@@ -42,6 +48,20 @@ class TestCase extends BaseTestCase
     private static $metadataCache;
 
     /**
+     * SQL queries to create database schema.
+     *
+     * @var string
+     */
+    private static $sql;
+
+    /**
+     * Entity manager instance.
+     *
+     * @var \EoneoPay\Externals\ORM\EntityManager
+     */
+    private $entityManager;
+
+    /**
      * Expected exception class (for exception testing).
      *
      * @var string
@@ -68,6 +88,13 @@ class TestCase extends BaseTestCase
      * @var mixed[]
      */
     private $exceptionValidation = [];
+
+    /**
+     * Whether the database has been seeded or not.
+     *
+     * @var bool
+     */
+    private $seeded = false;
 
     /**
      * Validator instance.
@@ -137,6 +164,47 @@ class TestCase extends BaseTestCase
     }
 
     /**
+     * Lazy load database schema only when required.
+     *
+     * @return void
+     */
+    protected function createSchema(): void
+    {
+        // If schema is already created, return
+        if ($this->seeded === true) {
+            return;
+        }
+
+        // Create schema
+        try {
+            $entityManager = $this->getDoctrineEntityManager();
+
+            // If schema hasn't been defined, define it, this will happen once per run
+            if (self::$sql === null) {
+                $tool = new SchemaTool($entityManager);
+                $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
+                self::$sql = \implode(';', $tool->getCreateSchemaSql($metadata));
+            }
+
+            $entityManager->getConnection()->exec(self::$sql);
+        } catch (Exception $exception) {
+            self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
+        }
+
+        $this->seeded = true;
+    }
+
+    /**
+     * Get application container.
+     *
+     * @return \EoneoPay\Externals\Container\Interfaces\ContainerInterface
+     */
+    protected function getContainer(): ContainerInterface
+    {
+        return new Container($this->app);
+    }
+
+    /**
      * Get doctrine entity manager instance.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
@@ -145,6 +213,29 @@ class TestCase extends BaseTestCase
     {
         // Extract entity manager from registry
         return $this->app->make('registry')->getManager();
+    }
+
+    /**
+     * Get entity manager instance.
+     *
+     * @return \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface
+     */
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        if ($this->entityManager !== null) {
+            return $this->entityManager;
+        }
+
+        // Lazy load database
+        $this->createSchema();
+
+        try {
+            $this->entityManager = new EntityManager($this->getDoctrineEntityManager());
+        } catch (BindingResolutionException $exception) {
+            self::fail(\sprintf('Unable to create entity manager instance: %s', $exception->getMessage()));
+        }
+
+        return $this->entityManager;
     }
 
     /**

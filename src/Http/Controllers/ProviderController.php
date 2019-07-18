@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+namespace LoyaltyCorp\Mulitenancy\Http\Controllers;
+
+use EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface;
+use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
+use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest;
+use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+
+class ProviderController extends BaseController
+{
+    /**
+     * @var \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * Constructs a new instance of ProviderController.
+     *
+     * @param \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface $entityManager
+     */
+    public function __construct(
+        EntityManagerInterface $entityManager
+    ) {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * Creates a new provider.
+     *
+     * @param \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest $request
+     *
+     * @return \EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface
+     */
+    public function create(ProviderCreateRequest $request): FormattedApiResponseInterface
+    {
+        $provider = new Provider($request->getId(), $request->getName());
+
+        $this->entityManager->persist($provider);
+        $this->entityManager->flush();
+
+        return $this->formattedApiResponse($provider, 201);
+    }
+
+    /**
+     * Modifies a provider.
+     *
+     * @param \LoyaltyCorp\Mulitenancy\Database\Entities\Provider $provider
+     * @param \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest $request
+     *
+     * @return \EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface
+     *
+     * @Entity(name="provider", expr="repository.findOneBy({id:id})")
+     */
+    public function modify(Provider $provider, ProviderModifyRequest $request): FormattedApiResponseInterface
+    {
+        $provider->setName($request->getName());
+
+        $this->entityManager->persist($provider);
+        $this->entityManager->flush();
+
+        return $this->formattedApiResponse($provider, 200);
+    }
+}

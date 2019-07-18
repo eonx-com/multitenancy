@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Exceptions\Requests;
 
 use LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\ProviderRequestValidationException;
-use Tests\LoyaltyCorp\Multitenancy\BaseTestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
  * @covers \LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\ProviderRequestValidationException
  */
-class ProviderRequestValidationExceptionTest extends BaseTestCase
+class ProviderRequestValidationExceptionTest extends TestCase
 {
     /**
      * Tests that the exception codes match the expected.

@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
 use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\BaseTestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
  * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Provider
  */
-class ProviderTest extends BaseTestCase
+class ProviderTest extends TestCase
 {
     /**
      * Test that the name can be overridden.

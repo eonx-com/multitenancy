@@ -8,11 +8,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
 use Exception;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
  * @coversNothing
  */
-class DoctrineTestCase extends BaseTestCase
+class DoctrineTestCase extends TestCase
 {
     /**
      * SQL queries to create database schema.

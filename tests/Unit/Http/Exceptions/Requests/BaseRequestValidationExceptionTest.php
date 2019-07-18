@@ -5,13 +5,13 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Exceptions\Requests;
 
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Tests\LoyaltyCorp\Multitenancy\BaseTestCase;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests\BaseRequestValidationExceptionStub;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
  * @covers \LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\BaseRequestValidationException
  */
-class BaseRequestValidationExceptionTest extends BaseTestCase
+class BaseRequestValidationExceptionTest extends TestCase
 {
     /**
      * Tests the base exception method.
@@ -39,7 +39,6 @@ class BaseRequestValidationExceptionTest extends BaseTestCase
         $exception = new BaseRequestValidationExceptionStub($violations);
 
         self::assertSame('exceptions.http.request_body.validation_failures', $exception->getMessage());
-
         self::assertSame($expected, $exception->getErrors());
     }
 }

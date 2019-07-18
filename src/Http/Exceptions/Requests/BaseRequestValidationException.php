@@ -31,7 +31,7 @@ abstract class BaseRequestValidationException extends RequestValidationException
     ) {
         parent::__construct(
             $violations ?? new ConstraintViolationList(),
-            $message,
+            $message ?? 'exceptions.http.request_body.validation_failures',
             $messageParameters,
             $code,
             $previous

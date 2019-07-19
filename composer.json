@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "LoyaltyCorp\\Mulitenancy\\": "src/"
+      "LoyaltyCorp\\Multitenancy\\": "src/"
     }
   },
   "autoload-dev": {

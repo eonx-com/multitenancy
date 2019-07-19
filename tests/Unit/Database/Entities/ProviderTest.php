@@ -4,14 +4,27 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
 use EoneoPay\Framework\Interfaces\Database\EntityInterface as BaseEntityInterface;
-use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\EntityTestCase;
 
 /**
- * @covers \LoyaltyCorp\Mulitenancy\Database\Entities\Provider
+ * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
  */
 class ProviderTest extends EntityTestCase
 {
+    /**
+     * Test that getters return text in constructor.
+     *
+     * @return void
+     */
+    public function testState(): void
+    {
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
+
+        self::assertSame('abc1235zxc', $entity->getExternalId());
+        self::assertSame('Acme Example Corp', $entity->getName());
+    }
+
     /**
      * Test that the name can be overridden.
      *

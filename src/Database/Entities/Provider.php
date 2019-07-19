@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Database\Entities;
+namespace LoyaltyCorp\Multitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use EoneoPay\Framework\Database\Entities\Entity;
@@ -11,7 +11,7 @@ use EoneoPay\Framework\Database\Entities\Entity;
  *
  * @ORM\Entity()
  *
- * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $tenantId.
+ * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $providerId.
  */
 class Provider extends Entity
 {

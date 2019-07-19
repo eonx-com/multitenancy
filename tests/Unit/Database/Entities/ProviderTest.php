@@ -13,19 +13,6 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\EntityTestCase;
 class ProviderTest extends EntityTestCase
 {
     /**
-     * Test that getters return text in constructor.
-     *
-     * @return void
-     */
-    public function testState(): void
-    {
-        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
-
-        self::assertSame('abc1235zxc', $entity->getExternalId());
-        self::assertSame('Acme Example Corp', $entity->getName());
-    }
-
-    /**
      * Test that the name can be overridden.
      *
      * @return void

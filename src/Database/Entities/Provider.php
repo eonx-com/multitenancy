@@ -90,7 +90,7 @@ class Provider extends Entity
     public function toArray(): array
     {
         return [
-            'externalId' => $this->getId(),
+            'external_id' => $this->getExternalId(),
             'name' => $this->getName()
         ];
     }
@@ -102,6 +102,6 @@ class Provider extends Entity
      */
     protected function getIdProperty(): string
     {
-        return 'externalId';
+        return 'providerId';
     }
 }

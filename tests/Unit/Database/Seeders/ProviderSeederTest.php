@@ -31,5 +31,6 @@ class ProviderSeederTest extends TestCase
         $seeder->seed();
 
         static::assertEquals($expected, $entityManager->getPersisted());
+        static::assertSame(1, $entityManager->getFlushCount());
     }
 }

@@ -3,3 +3,9 @@ includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
     ignoreErrors:
+        -
+            message: '/Parameter \#1 \$className \(string\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\EntityManagerStub::getClassMetadata\(\) should be contravariant with parameter \$className \(mixed\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
+            path: tests/Stubs/Vendor/Doctrine/EntityManagerStub.php
+        -
+            message: '/Return type \(Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\EntityManagerStub::getClassMetadata\(\) should be covariant with return type \(Doctrine\\ORM\\Mapping\\ClassMetadata\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
+            path: tests/Stubs/Vendor/Doctrine/EntityManagerStub.php

@@ -19,6 +19,8 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\UnitOfWork;
 
 /**
+ * @coversNothing
+ *
  * @SuppressWarnings(PHPMD) Doctrine interface requires this implementation
  */
 class EntityManagerStub implements EntityManagerInterface

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests;
 
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\RequestTestCase;
 
 class ProviderModifyRequestTest extends RequestTestCase

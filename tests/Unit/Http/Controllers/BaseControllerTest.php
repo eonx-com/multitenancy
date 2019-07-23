@@ -8,7 +8,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\ControllerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
- * @covers \LoyaltyCorp\Mulitenancy\Http\Controllers\BaseController
+ * @covers \LoyaltyCorp\Multitenancy\Http\Controllers\BaseController
  */
 class BaseControllerTest extends TestCase
 {

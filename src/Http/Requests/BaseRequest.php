@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Requests;
+namespace LoyaltyCorp\Multitenancy\Http\Requests;
 
 use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 

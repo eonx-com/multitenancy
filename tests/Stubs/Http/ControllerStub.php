@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Http;
 
 use EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface;
-use LoyaltyCorp\Mulitenancy\Http\Controllers\BaseController;
+use LoyaltyCorp\Multitenancy\Http\Controllers\BaseController;
 
 /**
  * @coversNothing

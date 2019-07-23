@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Controllers;
+namespace LoyaltyCorp\Multitenancy\Http\Controllers;
 
 use EoneoPay\ApiFormats\Bridge\Laravel\Responses\FormattedApiResponse;
 use EoneoPay\ApiFormats\Bridge\Laravel\Responses\NoContentApiResponse;

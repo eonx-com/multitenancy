@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Controllers;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
-use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Mulitenancy\Http\Controllers\ProviderController;
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest;
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Http\Controllers\ProviderController;
+use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
+use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerSpy;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ControllerTestCase;
@@ -32,7 +32,7 @@ class ProviderControllerTest extends ControllerTestCase
         );
 
         /**
-         * @var \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest $request
+         * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $request
          */
 
         $result = $controller->create($request);
@@ -63,7 +63,7 @@ class ProviderControllerTest extends ControllerTestCase
         );
 
         /**
-         * @var \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest $request
+         * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest $request
          */
 
         $result = $controller->modify($provider, $request);
@@ -78,7 +78,7 @@ class ProviderControllerTest extends ControllerTestCase
      *
      * @param \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface|null $entityManager
      *
-     * @return \LoyaltyCorp\Mulitenancy\Http\Controllers\ProviderController
+     * @return \LoyaltyCorp\Multitenancy\Http\Controllers\ProviderController
      */
     private function getControllerInstance(?EntityManagerInterface $entityManager = null): ProviderController
     {

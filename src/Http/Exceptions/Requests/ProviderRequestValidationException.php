@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests;
+namespace LoyaltyCorp\Multitenancy\Http\Exceptions\Requests;
 
 /**
  * An exception that is thrown when validation of the Provider request object fails.

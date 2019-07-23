@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Controllers;
+namespace LoyaltyCorp\Multitenancy\Http\Controllers;
 
 use EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface;
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
-use LoyaltyCorp\Mulitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest;
-use LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
+use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class ProviderController extends BaseController
@@ -31,7 +31,7 @@ class ProviderController extends BaseController
     /**
      * Creates a new provider.
      *
-     * @param \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderCreateRequest $request
+     * @param \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $request
      *
      * @return \EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface
      */
@@ -48,8 +48,8 @@ class ProviderController extends BaseController
     /**
      * Modifies a provider.
      *
-     * @param \LoyaltyCorp\Mulitenancy\Database\Entities\Provider $provider
-     * @param \LoyaltyCorp\Mulitenancy\Http\Requests\Providers\ProviderModifyRequest $request
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
+     * @param \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest $request
      *
      * @return \EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface
      *

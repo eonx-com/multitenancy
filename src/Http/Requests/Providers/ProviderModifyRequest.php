@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Requests\Providers;
+namespace LoyaltyCorp\Multitenancy\Http\Requests\Providers;
 
-use LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\ProviderRequestValidationException;
-use LoyaltyCorp\Mulitenancy\Http\Requests\BaseRequest;
+use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\ProviderRequestValidationException;
+use LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

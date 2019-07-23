@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests;
 
-use LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\BaseRequestValidationException;
+use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\BaseRequestValidationException;
 
 class BaseRequestValidationExceptionStub extends BaseRequestValidationException
 {

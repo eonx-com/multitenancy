@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests;
+namespace LoyaltyCorp\Multitenancy\Http\Exceptions\Requests;
 
 use EoneoPay\Utils\Interfaces\Exceptions\ValidationExceptionInterface;
 use LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException;

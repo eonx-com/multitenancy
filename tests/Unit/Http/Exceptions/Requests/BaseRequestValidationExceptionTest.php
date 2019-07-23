@@ -9,7 +9,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests\BaseRequestVal
 use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
 
 /**
- * @covers \LoyaltyCorp\Mulitenancy\Http\Exceptions\Requests\BaseRequestValidationException
+ * @covers \LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\BaseRequestValidationException
  */
 class BaseRequestValidationExceptionTest extends TestCase
 {

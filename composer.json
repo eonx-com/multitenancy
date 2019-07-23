@@ -13,6 +13,7 @@
     "loyaltycorp/requesthandlers": "^1.1",
     "symfony/validator": "^4.3",
     "eoneopay/utils": "^0.2.8",
+    "eoneopay/externals": "^1.0@rc",
     "eoneopay/framework": "dev-master"
   },
   "require-dev": {

@@ -7,9 +7,6 @@ use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\ProviderRequestValidationE
 use LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @Assert\GroupSequence({"ProviderCreateRequest", "SecondPass"})
- */
 class ProviderCreateRequest extends BaseRequest
 {
     /**
@@ -17,7 +14,7 @@ class ProviderCreateRequest extends BaseRequest
      *
      * @Assert\Length(max=100)
      * @Assert\NotBlank()
-     * @Assert\Type(type="string", groups={"PreValidate"})
+     * @Assert\Type("string", groups={"PreValidate"})
      *
      * @var string
      */

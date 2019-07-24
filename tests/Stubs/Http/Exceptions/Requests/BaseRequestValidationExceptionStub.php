@@ -5,12 +5,13 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests;
 
 use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\BaseRequestValidationException;
 
+/**
+ * @coversNothing
+ */
 class BaseRequestValidationExceptionStub extends BaseRequestValidationException
 {
     /**
-     * Get Error code.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getErrorCode(): int
     {
@@ -18,9 +19,7 @@ class BaseRequestValidationExceptionStub extends BaseRequestValidationException
     }
 
     /**
-     * Get Error sub-code.
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function getErrorSubCode(): int
     {

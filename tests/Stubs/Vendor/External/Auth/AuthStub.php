@@ -13,7 +13,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub;
 class AuthStub implements AuthInterface
 {
     /**
-     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub|null
      */
     private $user;
 

@@ -69,7 +69,7 @@ class UserStub implements EntityInterface
     /**
      * {@inheritdoc}
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): string
     {
     }
 }

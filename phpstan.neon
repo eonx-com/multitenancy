@@ -9,3 +9,12 @@ parameters:
         -
             message: '/Return type \(Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\EntityManagerStub::getClassMetadata\(\) should be covariant with return type \(Doctrine\\ORM\\Mapping\\ClassMetadata\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
             path: tests/Stubs/Vendor/Doctrine/EntityManagerStub.php
+        -
+            message: '#Call to function is_array\(\) with object|string will always evaluate to false\.#'
+            path: src/Middleware/ProviderMiddleware.php
+        -
+            message: '#Strict comparison using === between false and false will always evaluate to true\.#'
+            path: src/Middleware/ProviderMiddleware.php
+        -
+            message: '#Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with (.*) and object|string will always evaluate to false.\.#'
+            path: tests/Unit/Middleware/ProviderMiddlewareTest.php

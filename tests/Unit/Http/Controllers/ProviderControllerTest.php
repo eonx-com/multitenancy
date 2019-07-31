@@ -21,17 +21,15 @@ class ProviderControllerTest extends ControllerTestCase
      * Tests that the `create` method on the controller is successful.
      *
      * @return void
-     *
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function testProviderCreateSuccess(): void
     {
         $provider = new Provider('test-provider', 'Test Provider');
         $entityManager = new EntityManagerSpy();
         $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
-        $request = $this->buildUnvalidatedRequestObject(
+        $request = $this->requestTestHelper->buildUnvalidatedRequest(
             ProviderCreateRequest::class,
-            ['id' => 'test-provider', 'name' => 'Test Provider']
+            \json_encode(['id' => 'test-provider', 'name' => 'Test Provider'])
         );
 
         /**
@@ -50,8 +48,6 @@ class ProviderControllerTest extends ControllerTestCase
      * Tests that the `modify` method on the controller is successful.
      *
      * @return void
-     *
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function testProviderModifySuccess(): void
     {
@@ -60,9 +56,9 @@ class ProviderControllerTest extends ControllerTestCase
         $entityManager->persist($provider);
         $entityManager->flush();
         $controller = $this->getControllerInstance($entityManager);
-        $request = $this->buildUnvalidatedRequestObject(
+        $request = $this->requestTestHelper->buildUnvalidatedRequest(
             ProviderModifyRequest::class,
-            ['name' => 'Something Different']
+            \json_encode(['name' => 'Something Different'])
         );
 
         /**

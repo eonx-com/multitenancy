@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy;
+namespace Tests\LoyaltyCorp\Multitenancy\TestCases;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
-use Exception;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
@@ -57,7 +57,7 @@ class DoctrineTestCase extends TestCase
             }
 
             $this->entityManager->getConnection()->exec(self::$sql);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
         }
 

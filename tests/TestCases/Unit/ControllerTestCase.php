@@ -3,39 +3,35 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
-use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
-use LoyaltyCorp\RequestHandlers\Serializer\PropertyNormalizer;
+use LoyaltyCorp\RequestHandlers\Builder\Interfaces\ObjectBuilderInterface;
+use LoyaltyCorp\RequestHandlers\TestHelper\RequestObjectTestHelper;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @coversNothing
- *
- * @SuppressWarnings(PHPMD.NumberOfChildren) All tests extend this class
  */
 class ControllerTestCase extends AppTestCase
 {
     /**
-     * Returns an unvalidated request object. The request object is not valid and may
-     * cause fatal errors.
+     * Request object test helper - this is marked as @internal to ensure it's used for test purposes only
      *
-     * THESE OBJECTS ARE ONLY FOR USE IN CONTROLLER UNIT TESTS!
-     *
-     * @param string $dtoClass
-     * @param mixed[] $properties
-     *
-     * @return \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface
-     *
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @var \LoyaltyCorp\RequestHandlers\TestHelper\RequestObjectTestHelper
      */
-    protected function buildUnvalidatedRequestObject(string $dtoClass, array $properties): RequestObjectInterface
-    {
-        /** @var \Symfony\Component\Serializer\Serializer $serializer */
-        $serializer = $this->getContainer()->get('requesthandlers_serializer');
-        /** @var \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface $instance */
-        $instance = $serializer->denormalize([], $dtoClass, null, [
-            PropertyNormalizer::EXTRA_PARAMETERS => $properties
-        ]);
+    protected $requestTestHelper;
 
-        return $instance;
+    /**
+     * {@inheritdoc}
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        /**
+         * @noinspection PhpInternalEntityUsedInspection Ignore to provide full testing
+         */
+        $this->requestTestHelper = new RequestObjectTestHelper(
+            $this->app->make(ObjectBuilderInterface::class),
+            $this->app->make('requesthandlers_serializer')
+        );
     }
 }

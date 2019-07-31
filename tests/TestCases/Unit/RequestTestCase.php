@@ -119,21 +119,6 @@ abstract class RequestTestCase extends AppTestCase
     }
 
     /**
-     * Asserts that the request object has the expected properties.
-     *
-     * @param \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface $instance
-     * @param mixed[] $expected
-     *
-     * @return void
-     */
-    protected function assertRequestProperties(RequestObjectInterface $instance, array $expected): void
-    {
-        $actual = $this->requestTestHelper->getRequestProperties($instance);
-
-        self::assertArraySameWithDates($expected, $actual);
-    }
-
-    /**
      * Builds a failing request, and returns a formatted validation failures array.
      *
      * @param string $jsonIn

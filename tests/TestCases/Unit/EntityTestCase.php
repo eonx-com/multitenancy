@@ -8,7 +8,7 @@ use EoneoPay\Externals\ORM\Interfaces\EntityInterface as BaseEntityInterface;
 use EoneoPay\Utils\AnnotationReader;
 use EoneoPay\Utils\Interfaces\SerializableInterface;
 use ReflectionClass;
-use Tests\LoyaltyCorp\Multitenancy\DoctrineTestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 abstract class EntityTestCase extends DoctrineTestCase
 {

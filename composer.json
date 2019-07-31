@@ -9,6 +9,7 @@
   "type": "library",
   "require": {
     "php": ">=7.3",
+    "ext-json": "*",
     "doctrine/orm": "^2.6.3",
     "eoneopay/apiformats": "dev-master",
     "eoneopay/externals": "^1.0@rc",

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
-use EoneoPay\Framework\Interfaces\Database\EntityInterface as BaseEntityInterface;
+use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\EntityTestCase;
 
@@ -40,9 +40,7 @@ class ProviderTest extends EntityTestCase
     }
 
     /**
-     * Get entity class name.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     protected function getEntityClass(): string
     {
@@ -50,19 +48,15 @@ class ProviderTest extends EntityTestCase
     }
 
     /**
-     * Gets an instance of an entity.
-     *
-     * @return \EoneoPay\Framework\Interfaces\Database\EntityInterface
+     * {@inheritdoc}
      */
-    protected function getEntityInstance(): BaseEntityInterface
+    protected function getEntityInstance(): EntityInterface
     {
         return new Provider('test-provider', 'Test Provider');
     }
 
     /**
-     * Get keys returned with to array.
-     *
-     * @return string[]
+     * {@inheritdoc}
      */
     protected function getToArrayKeys(): array
     {

@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
 use Doctrine\ORM\Mapping\Id;
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
-use EoneoPay\Framework\Interfaces\Database\EntityInterface as BaseEntityInterface;
+use EoneoPay\Externals\ORM\Interfaces\EntityInterface as BaseEntityInterface;
 use EoneoPay\Utils\AnnotationReader;
 use EoneoPay\Utils\Interfaces\SerializableInterface;
 use ReflectionClass;
@@ -36,9 +35,7 @@ abstract class EntityTestCase extends DoctrineTestCase
         self::assertNotNull($entityId);
 
         // Create entity
-        /** @var \EoneoPay\Externals\ORM\Interfaces\EntityInterface|null $entity */
         $entity = $this->getEntityInstance();
-        self::assertInstanceOf(EntityInterface::class, $entity);
 
         // Make getIdProperty available to ensure it matches
         $class = new ReflectionClass($entityClass);
@@ -81,7 +78,7 @@ abstract class EntityTestCase extends DoctrineTestCase
     /**
      * Gets an instance of an entity.
      *
-     * @return \EoneoPay\Framework\Interfaces\Database\EntityInterface
+     * @return \EoneoPay\Externals\ORM\Interfaces\EntityInterface
      */
     abstract protected function getEntityInstance(): BaseEntityInterface;
 

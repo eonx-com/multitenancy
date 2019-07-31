@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use EoneoPay\Framework\Database\Entities\Entity;
+use EoneoPay\Externals\ORM\Entity;
 
 /**
  * Provider represents a customer of Loyalty Corp in this product.

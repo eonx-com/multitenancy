@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
 use EoneoPay\Utils\AnnotationReader;
+use LoyaltyCorp\RequestHandlers\Builder\Interfaces\ObjectBuilderInterface;
 use LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException;
 use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 use LoyaltyCorp\RequestHandlers\TestHelper\Exceptions\ValidationFailedException;
@@ -44,7 +45,13 @@ abstract class RequestTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->requestTestHelper = new RequestObjectTestHelper($this->app);
+        /**
+         * @noinspection PhpInternalEntityUsedInspection Ignore to provide full testing
+         */
+        $this->requestTestHelper = new RequestObjectTestHelper(
+            $this->app->make(ObjectBuilderInterface::class),
+            $this->app->make('requesthandlers_serializer')
+        );
     }
 
     /**

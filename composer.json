@@ -10,11 +10,12 @@
   "require": {
     "php": ">=7.3",
     "doctrine/orm": "^2.6.3",
-    "loyaltycorp/requesthandlers": "^1.1",
-    "symfony/validator": "^4.3",
-    "eoneopay/utils": "^0.2.8",
+    "eoneopay/apiformats": "dev-master",
     "eoneopay/externals": "^1.0@rc",
-    "eoneopay/framework": "dev-master"
+    "eoneopay/framework": "dev-master",
+    "eoneopay/utils": "^0.2.8",
+    "loyaltycorp/requesthandlers": "^1.1",
+    "symfony/validator": "^4.3"
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",
@@ -37,8 +38,7 @@
       "Tests\\LoyaltyCorp\\Multitenancy\\": "tests/"
     }
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
+  "minimum-stability": "stable",
   "config": {
     "optimize-autoloader": true
   }

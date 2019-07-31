@@ -1,5 +1,5 @@
-/vendor
+*.cache
 .env
 .idea
-*.cache
-storage/
+/storage
+/vendor

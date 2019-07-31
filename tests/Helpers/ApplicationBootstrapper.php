@@ -15,7 +15,6 @@ use EoneoPay\Externals\Bridge\Laravel\Providers\ValidationServiceProvider;
 use EoneoPay\Externals\EventDispatcher\Interfaces\EventDispatcherInterface;
 use EoneoPay\Externals\HttpClient\Interfaces\ClientInterface;
 use EoneoPay\Externals\HttpClient\LoggingClient;
-use EoneoPay\Framework\Providers\FrameworkServiceProvider;
 use EoneoPay\Utils\AnnotationReader;
 use EoneoPay\Utils\Arr;
 use EoneoPay\Utils\Bridge\Lumen\Interfaces\Resolvers\ControllerResolverInterface;
@@ -28,6 +27,7 @@ use EoneoPay\Utils\Interfaces\MathInterface;
 use EoneoPay\Utils\Math;
 use Illuminate\Contracts\Container\Container;
 use Laravel\Lumen\Application;
+use LaravelDoctrine\ORM\DoctrineServiceProvider;
 use LoyaltyCorp\RequestHandlers\Bridge\Laravel\Providers\ParamConverterProvider;
 use LoyaltyCorp\RequestHandlers\Middleware\ParamConverterMiddleware;
 use LoyaltyCorp\RequestHandlers\Middleware\ValidatingMiddleware;
@@ -67,12 +67,12 @@ final class ApplicationBootstrapper
         $app->register(ContainerServiceProvider::class);
         $app->register(ParamConverterProvider::class);
         $app->register(RequestServiceProvider::class);
+        $app->register(DoctrineServiceProvider::class);
 
         // Service providers for the application
         $app->register(HttpClientServiceProvider::class);
         $app->register(ValidationServiceProvider::class);
         $app->register(ValidationConstraintServiceProvider::class);
-        $app->register(FrameworkServiceProvider::class);
 
         // Register any singletons
         $app->singleton(AnnotationReaderInterface::class, AnnotationReader::class);

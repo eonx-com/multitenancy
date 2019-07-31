@@ -5,12 +5,12 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Controllers;
 
 use EoneoPay\ApiFormats\Bridge\Laravel\Responses\NoContentApiResponse;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\ControllerStub;
-use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Http\Controllers\BaseController
  */
-class BaseControllerTest extends TestCase
+class BaseControllerTest extends AppTestCase
 {
     /**
      * Test formattedApiResponse() successfully.

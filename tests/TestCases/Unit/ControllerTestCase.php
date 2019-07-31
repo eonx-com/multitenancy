@@ -5,14 +5,14 @@ namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
 use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 use LoyaltyCorp\RequestHandlers\Serializer\PropertyNormalizer;
-use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @coversNothing
  *
  * @SuppressWarnings(PHPMD.NumberOfChildren) All tests extend this class
  */
-class ControllerTestCase extends TestCase
+class ControllerTestCase extends AppTestCase
 {
     /**
      * Returns an unvalidated request object. The request object is not valid and may

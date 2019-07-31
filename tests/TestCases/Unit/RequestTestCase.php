@@ -14,7 +14,7 @@ use ReflectionProperty;
 use RuntimeException;
 use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\ConstraintViolationList;
-use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @coversNothing
@@ -22,7 +22,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\TestCase;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Centralised logic for all tests
  * @SuppressWarnings(PHPMD.NumberOfChildren) All request object test cases extend this.
  */
-abstract class RequestTestCase extends TestCase
+abstract class RequestTestCase extends AppTestCase
 {
     /**
      * Request object test helper - this is marked as @internal to ensure it's used for test purposes only

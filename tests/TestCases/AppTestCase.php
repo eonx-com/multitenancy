@@ -20,8 +20,8 @@ use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\Factory;
 use Laravel\Lumen\Application;
-use Laravel\Lumen\Testing\TestCase as BaseTestCase;
 use PHPUnit\Framework\Constraint\Exception as ExceptionConstraint;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use PHPUnit\Framework\TestResult;
 use RuntimeException;
 use Tests\LoyaltyCorp\Multitenancy\Helpers\ApplicationBootstrapper;
@@ -37,8 +37,15 @@ use Throwable;
  * @SuppressWarnings(PHPMD.NumberOfChildren) All tests extend this class
  * @SuppressWarnings(PHPMD.TooManyFields) Required for base test functionality
  */
-class TestCase extends BaseTestCase
+class AppTestCase extends BaseTestCase
 {
+    /**
+     * Lumen application instance for testing.
+     *
+     * @var \Laravel\Lumen\Application
+     */
+    protected $app;
+
     /**
      * A doctrine cache for metadata storage across test runs.
      *
@@ -105,22 +112,12 @@ class TestCase extends BaseTestCase
     /**
      * {@inheritdoc}
      */
-    public function createApplication()
+    public function setUp(): void
     {
-        $app = ApplicationBootstrapper::create();
+        // Create the application instance.
+        $this->app = $this->createApplication();
 
-        // Make sure it's an app
-        if (($app instanceof Application) === false) {
-            new RuntimeException('Unable to create application, can not continue');
-        }
-
-        if (self::$metadataCache === null) {
-            self::$metadataCache = new ArrayCache();
-        }
-
-        $app->make('registry')->getManager()->getMetadataFactory()->setCacheDriver(self::$metadataCache);
-
-        return $app;
+        parent::setUp();
     }
 
     /**
@@ -289,6 +286,33 @@ class TestCase extends BaseTestCase
         $this->exceptionMessage = $message;
         $this->exceptionParameters = $parameters ?? [];
         $this->exceptionValidation = $validationKeys ?? [];
+    }
+
+    /**
+     * Creates a new application instance for testing.
+     *
+     * @return \Laravel\Lumen\Application
+     */
+    private function createApplication(): Application
+    {
+        $app = ApplicationBootstrapper::create();
+
+        // Make sure it's an app
+        if (($app instanceof Application) === false) {
+            new RuntimeException('Unable to create application, can not continue');
+        }
+
+        if (self::$metadataCache === null) {
+            self::$metadataCache = new ArrayCache();
+        }
+
+        $app
+            ->make('registry')
+            ->getManager()
+            ->getMetadataFactory()
+            ->setCacheDriver(self::$metadataCache);
+
+        return $app;
     }
 
     /**

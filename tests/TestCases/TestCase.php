@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases;
 
-use DateInterval;
-use DateTime;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManagerInterface;
@@ -27,7 +25,6 @@ use PHPUnit\Framework\Constraint\Exception as ExceptionConstraint;
 use PHPUnit\Framework\TestResult;
 use RuntimeException;
 use Tests\LoyaltyCorp\Multitenancy\Helpers\ApplicationBootstrapper;
-use Tests\LoyaltyCorp\Multitenancy\Helpers\DateIntervalFormatter;
 use Throwable;
 
 /**
@@ -104,45 +101,6 @@ class TestCase extends BaseTestCase
      * @var \EoneoPay\Externals\Bridge\Laravel\Validator
      */
     private $validator;
-
-    /**
-     * Uses assertSame on $expected and $actual arrays after converting DateTime and DateInterval
-     * objects to strings.
-     *
-     * @param mixed[] $expected
-     * @param mixed[] $actual
-     * @param string|null $message
-     *
-     * @return void
-     */
-    public static function assertArraySameWithDates(array $expected, array $actual, ?string $message = null): void
-    {
-        $intervalFormat = new DateIntervalFormatter();
-        $format = static function (&$value) use ($intervalFormat): void {
-            if (($value instanceof DateTime) === true) {
-                /**
-                 * @var \DateTime $value
-                 *
-                 * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises ===
-                 */
-                $value = $value->format(DateTime::RFC3339);
-            }
-
-            if (($value instanceof DateInterval) === true) {
-                /**
-                 * @var \DateInterval $value
-                 *
-                 * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises ===
-                 */
-                $value = $intervalFormat->format($value);
-            }
-        };
-
-        \array_walk_recursive($expected, $format);
-        \array_walk_recursive($actual, $format);
-
-        self::assertSame($expected, $actual, $message ?? '');
-    }
 
     /**
      * {@inheritdoc}

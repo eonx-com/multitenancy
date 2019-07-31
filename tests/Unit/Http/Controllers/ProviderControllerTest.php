@@ -8,8 +8,11 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Http\Controllers\ProviderController;
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
+use LoyaltyCorp\Multitenancy\Services\Providers\ProviderService;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerSpy;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Providers\ProviderServiceStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ControllerTestCase;
 
 class ProviderControllerTest extends ControllerTestCase
@@ -25,7 +28,7 @@ class ProviderControllerTest extends ControllerTestCase
     {
         $provider = new Provider('test-provider', 'Test Provider');
         $entityManager = new EntityManagerSpy();
-        $controller = $this->getControllerInstance($entityManager);
+        $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
         $request = $this->buildUnvalidatedRequestObject(
             ProviderCreateRequest::class,
             ['id' => 'test-provider', 'name' => 'Test Provider']
@@ -77,13 +80,17 @@ class ProviderControllerTest extends ControllerTestCase
      * Creates a new instance of the Provider controller instance.
      *
      * @param \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface|null $entityManager
+     * @param \LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface|null $providerService
      *
      * @return \LoyaltyCorp\Multitenancy\Http\Controllers\ProviderController
      */
-    private function getControllerInstance(?EntityManagerInterface $entityManager = null): ProviderController
-    {
+    private function getControllerInstance(
+        ?EntityManagerInterface $entityManager = null,
+        ?ProviderServiceInterface $providerService = null
+    ): ProviderController {
         return new ProviderController(
-            $entityManager ?? new EntityManagerStub()
+            $entityManager ?? new EntityManagerStub(),
+            $providerService ?? new ProviderServiceStub()
         );
     }
 }

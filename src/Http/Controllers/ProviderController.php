@@ -8,6 +8,7 @@ use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
+use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 class ProviderController extends BaseController
@@ -18,14 +19,22 @@ class ProviderController extends BaseController
     private $entityManager;
 
     /**
+     * @var \LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface
+     */
+    private $providerService;
+
+    /**
      * Constructs a new instance of ProviderController.
      *
      * @param \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface $entityManager
+     * @param \LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface $providerService
      */
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        ProviderServiceInterface $providerService
     ) {
         $this->entityManager = $entityManager;
+        $this->providerService = $providerService;
     }
 
     /**
@@ -37,9 +46,8 @@ class ProviderController extends BaseController
      */
     public function create(ProviderCreateRequest $request): FormattedApiResponseInterface
     {
-        $provider = new Provider($request->getId(), $request->getName());
+        $provider = $this->providerService->create($request->getId(), $request->getName());
 
-        $this->entityManager->persist($provider);
         $this->entityManager->flush();
 
         return $this->formattedApiResponse($provider, 201);

@@ -5,7 +5,6 @@ namespace LoyaltyCorp\Multitenancy\Http\Exceptions\Requests;
 
 use EoneoPay\Utils\Interfaces\Exceptions\ValidationExceptionInterface;
 use LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException;
-use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Throwable;
@@ -36,30 +35,5 @@ abstract class BaseRequestValidationException extends RequestValidationException
             $code,
             $previous
         );
-    }
-
-    /**
-     * @noinspection PhpMissingParentCallCommonInspection Parent implementation is empty
-     *
-     * {@inheritdoc}
-     *
-     * This method converts symfony constraint violation objects into a message array
-     * format that closely follows the laravel validation errors format.
-     */
-    public function getErrors(): array
-    {
-        $errors = [];
-
-        $converter = new CamelCaseToSnakeCaseNameConverter();
-
-        foreach ($this->getViolations() as $violation) {
-            /** @var \Symfony\Component\Validator\ConstraintViolationInterface $violation */
-            $path = $converter->normalize($violation->getPropertyPath());
-            $errors[$path] = $errors[$path] ?? [];
-
-            $errors[$path][] = $violation->getMessage();
-        }
-
-        return $errors;
     }
 }

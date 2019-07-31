@@ -48,6 +48,13 @@ class UserStub implements EntityInterface
     /**
      * {@inheritdoc}
      */
+    public function jsonSerialize(): string
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function toArray(): array
     {
     }
@@ -63,13 +70,6 @@ class UserStub implements EntityInterface
      * {@inheritdoc}
      */
     public function toXml(?string $rootNode = null): ?string
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function jsonSerialize(): string
     {
     }
 }

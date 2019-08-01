@@ -63,7 +63,7 @@ final class ProviderMiddleware
         ]);
 
         // add provider to symfony request
-        $request->attributes->add($route[2]);
+        $request->attributes->set('provider', $provider);
 
         $request->setRouteResolver(static function () use ($route) {
             return $route;

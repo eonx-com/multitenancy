@@ -58,12 +58,18 @@ final class ProviderMiddleware
         $provider = $this->providerResolver->getProvider($user);
 
         // add provider to symfony request
-        $request->attributes->add([
-            'provider' => $provider
-        ]);
+        $request->attributes->add(
+            \array_merge($route[2] ?? [], [
+                'provider' => $provider
+            ])
+        );
 
         // add provider to lumen route
-        $route = \array_merge($route, [['provider' => $provider]]);
+        // Put the Symfony request attributes back into the laravel route.
+        foreach ($request->attributes as $key => $attribute) {
+            /** @noinspection UnsupportedStringOffsetOperationsInspection */
+            $route[2][$key] = $attribute;
+        }
 
         $request->setRouteResolver(static function () use ($route) {
             return $route;

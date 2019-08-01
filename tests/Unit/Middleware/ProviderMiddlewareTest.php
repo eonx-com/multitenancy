@@ -102,6 +102,47 @@ class ProviderMiddlewareTest extends TestCase
     }
 
     /**
+     * Test existing params in lumen route are kept.
+     *
+     * @return void
+     */
+    public function testHandleWhenRouteHasExistingParams(): void
+    {
+        $provider = new Provider('PROVIDER_ID', 'Loyalty Corp.');
+        $providerResolver = new ProviderResolverStub($provider);
+        $middleware = $this->getMiddleware(
+            new AuthStub(new UserStub()),
+            $providerResolver
+        );
+
+        $expectedRoute = [
+            null,
+            ['uses' => 'Class@method'],
+            ['this' => 'that', 'provider' => $provider]
+        ];
+
+        $request = new Request();
+        $request->setRouteResolver(static function () {
+            return [
+                null,
+                ['uses' => 'Class@method'],
+                ['this' => 'that']
+            ];
+        });
+
+        $next = static function () {
+            return 'OK';
+        };
+
+        $result = $middleware->handle($request, $next);
+
+        self::assertInstanceOf(Provider::class, $request->attributes->get('provider'));
+        self::assertSame($provider, $request->attributes->get('provider'));
+        self::assertSame($expectedRoute, $request->route());
+        self::assertSame('OK', $result);
+    }
+
+    /**
      * Get middleware instance
      *
      * @param \EoneoPay\Externals\Auth\Interfaces\AuthInterface|null $auth

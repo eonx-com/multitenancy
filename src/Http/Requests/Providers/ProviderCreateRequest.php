@@ -7,6 +7,9 @@ use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\ProviderRequestValidationE
 use LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable) Ignore short variable $id, required for entity relationship
+ */
 class ProviderCreateRequest extends BaseRequest
 {
     /**

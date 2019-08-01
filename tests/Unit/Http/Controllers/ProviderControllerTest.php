@@ -27,15 +27,17 @@ class ProviderControllerTest extends ControllerTestCase
         $provider = new Provider('test-provider', 'Test Provider');
         $entityManager = new EntityManagerSpy();
         $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
-        $request = $this->requestTestHelper->buildUnvalidatedRequest(
-            ProviderCreateRequest::class,
-            \json_encode(['id' => 'test-provider', 'name' => 'Test Provider'])
-        );
+        $json = <<<JSON
+{
+    "id": "test-provider",
+    "name": "Test Provider"
+}
+JSON;
 
         /**
          * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $request
          */
-
+        $request = $this->requestTestHelper->buildUnvalidatedRequest(ProviderCreateRequest::class, $json);
         $result = $controller->create($request);
 
         self::assertInstanceOf(Provider::class, $result->getContent());
@@ -56,15 +58,16 @@ class ProviderControllerTest extends ControllerTestCase
         $entityManager->persist($provider);
         $entityManager->flush();
         $controller = $this->getControllerInstance($entityManager);
-        $request = $this->requestTestHelper->buildUnvalidatedRequest(
-            ProviderModifyRequest::class,
-            \json_encode(['name' => 'Something Different'])
-        );
+        $json = <<<JSON
+{
+    "name": "Something Different"
+}
+JSON;
 
         /**
          * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest $request
          */
-
+        $request = $this->requestTestHelper->buildUnvalidatedRequest(ProviderModifyRequest::class, $json);
         $result = $controller->modify($provider, $request);
 
         self::assertInstanceOf(Provider::class, $result->getContent());

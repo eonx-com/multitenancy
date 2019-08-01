@@ -46,6 +46,8 @@ class Provider extends Entity
      */
     public function __construct(string $externalId, string $name)
     {
+        parent::__construct();
+
         $this->externalId = $externalId;
         $this->name = $name;
     }

@@ -24,7 +24,6 @@ class ProviderServiceTest extends AppTestCase
 
         $provider = $serivce->create('test-provider', 'Test Provider');
 
-        self::assertNotNull($provider);
         self::assertSame('test-provider', $provider->getExternalId());
         self::assertSame('Test Provider', $provider->getName());
     }

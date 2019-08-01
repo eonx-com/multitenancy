@@ -23,7 +23,6 @@ use Laravel\Lumen\Application;
 use PHPUnit\Framework\Constraint\Exception as ExceptionConstraint;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use PHPUnit\Framework\TestResult;
-use RuntimeException;
 use Tests\LoyaltyCorp\Multitenancy\Helpers\ApplicationBootstrapper;
 use Throwable;
 
@@ -35,6 +34,7 @@ use Throwable;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Centralised logic for all tests
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity) Complexity required for testing
  * @SuppressWarnings(PHPMD.NumberOfChildren) All tests extend this class
+ * @SuppressWarnings(PHPMD.StaticAccess) Static access required for testing
  * @SuppressWarnings(PHPMD.TooManyFields) Required for base test functionality
  */
 class AppTestCase extends BaseTestCase
@@ -296,11 +296,6 @@ class AppTestCase extends BaseTestCase
     private function createApplication(): Application
     {
         $app = ApplicationBootstrapper::create();
-
-        // Make sure it's an app
-        if (($app instanceof Application) === false) {
-            new RuntimeException('Unable to create application, can not continue');
-        }
 
         if (self::$metadataCache === null) {
             self::$metadataCache = new ArrayCache();

@@ -38,6 +38,9 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\Persistence\Mana
  * This class bootstraps an application for use in testing.
  *
  * @internal Only for use with tests within this library.
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Ignore coupling as the bootstrapper is used for testing.
+ * @SuppressWarnings(PHPMD.StaticAccess) Static access to some classes required for testing
  */
 final class ApplicationBootstrapper
 {
@@ -49,7 +52,7 @@ final class ApplicationBootstrapper
     public static function create(): Application
     {
         // Set the base path and include the autoloader
-        $basePath = \realpath(\dirname(__DIR__, 2));
+        $basePath = \dirname(__DIR__, 2);
         require_once $basePath . '/vendor/autoload.php';
 
         // Until Doctrine Annotations v2.0, we need to register an autoloader, which is just 'class_exists'.

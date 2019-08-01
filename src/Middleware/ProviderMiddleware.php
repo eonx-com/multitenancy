@@ -65,11 +65,8 @@ final class ProviderMiddleware
         );
 
         // add provider to lumen route
-        // Put the Symfony request attributes back into the laravel route.
-        foreach ($request->attributes as $key => $attribute) {
-            /** @noinspection UnsupportedStringOffsetOperationsInspection */
-            $route[2][$key] = $attribute;
-        }
+        /** @noinspection UnsupportedStringOffsetOperationsInspection */
+        $route[2]['provider'] = $provider;
 
         $request->setRouteResolver(static function () use ($route) {
             return $route;

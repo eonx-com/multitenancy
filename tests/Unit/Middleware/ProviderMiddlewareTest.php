@@ -11,12 +11,12 @@ use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterfa
 use Tests\LoyaltyCorp\Multitenancy\Stubs\ProviderResolver\ProviderResolverStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\Auth\AuthStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub;
-use Tests\LoyaltyCorp\Multitenancy\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Middleware\ProviderMiddleware
  */
-class ProviderMiddlewareTest extends TestCase
+class ProviderMiddlewareTest extends AppTestCase
 {
     /**
      * Test handle adds provider to route and attributes.

@@ -104,7 +104,7 @@ abstract class RequestTestCase extends AppTestCase
     public function testRequestExceptionClass(): void
     {
         $class = static::getRequestClass();
-        $reflection = new \ReflectionClass($class);
+        $reflection = new ReflectionClass($class);
 
         $instance = $reflection->newInstanceWithoutConstructor();
 

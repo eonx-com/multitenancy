@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy;
+namespace Tests\LoyaltyCorp\Multitenancy\TestCases;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
-use Exception;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
@@ -34,6 +34,37 @@ class DoctrineTestCase extends TestCase
     private $seeded = false;
 
     /**
+     * Lazy load database schema only when required
+     *
+     * @return void
+     */
+    protected function createSchema(): void
+    {
+        // If schema is already created, return
+        if ($this->seeded === true) {
+            return;
+        }
+
+        // Create schema
+        try {
+            $this->entityManager = $this->getDoctrineEntityManager();
+
+            // If schema hasn't been defined, define it, this will happen once per run
+            if (self::$sql === null) {
+                $tool = new SchemaTool($this->entityManager);
+                $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
+                self::$sql = \implode(';', $tool->getCreateSchemaSql($metadata));
+            }
+
+            $this->entityManager->getConnection()->exec(self::$sql);
+        } catch (\Exception $exception) {
+            self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
+        }
+
+        $this->seeded = true;
+    }
+
+    /**
      * Get doctrine entity manager instance
      *
      * @return \Doctrine\ORM\EntityManagerInterface
@@ -44,7 +75,7 @@ class DoctrineTestCase extends TestCase
      */
     protected function getDoctrineEntityManager(): EntityManagerInterface
     {
-        $paths = [__DIR__.'/../src'];
+        $paths = [\implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'src', 'Database', 'Entities'])];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
         $dbParams = ['driver' => 'pdo_sqlite', 'memory' => true];
@@ -67,36 +98,5 @@ class DoctrineTestCase extends TestCase
         $this->createSchema();
 
         return $this->entityManager;
-    }
-
-    /**
-     * Lazy load database schema only when required
-     *
-     * @return void
-     */
-    private function createSchema(): void
-    {
-        // If schema is already created, return
-        if ($this->seeded === true) {
-            return;
-        }
-
-        // Create schema
-        try {
-            $this->entityManager = $this->getDoctrineEntityManager();
-
-            // If schema hasn't been defined, define it, this will happen once per run
-            if (self::$sql === null) {
-                $tool = new SchemaTool($this->entityManager);
-                $metadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
-                self::$sql = \implode(';', $tool->getCreateSchemaSql($metadata));
-            }
-
-            $this->entityManager->getConnection()->exec(self::$sql);
-        } catch (Exception $exception) {
-            self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
-        }
-
-        $this->seeded = true;
     }
 }

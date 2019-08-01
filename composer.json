@@ -9,8 +9,14 @@
   "type": "library",
   "require": {
     "php": ">=7.3",
+    "ext-json": "*",
     "doctrine/orm": "^2.6.3",
-    "eoneopay/externals": "^1.0@rc"
+    "eoneopay/apiformats": "dev-master",
+    "eoneopay/externals": "^1.0@rc",
+    "eoneopay/framework": "dev-master",
+    "eoneopay/utils": "^0.2.8",
+    "loyaltycorp/requesthandlers": "^1.1",
+    "symfony/validator": "^4.3"
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",

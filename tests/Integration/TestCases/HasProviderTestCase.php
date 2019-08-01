@@ -6,7 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Integration\TestCases;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Setup;
-use Tests\LoyaltyCorp\Multitenancy\DoctrineTestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
  * @coversNothing

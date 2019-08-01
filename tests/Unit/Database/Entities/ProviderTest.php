@@ -3,14 +3,29 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
+use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\TestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\EntityTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
  */
-class ProviderTest extends TestCase
+class ProviderTest extends EntityTestCase
 {
+    /**
+     * Test that the name can be overridden.
+     *
+     * @return void
+     */
+    public function testNameSet(): void
+    {
+        $entity = new Provider('0x0x0x123', 'Foo');
+
+        $entity->setName('Bob');
+
+        self::assertSame('Bob', $entity->getName());
+    }
+
     /**
      * Test that getters return text in constructor.
      *
@@ -25,16 +40,26 @@ class ProviderTest extends TestCase
     }
 
     /**
-     * Test that the name can be overridden.
-     *
-     * @return void
+     * {@inheritdoc}
      */
-    public function testNameSet(): void
+    protected function getEntityClass(): string
     {
-        $entity = new Provider('0x0x0x123', 'Foo');
+        return Provider::class;
+    }
 
-        $entity->setName('Bob');
+    /**
+     * {@inheritdoc}
+     */
+    protected function getEntityInstance(): EntityInterface
+    {
+        return new Provider('test-provider', 'Test Provider');
+    }
 
-        self::assertSame('Bob', $entity->getName());
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToArrayKeys(): array
+    {
+        return ['external_id', 'name'];
     }
 }

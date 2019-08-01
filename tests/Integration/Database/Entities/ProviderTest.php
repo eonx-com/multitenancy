@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Database\Entities;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\DoctrineTestCase;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider

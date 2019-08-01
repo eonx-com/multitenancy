@@ -57,16 +57,13 @@ final class ProviderMiddleware
         // get provider from resolver
         $provider = $this->providerResolver->getProvider($user);
 
-        // add provider to symfony request
-        $request->attributes->add(
-            \array_merge($route[2] ?? [], [
-                'provider' => $provider
-            ])
-        );
-
         // add provider to lumen route
-        /** @noinspection UnsupportedStringOffsetOperationsInspection */
-        $route[2]['provider'] = $provider;
+        $route[2] = \array_merge($route[2] ?? [], [
+            'provider' => $provider
+        ]);
+
+        // add provider to symfony request
+        $request->attributes->add($route[2]);
 
         $request->setRouteResolver(static function () use ($route) {
             return $route;

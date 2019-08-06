@@ -10,8 +10,6 @@ use EoneoPay\Externals\ORM\Entity;
  * Provider represents a customer of Loyalty Corp in this product.
  *
  * @ORM\Entity()
- *
- * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $providerId.
  */
 class Provider extends Entity
 {
@@ -70,6 +68,16 @@ class Provider extends Entity
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * Get provider id
+     *
+     * @return int|null
+     */
+    public function getProviderId(): ?int
+    {
+        return $this->providerId;
     }
 
     /**

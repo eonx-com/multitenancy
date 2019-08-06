@@ -4,17 +4,16 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
 
 use Doctrine\ORM\Mapping as ORM;
+use EoneoPay\Externals\ORM\Entity;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 
 /**
  * This Stub entity is to test HasProvider trait.
  *
  * @ORM\Entity()
- * @ORM\Table(name="entity_stub")
- *
- * @SuppressWarnings(PHPMD.UnusedPrivateField) Suppress warning about "unused" $entityId.
+ * @ORM\Table()
  */
-class EntityHasProviderStub
+class EntityHasProviderStub extends Entity
 {
     use HasProvider;
 
@@ -23,7 +22,7 @@ class EntityHasProviderStub
      * @ORM\GeneratedValue(strategy="UUID")
      * @ORM\Id()
      *
-     * @var int Internal Database ID.
+     * @var string Internal Database ID.
      */
     private $entityId;
 
@@ -51,5 +50,33 @@ class EntityHasProviderStub
     {
         $this->externalId = $externalId;
         $this->name = $name;
+
+        parent::__construct();
+    }
+
+    /**
+     * Get entity id
+     *
+     * @return string|null
+     */
+    public function getEntityId(): ?string
+    {
+        return $this->entityId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdProperty(): string
+    {
+        return 'entityId';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toArray(): array
+    {
+        return [];
     }
 }

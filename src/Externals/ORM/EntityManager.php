@@ -34,7 +34,7 @@ final class EntityManager implements EntityManagerInterface
      *
      * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException If provider mismatch
      */
-    public function flush(int $providerId): void
+    public function flush(Provider $provider): void
     {
         // Ensure that all entities pending write are for the correct provider
         $unitOfWork = $this->entityManager->getUnitOfWork();
@@ -47,7 +47,7 @@ final class EntityManager implements EntityManagerInterface
         ]);
 
         // Check ownership of entities
-        $this->checkEntityOwnership($changes, $providerId);
+        $this->checkEntityOwnership($changes, $provider);
 
         // If no exception has been thrown, allow flush to be performed
         $this->entityManager->flush();
@@ -81,13 +81,13 @@ final class EntityManager implements EntityManagerInterface
      * Check the ownership of entities
      *
      * @param mixed[] $entities Entities that are scheduled for an update
-     * @param int $providerId The provider id these entities should belong to
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider The provider entities should belong to
      *
      * @return void
      *
      * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException If provider mismatch
      */
-    private function checkEntityOwnership(array $entities, int $providerId): void
+    private function checkEntityOwnership(array $entities, Provider $provider): void
     {
         foreach ($entities as $entity) {
             // Skip check if the entity doesn't implement entity interface or doesn't implement provider trait
@@ -101,10 +101,10 @@ final class EntityManager implements EntityManagerInterface
              *
              * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
              */
-            $provider = $entity->getProvider();
+            $owner = $entity->getProvider();
 
             // If the provider isn't specified or the id mismatches, throw exception
-            if (($provider instanceof Provider) === false || (int)$provider->getProviderId() !== $providerId) {
+            if (($owner instanceof Provider) === false || $owner !== $provider) {
                 throw new InvalidEntityOwnershipException();
             }
         }

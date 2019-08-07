@@ -4,17 +4,18 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 
 interface EntityManagerInterface
 {
     /**
      * Flush unit of work to the database, ensuring all entities belong to the correct provider if applicable
      *
-     * @param int $providerId The provider id to match against unit of work
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own all entities in UOW
      *
      * @return void
      */
-    public function flush(int $providerId): void;
+    public function flush(Provider $provider): void;
 
     /**
      * Gets the repository from a entity class

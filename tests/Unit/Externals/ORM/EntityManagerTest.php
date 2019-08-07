@@ -28,7 +28,7 @@ final class EntityManagerTest extends DoctrineTestCase
         // Create a provider, flush should ignore
         $provider = new Provider('external', 'Acme Corp');
         $instance->persist($provider);
-        $instance->flush(0);
+        $instance->flush($provider);
 
         // No exception should be thrown and an id should have been generated
         self::assertNotNull($provider->getProviderId());
@@ -64,7 +64,7 @@ final class EntityManagerTest extends DoctrineTestCase
         $this->expectException(InvalidEntityOwnershipException::class);
 
         // Attempt to flush
-        $instance->flush((int)$provider1->getProviderId());
+        $instance->flush($provider1);
     }
 
     /**
@@ -97,7 +97,7 @@ final class EntityManagerTest extends DoctrineTestCase
         $entity = new EntityHasProviderStub('entity', 'Acme Corp');
         $entity->setProvider($provider);
         $instance->persist($entity);
-        $instance->flush((int)$provider->getProviderId());
+        $instance->flush($provider);
 
         // Capture entity id
         $entityId = (string)$entity->getEntityId();
@@ -111,7 +111,7 @@ final class EntityManagerTest extends DoctrineTestCase
 
         // Remove entity
         $instance->remove($found);
-        $instance->flush((int)$provider->getProviderId());
+        $instance->flush($provider);
 
         // Check it no longer exists
         $found = $repository->find($entityId);

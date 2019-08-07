@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM;
 
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 
 interface EntityManagerInterface
@@ -29,18 +28,18 @@ interface EntityManagerInterface
     /**
      * Persist entity to the database
      *
-     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity The entity to persist to the database
+     * @param object $entity The entity to persist to the database
      *
      * @return void
      */
-    public function persist(EntityInterface $entity): void;
+    public function persist(object $entity): void;
 
     /**
      * Remove entity from the database.
      *
-     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity The entity to remove from the database
+     * @param object $entity The entity to remove from the database
      *
      * @return void
      */
-    public function remove(EntityInterface $entity): void;
+    public function remove(object $entity): void;
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
 
 use Doctrine\ORM\Mapping as ORM;
-use EoneoPay\Externals\ORM\Entity;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 
 /**
@@ -13,7 +12,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
  * @ORM\Entity()
  * @ORM\Table()
  */
-class EntityHasProviderStub extends Entity
+class EntityHasProviderStub
 {
     use HasProvider;
 
@@ -50,8 +49,6 @@ class EntityHasProviderStub extends Entity
     {
         $this->externalId = $externalId;
         $this->name = $name;
-
-        parent::__construct();
     }
 
     /**
@@ -62,21 +59,5 @@ class EntityHasProviderStub extends Entity
     public function getEntityId(): ?string
     {
         return $this->entityId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdProperty(): string
-    {
-        return 'entityId';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toArray(): array
-    {
-        return [];
     }
 }

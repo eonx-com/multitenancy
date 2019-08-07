@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Externals\ORM;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
@@ -64,7 +63,7 @@ final class EntityManager implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function persist(EntityInterface $entity): void
+    public function persist($entity): void
     {
         $this->entityManager->persist($entity);
     }
@@ -72,7 +71,7 @@ final class EntityManager implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function remove(EntityInterface $entity): void
+    public function remove($entity): void
     {
         $this->entityManager->remove($entity);
     }
@@ -80,7 +79,7 @@ final class EntityManager implements EntityManagerInterface
     /**
      * Check the ownership of entities
      *
-     * @param mixed[] $entities Entities that are scheduled for an update
+     * @param object[] $entities Entities that are scheduled for an update
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider The provider entities should belong to
      *
      * @return void
@@ -90,9 +89,8 @@ final class EntityManager implements EntityManagerInterface
     private function checkEntityOwnership(array $entities, Provider $provider): void
     {
         foreach ($entities as $entity) {
-            // Skip check if the entity doesn't implement entity interface or doesn't implement provider trait
-            if (($entity instanceof EntityInterface) === false ||
-                \in_array(HasProvider::class, $this->getEntityTraitsRecursive($entity), true) === false) {
+            // Skip check if the entity doesn't implement provider trait
+            if (\in_array(HasProvider::class, $this->getEntityTraitsRecursive($entity), true) === false) {
                 continue;
             }
 
@@ -113,11 +111,11 @@ final class EntityManager implements EntityManagerInterface
     /**
      * Get all traits used by a class and any parent classes
      *
-     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity Entity to get traits for
+     * @param object $entity Entity to get traits for
      *
      * @return mixed[]
      */
-    private function getEntityTraitsRecursive(EntityInterface $entity): array
+    private function getEntityTraitsRecursive(object $entity): array
     {
         $results = [];
 

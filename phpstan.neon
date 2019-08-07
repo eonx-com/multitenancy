@@ -4,7 +4,7 @@ includes:
 parameters:
     ignoreErrors:
         -
-            message: '/Call to an undefined method EoneoPay\\Externals\\ORM\\Interfaces\\EntityInterface::getProvider\(\)./'
+            message: '/Call to an undefined method object::getProvider\(\)./'
             path: src/Externals/ORM/EntityManager.php
         -
             message: '/Parameter \#1 \$className \(string\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\EntityManagerStub::getClassMetadata\(\) should be contravariant with parameter \$className \(mixed\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'

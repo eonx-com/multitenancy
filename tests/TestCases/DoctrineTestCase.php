@@ -75,7 +75,10 @@ class DoctrineTestCase extends TestCase
      */
     protected function getDoctrineEntityManager(): EntityManagerInterface
     {
-        $paths = [\implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'src', 'Database', 'Entities'])];
+        $paths = [
+            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', '..', 'src', 'Database', 'Entities']),
+            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'Integration', 'Stubs', 'Database'])
+        ];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
         $dbParams = ['driver' => 'pdo_sqlite', 'memory' => true];

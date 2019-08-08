@@ -3,12 +3,15 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Externals\ORM;
 
+use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use Doctrine\ORM\EntityRepository;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
 use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\EventManagerStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
@@ -17,54 +20,46 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class EntityManagerTest extends DoctrineTestCase
 {
     /**
-     * Test protected flush bypasses entities which don't have the HasProvider trait
+     * Test flush binds (and removes) the subscriber
      *
      * @return void
      */
-    public function testEntityManagerFlushBypassesEntitiesWithoutProviderTrait(): void
+    public function testFlushBindsAndRemovesSubscriber(): void
     {
-        $instance = $this->createInstance();
+        $eventManager = new EventManagerStub();
+        $entityManager = new EntityManagerStub($eventManager);
+        $instance = $this->createInstance($entityManager);
 
-        // Create a provider, flush should ignore
-        $provider = new Provider('external', 'Acme Corp');
-        $instance->persist($provider);
+        // Create provider
+        $provider = $this->createProvider('provider');
+
+        // Create entity
+        $entity = new EntityHasProviderStub('entity', 'Acme Corp');
+        $entity->setProvider($provider);
+        $instance->persist($entity);
         $instance->flush($provider);
 
-        // No exception should be thrown and an id should have been generated
-        self::assertNotNull($provider->getProviderId());
-        self::assertIsInt($provider->getProviderId());
-    }
+        // Check subscriber was added
+        $added = false;
+        foreach ($eventManager->getAddedSubscribers() as $subscriber) {
+            if ($subscriber instanceof ProtectedFlushSubscriber) {
+                $added = true;
 
-    /**
-     * Test protected flush throws exception if there is an entity with an mismatched
-     * provider id from what is passed to the flush method
-     *
-     * @return void
-     */
-    public function testEntityManagerFlushThrowsExceptionIfProviderIdMismatchOnEntity(): void
-    {
-        $instance = $this->createInstance();
+                break;
+            }
+        }
+        self::assertTrue($added);
 
-        // Create two providers
-        $provider1 = $this->createProvider('provider1');
-        $provider2 = $this->createProvider('provider2');
+        // Check subscriber was removed
+        $removed = false;
+        foreach ($eventManager->getAddedSubscribers() as $subscriber) {
+            if ($subscriber instanceof ProtectedFlushSubscriber) {
+                $removed = true;
 
-        // Create three entities, the third of which is using a different provider
-        $entity1 = new EntityHasProviderStub('entity1', 'Acme Corp');
-        $entity1->setProvider($provider1);
-        $instance->persist($entity1);
-        $entity2 = new EntityHasProviderStub('entity2', 'Acme Corp');
-        $entity2->setProvider($provider1);
-        $instance->persist($entity2);
-        $entity3 = new EntityHasProviderStub('entity3', 'Acme Corp');
-        $entity3->setProvider($provider2);
-        $instance->persist($entity3);
-
-        // Set expectation
-        $this->expectException(InvalidEntityOwnershipException::class);
-
-        // Attempt to flush
-        $instance->flush($provider1);
+                break;
+            }
+        }
+        self::assertTrue($removed);
     }
 
     /**
@@ -121,11 +116,13 @@ final class EntityManagerTest extends DoctrineTestCase
     /**
      * Get entity manager instance
      *
+     * @param \Doctrine\ORM\EntityManagerInterface|null $entityManager Entity manager to use
+     *
      * @return \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface
      */
-    protected function createInstance(): EntityManagerInterface
+    protected function createInstance(?DoctrineEntityManager $entityManager = null): EntityManagerInterface
     {
-        return new EntityManager($this->getEntityManager());
+        return new EntityManager($entityManager ?? $this->getEntityManager());
     }
 
     /**

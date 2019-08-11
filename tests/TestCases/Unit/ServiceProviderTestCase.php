@@ -114,6 +114,6 @@ abstract class ServiceProviderTestCase extends AppTestCase
         /**
          * @var \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain $chainDriver
          */
-        $chainDriver->addDriver($xmlDriver, 'CodeFoundation');
+        $chainDriver->addDriver($xmlDriver, 'CodeFoundation\FlowConfig');
     }
 }

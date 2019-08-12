@@ -10,7 +10,7 @@ Flow Config is a key value configuration platform built on top of doctrine. It p
 
 1. Register `FlowConfigServiceProvider` in your `bootstrap/app.php`
 
-2. Add an XMLDriver for `CodeFoundation` namespace on your doctrine mapping driver chain. The driver should load maps from `vendor/code-foundation/flow-config/src/Entity/DoctrineMaps` and look for files with extension `.orm.xml` 
+2. Add an XMLDriver for `CodeFoundation\FlowConfig` namespace on your doctrine mapping driver chain. The driver should load maps from `vendor/code-foundation/flow-config/src/Entity/DoctrineMaps` and look for files with extension `.orm.xml` 
 
 3. Implement `LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface` on an entity that wishes to be able to write to flow config.
 

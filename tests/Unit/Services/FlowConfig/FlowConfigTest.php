@@ -5,7 +5,8 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\FlowConfig;
 
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
 use PHPUnit\Framework\TestCase;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\FlowConfigEntityStubInterface;
+
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\FlowConfigEntityStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig\DoctrineConfigStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig\DoctrineEntityConfigStub;
 
@@ -55,7 +56,7 @@ class FlowConfigTest extends TestCase
     public function testConfigurationCanBeSetOnEntity(): void
     {
         $flowConfig = $this->getService();
-        $entity = new FlowConfigEntityStubInterface('id_100');
+        $entity = new FlowConfigEntityStub('id_100');
 
         $flowConfig->setByEntity($entity, 'config_100', 'value_100');
         $savedValue = $flowConfig->getByEntity($entity, 'config_100');

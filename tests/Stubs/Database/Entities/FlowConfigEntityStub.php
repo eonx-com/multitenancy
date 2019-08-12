@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
 
-class FlowConfigEntityStubInterface implements FlowConfigurableInterface
+class FlowConfigEntityStub implements FlowConfigurableInterface
 {
     /**
      * @var string

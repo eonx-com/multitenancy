@@ -19,6 +19,7 @@ class User implements LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\Fl
 {
     public function getEntityType(): string
     {
+        // This should be unique for each entity.
         return 'user';
     }
 

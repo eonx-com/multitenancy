@@ -26,6 +26,8 @@ final class FlowConfig implements FlowConfigInterface
      * @param \CodeFoundation\FlowConfig\Interfaces\EntityConfigRepositoryInterface $entityFlowConfig
      * @param \CodeFoundation\FlowConfig\Interfaces\ConfigRepositoryInterface $flowConfig
      * @param bool|null $autoFlush
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter) constructor signature set for future developments.
      */
     public function __construct(
         EntityConfigRepositoryInterface $entityFlowConfig,

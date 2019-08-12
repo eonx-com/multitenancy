@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
-use CodeFoundation\FlowConfig\Entity\ConfigItem;
-use CodeFoundation\FlowConfig\Entity\EntityConfigItem;
 use Doctrine\Common\Persistence\Mapping\Driver\DefaultFileLocator;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\EntityManagerInterface;

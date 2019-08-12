@@ -3,10 +3,6 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases\Unit;
 
-use Doctrine\Common\Persistence\Mapping\Driver\DefaultFileLocator;
-use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Laravel\Lumen\ApplicationStub;
@@ -24,13 +20,10 @@ abstract class ServiceProviderTestCase extends AppTestCase
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException If container doesn't contain key
      * @throws \ReflectionException If reflected class doesn't exist
-     * @throws \Doctrine\ORM\ORMException
      */
     public function testBindings(): void
     {
         $application = new ApplicationStub($this->app);
-        $entityManager = $this->app->make('registry')->getManager();
-        $this->setupDoctrineDrivers($entityManager);
 
         // Create the service provider, register bindings and check they've been specified
         $class = $this->getServiceProvider();
@@ -86,32 +79,4 @@ abstract class ServiceProviderTestCase extends AppTestCase
      * @return string
      */
     abstract protected function getServiceProvider(): string;
-
-    /**
-     * Add XML driver to doctrine for flow config.
-     *
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     *
-     * @return void
-     *
-     * @throws \Doctrine\ORM\ORMException
-     */
-    private function setupDoctrineDrivers(EntityManagerInterface $entityManager): void
-    {
-        $chainDriver = $entityManager->getConfiguration()->getMetadataDriverImpl();
-
-        if ($chainDriver instanceof MappingDriverChain === false) {
-            return;
-        }
-
-        $path = \sprintf('%s/vendor/code-foundation/flow-config/src/Entity/DoctrineMaps/', $this->app->basePath());
-        $xmlDriver = new XmlDriver(
-            new DefaultFileLocator($path, '.orm.xml')
-        );
-
-        /**
-         * @var \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain $chainDriver
-         */
-        $chainDriver->addDriver($xmlDriver, 'CodeFoundation\FlowConfig');
-    }
 }

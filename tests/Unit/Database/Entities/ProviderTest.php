@@ -37,6 +37,7 @@ class ProviderTest extends EntityTestCase
 
         self::assertSame('abc1235zxc', $entity->getExternalId());
         self::assertSame('Acme Example Corp', $entity->getName());
+        self::assertNull($entity->getProviderId());
     }
 
     /**

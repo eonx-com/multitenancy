@@ -4,6 +4,9 @@ includes:
 parameters:
     ignoreErrors:
         -
+            message: '/Call to an undefined method object::getProvider\(\)./'
+            path: src/Externals/ORM/Subscribers/ProtectedFlushSubscriber.php
+        -
             message: '/Parameter \#1 \$className \(string\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\EntityManagerStub::getClassMetadata\(\) should be contravariant with parameter \$className \(mixed\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
             path: tests/Stubs/Vendor/Doctrine/EntityManagerStub.php
         -

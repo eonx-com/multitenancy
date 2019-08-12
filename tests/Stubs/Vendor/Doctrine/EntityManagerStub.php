@@ -26,6 +26,11 @@ use Doctrine\ORM\UnitOfWork;
 class EntityManagerStub implements EntityManagerInterface
 {
     /**
+     * @var \Doctrine\Common\EventManager
+     */
+    private $eventManager;
+
+    /**
      * The number of times the entity manager was flushed.
      *
      * @var int
@@ -45,6 +50,16 @@ class EntityManagerStub implements EntityManagerInterface
      * @var mixed[]
      */
     private $removed = [];
+
+    /**
+     * Create entity manager stub
+     *
+     * @param \Doctrine\Common\EventManager $eventManager Event manager instance
+     */
+    public function __construct(?EventManager $eventManager = null)
+    {
+        $this->eventManager = $eventManager ?? new EventManager();
+    }
 
     /**
      * {@inheritdoc}
@@ -178,6 +193,7 @@ class EntityManagerStub implements EntityManagerInterface
      */
     public function getEventManager(): EventManager
     {
+        return $this->eventManager;
     }
 
     /**

@@ -3,11 +3,15 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\TestCases;
 
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Persistence\Mapping\Driver\DefaultFileLocator;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManagerInterface;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\ORM\Tools\Setup;
 use EoneoPay\Externals\Bridge\Laravel\Container;
 use EoneoPay\Externals\Bridge\Laravel\Validator;
 use EoneoPay\Externals\Container\Interfaces\ContainerInterface;
@@ -121,6 +125,39 @@ class AppTestCase extends BaseTestCase
     }
 
     /**
+     * Lazy load database schema only when required
+     *
+     * @return void
+     */
+    protected function createSchema(): void
+    {
+        // If schema is already created, return
+        if ($this->seeded === true) {
+            return;
+        }
+
+        // Create schema
+        try {
+            $entityManager = $this->getDoctrineEntityManager();
+
+            // If schema hasn't been defined, define it, this will happen once per run
+            if (self::$sql === null) {
+                $tool = new SchemaTool($entityManager);
+                $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
+                self::$sql = \implode(';', $tool->getCreateSchemaSql($metadata));
+            }
+
+            $entityManager->getConnection()->exec(self::$sql);
+
+            $this->entityManager = new EntityManager($entityManager);
+        } catch (Exception $exception) {
+            self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
+        }
+
+        $this->seeded = true;
+    }
+
+    /**
      * Get application container.
      *
      * @return \EoneoPay\Externals\Container\Interfaces\ContainerInterface
@@ -135,18 +172,14 @@ class AppTestCase extends BaseTestCase
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      *
-     * @throws \Doctrine\ORM\ORMException
-     *
      * @SuppressWarnings(PHPMD.StaticAccess) Static access to entity manager required to create instance
      */
     protected function getDoctrineEntityManager(): DoctrineEntityManagerInterface
     {
-        $paths = [\implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', '..', 'src', 'Database', 'Entities'])];
-        $setup = new Setup();
-        $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
-        $dbParams = ['driver' => 'pdo_sqlite', 'memory' => true];
+        $entityManager = $this->app->make('registry')->getManager();
+        $this->setupEntityManagerDrivers($entityManager);
 
-        return DoctrineEntityManager::create($dbParams, $config);
+        return $entityManager;
     }
 
     /**
@@ -311,39 +344,6 @@ class AppTestCase extends BaseTestCase
     }
 
     /**
-     * Lazy load database schema only when required
-     *
-     * @return void
-     */
-    private function createSchema(): void
-    {
-        // If schema is already created, return
-        if ($this->seeded === true) {
-            return;
-        }
-
-        // Create schema
-        try {
-            $entityManager = $this->getDoctrineEntityManager();
-
-            // If schema hasn't been defined, define it, this will happen once per run
-            if (self::$sql === null) {
-                $tool = new SchemaTool($entityManager);
-                $metadata = $entityManager->getMetadataFactory()->getAllMetadata();
-                self::$sql = \implode(';', $tool->getCreateSchemaSql($metadata));
-            }
-
-            $entityManager->getConnection()->exec(self::$sql);
-
-            $this->entityManager = new EntityManager($entityManager);
-        } catch (Exception $exception) {
-            self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
-        }
-
-        $this->seeded = true;
-    }
-
-    /**
      * Determine if we are checking for exceptions.
      *
      * @return bool
@@ -353,5 +353,33 @@ class AppTestCase extends BaseTestCase
         return $this->exceptionClass !== null ||
             $this->exceptionMessage !== null ||
             \count($this->exceptionParameters) > 0;
+    }
+
+    /**
+     * Setup drivers for multitenancy doctrine. This sets up annotation reader to read from
+     * src/Database and XMLDriver to read for flow config entities.
+     *
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     *
+     * @return void
+     */
+    private function setupEntityManagerDrivers(DoctrineEntityManager $entityManager): void
+    {
+        $annotationReader = $this->app->make(AnnotationReader::class);
+        $annotationDriver = new AnnotationDriver(
+            $annotationReader,
+            [\sprintf('%s/src/Database/Entities', $this->app->basePath())]
+        );
+
+        $path = \sprintf('%s/vendor/code-foundation/flow-config/src/Entity/DoctrineMaps/', $this->app->basePath());
+        $xmlDriver = new XmlDriver(
+            new DefaultFileLocator($path, '.orm.xml')
+        );
+
+        $chainDriver = new MappingDriverChain();
+        $chainDriver->addDriver($annotationDriver, 'LoyaltyCorp\Multitenancy');
+        $chainDriver->addDriver($xmlDriver, 'CodeFoundation\FlowConfig');
+
+        $entityManager->getConfiguration()->setMetadataDriverImpl($chainDriver);
     }
 }

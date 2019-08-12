@@ -18,3 +18,12 @@ parameters:
         -
             message: '#Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with (.*) and object|string will always evaluate to false.\.#'
             path: tests/Unit/Middleware/ProviderMiddlewareTest.php
+        -
+            message: '/Method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Externals\\FlowConfig\\DoctrineConfigStub::set\(\) has parameter \$value with no typehint specified\./'
+            path: tests/Stubs/Externals/FlowConfig/DoctrineConfigStub.php
+        -
+            message: '/Method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Externals\\FlowConfig\\DoctrineEntityConfigStub::setByEntity\(\) has parameter \$value with no typehint specified\./'
+            path: tests/Stubs/Externals/FlowConfig/DoctrineEntityConfigStub.php
+        -
+            message: '/Constructor of class LoyaltyCorp\\Multitenancy\\Services\\FlowConfig\\FlowConfig has an unused parameter \$autoFlush\./'
+            path: src/Services/FlowConfig/FlowConfig.php

@@ -25,16 +25,10 @@ final class FlowConfig implements FlowConfigInterface
      *
      * @param \CodeFoundation\FlowConfig\Interfaces\EntityConfigRepositoryInterface $entityFlowConfig
      * @param \CodeFoundation\FlowConfig\Interfaces\ConfigRepositoryInterface $flowConfig
-     * @param bool|null $autoFlush
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter) constructor signature set for future developments.
-     *
-     * @see https://loyaltycorp.atlassian.net/browse/PYMT-1063#icft=PYMT-1063 for use of $autoFlush.
      */
     public function __construct(
         EntityConfigRepositoryInterface $entityFlowConfig,
-        ConfigRepositoryInterface $flowConfig,
-        ?bool $autoFlush = null
+        ConfigRepositoryInterface $flowConfig
     ) {
         $this->entityFlowConfig = $entityFlowConfig;
         $this->flowConfig = $flowConfig;

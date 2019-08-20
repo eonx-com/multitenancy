@@ -5,6 +5,9 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
 
+/**
+ * @coversNothing
+ */
 class FlowConfigEntityStub implements FlowConfigurableInterface
 {
     /**
@@ -35,5 +38,6 @@ class FlowConfigEntityStub implements FlowConfigurableInterface
      */
     public function getEntityType(): string
     {
+        return 'stub';
     }
 }

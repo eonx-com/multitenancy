@@ -23,8 +23,7 @@ class FlowConfigTest extends TestCase
     {
         new FlowConfig(
             new DoctrineEntityConfigStub(),
-            new DoctrineConfigStub(),
-            true
+            new DoctrineConfigStub()
         );
 
         $this->addToAssertionCount(1);
@@ -76,8 +75,7 @@ class FlowConfigTest extends TestCase
     {
         return new FlowConfig(
             new DoctrineEntityConfigStub($configs),
-            new DoctrineConfigStub($configs),
-            false
+            new DoctrineConfigStub($configs)
         );
     }
 }

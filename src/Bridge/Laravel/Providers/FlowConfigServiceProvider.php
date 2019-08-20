@@ -21,11 +21,11 @@ class FlowConfigServiceProvider extends ServiceProvider
     {
         $this->app->bind(FlowConfigInterface::class, static function (Container $app): FlowConfig {
             $entityManager = $app->make('registry')->getManager();
+            $autoFlush = false;
 
             return new FlowConfig(
-                new DoctrineEntityConfig($entityManager),
-                new DoctrineConfig($entityManager),
-                false
+                new DoctrineEntityConfig($entityManager, $autoFlush),
+                new DoctrineConfig($entityManager, $autoFlush)
             );
         });
     }

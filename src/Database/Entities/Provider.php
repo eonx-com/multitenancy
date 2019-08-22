@@ -14,7 +14,7 @@ use EoneoPay\Externals\ORM\Entity;
 class Provider extends Entity
 {
     /**
-     * @ORM\Column(type="string", nullable=false, unique=true)
+     * @ORM\Column(type="string", length=100, nullable=false, unique=true)
      *
      * @var string The immutable external ID.
      */

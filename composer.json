@@ -10,7 +10,7 @@
   "require": {
     "php": ">=7.3",
     "ext-json": "*",
-    "code-foundation/flow-config": "^0.0.5",
+    "code-foundation/flow-config": "^0.1.0",
     "doctrine/orm": "^2.6.3",
     "eoneopay/apiformats": "dev-master",
     "eoneopay/externals": "^1.0@rc",

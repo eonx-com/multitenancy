@@ -50,7 +50,7 @@ class ProviderController extends BaseController
 
         $this->entityManager->flush();
 
-        return $this->formattedApiResponse($provider, 201);
+        return $this->formattedApiResponse($this->buildResponse($provider), 201);
     }
 
     /**
@@ -70,6 +70,21 @@ class ProviderController extends BaseController
         $this->entityManager->persist($provider);
         $this->entityManager->flush();
 
-        return $this->formattedApiResponse($provider, 200);
+        return $this->formattedApiResponse($this->buildResponse($provider), 200);
+    }
+
+    /**
+     * Builds the basic Provider response.
+     *
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
+     *
+     * @return mixed[]
+     */
+    private function buildResponse(Provider $provider): array
+    {
+        return [
+            'id' => $provider->getExternalId(),
+            'name' => $provider->getName()
+        ];
     }
 }

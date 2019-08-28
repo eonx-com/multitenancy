@@ -4,14 +4,16 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use EoneoPay\Externals\ORM\Entity;
+use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
+use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
 
 /**
  * Provider represents a customer of Loyalty Corp in this product.
  *
  * @ORM\Entity()
+ * @ORM\Table(name="multitenancy_provider")
  */
-class Provider extends Entity
+class Provider implements EntityInterface, FlowConfigurableInterface
 {
     /**
      * @ORM\Column(type="string", length=100, nullable=false, unique=true)
@@ -44,10 +46,24 @@ class Provider extends Entity
      */
     public function __construct(string $externalId, string $name)
     {
-        parent::__construct();
-
         $this->externalId = $externalId;
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEntityId(): string
+    {
+        return (string)$this->providerId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEntityType(): string
+    {
+        return 'multi_tenancy_provider';
     }
 
     /**
@@ -58,6 +74,14 @@ class Provider extends Entity
     public function getExternalId(): string
     {
         return $this->externalId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId(): ?int
+    {
+        return $this->providerId;
     }
 
     /**
@@ -90,28 +114,5 @@ class Provider extends Entity
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    /**
-     * Serialize entity as an array
-     *
-     * @return mixed[]
-     */
-    public function toArray(): array
-    {
-        return [
-            'external_id' => $this->getExternalId(),
-            'name' => $this->getName()
-        ];
-    }
-
-    /**
-     * Get the id property for this entity
-     *
-     * @return string
-     */
-    protected function getIdProperty(): string
-    {
-        return 'providerId';
     }
 }

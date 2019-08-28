@@ -1107,16 +1107,16 @@
         },
         {
             "name": "eoneopay/externals",
-            "version": "v1.0.0-RC14",
+            "version": "v1.0.0-RC18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/externals.git",
-                "reference": "7f4f9b9ad50ee692f8f6972bcfe19c6135cf4797"
+                "reference": "7ba7a955f32776959fba90a9aee4c4aa7c58ca77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/externals/zipball/7f4f9b9ad50ee692f8f6972bcfe19c6135cf4797",
-                "reference": "7f4f9b9ad50ee692f8f6972bcfe19c6135cf4797",
+                "url": "https://api.github.com/repos/loyaltycorp/externals/zipball/7ba7a955f32776959fba90a9aee4c4aa7c58ca77",
+                "reference": "7ba7a955f32776959fba90a9aee4c4aa7c58ca77",
                 "shasum": ""
             },
             "require": {
@@ -1144,6 +1144,7 @@
                 "mikey179/vfsstream": "^1.6",
                 "monolog/monolog": "^1.23",
                 "nicoswd/php-gpg": "^1.7",
+                "paragonie/hidden-string": "^1.0",
                 "phpmd/phpmd": "^2.6",
                 "phpstan/phpstan": "^0.11",
                 "phpstan/phpstan-phpunit": "^0.11.0",
@@ -1168,6 +1169,7 @@
                 "league/flysystem-aws-s3-v3": "Required to use the cloud Filesystem class",
                 "monolog/monolog": "Required to use the logger class",
                 "nicoswd/php-gpg": "Required to use the encryption class",
+                "paragonie/hidden-string": "Required to use hidden string functionality",
                 "symfony/validator": "Required to use the symfony validator",
                 "vlucas/phpdotenv": "Required to use the env helper"
             },
@@ -1185,7 +1187,7 @@
             "keywords": [
                 "external"
             ],
-            "time": "2019-07-03T03:19:27+00:00"
+            "time": "2019-08-27T01:03:31+00:00"
         },
         {
             "name": "eoneopay/framework",
@@ -1193,12 +1195,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/framework.git",
-                "reference": "b40a46756bbc6f7d4cdb38b91c49717aa1d94778"
+                "reference": "95771fe24402c63503f95a43944c44830c0877fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/framework/zipball/b40a46756bbc6f7d4cdb38b91c49717aa1d94778",
-                "reference": "b40a46756bbc6f7d4cdb38b91c49717aa1d94778",
+                "url": "https://api.github.com/repos/loyaltycorp/framework/zipball/95771fe24402c63503f95a43944c44830c0877fa",
+                "reference": "95771fe24402c63503f95a43944c44830c0877fa",
                 "shasum": ""
             },
             "require": {
@@ -1235,7 +1237,7 @@
                 "eoneopay",
                 "framework"
             ],
-            "time": "2019-07-29T21:52:03+00:00"
+            "time": "2019-08-21T02:19:29+00:00"
         },
         {
             "name": "eoneopay/utils",
@@ -2803,9 +2805,9 @@
             "authors": [
                 {
                     "name": "Phil Sturgeon",
+                    "role": "Developer",
                     "email": "me@philsturgeon.uk",
-                    "homepage": "http://philsturgeon.uk/",
-                    "role": "Developer"
+                    "homepage": "http://philsturgeon.uk/"
                 }
             ],
             "description": "Handle the output of complex data structures ready for API output.",

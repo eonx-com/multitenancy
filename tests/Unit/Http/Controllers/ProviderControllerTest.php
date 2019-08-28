@@ -24,7 +24,6 @@ class ProviderControllerTest extends ControllerTestCase
      */
     public function testProviderCreateSuccess(): void
     {
-        $provider = new Provider('test-provider', 'Test Provider');
         $entityManager = new EntityManagerSpy();
         $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
         $json = <<<JSON
@@ -34,14 +33,18 @@ class ProviderControllerTest extends ControllerTestCase
 }
 JSON;
 
+        $expected = [
+            'id' => 'test-provider',
+            'name' => 'Test Provider'
+        ];
+
         /**
          * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $request
          */
         $request = $this->requestTestHelper->buildUnvalidatedRequest(ProviderCreateRequest::class, $json);
         $result = $controller->create($request);
 
-        self::assertInstanceOf(Provider::class, $result->getContent());
-        self::assertEquals($provider, $result->getContent());
+        self::assertSame($expected, $result->getContent());
         self::assertTrue($entityManager->isFlushed());
         self::assertCount(1, $entityManager->getPersisted());
     }
@@ -64,14 +67,18 @@ JSON;
 }
 JSON;
 
+        $expected = [
+            'id' => 'test-provider',
+            'name' => 'Something Different'
+        ];
+
         /**
          * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest $request
          */
         $request = $this->requestTestHelper->buildUnvalidatedRequest(ProviderModifyRequest::class, $json);
         $result = $controller->modify($provider, $request);
 
-        self::assertInstanceOf(Provider::class, $result->getContent());
-        self::assertEquals($provider, $result->getContent());
+        self::assertSame($expected, $result->getContent());
         self::assertSame('Something Different', $provider->getName());
     }
 

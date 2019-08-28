@@ -3,15 +3,64 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Entities;
 
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\EntityTestCase;
+use ReflectionProperty;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
  */
-class ProviderTest extends EntityTestCase
+class ProviderTest extends AppTestCase
 {
+    /**
+     * Tests that the flow config methods return expected data.
+     *
+     * @return void
+     *
+     * @throws \ReflectionException
+     */
+    public function testFlowConfigable(): void
+    {
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
+
+        $reflProp = new ReflectionProperty(Provider::class, 'providerId');
+        $reflProp->setAccessible(true);
+        $reflProp->setValue($entity, 5);
+
+        self::assertSame('multi_tenancy_provider', $entity->getEntityType());
+        self::assertSame('5', $entity->getEntityId());
+    }
+
+    /**
+     * Test getId when entity has an id.
+     *
+     * @return void
+     *
+     * @throws \ReflectionException
+     */
+    public function testGetId(): void
+    {
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
+
+        $reflProp = new ReflectionProperty(Provider::class, 'providerId');
+        $reflProp->setAccessible(true);
+        $reflProp->setValue($entity, 5);
+
+        self::assertSame(5, $entity->getId());
+    }
+
+    /**
+     * Test getId when entity is new.
+     *
+     * @return void
+     */
+    public function testGetIdNull(): void
+    {
+        $entity = new Provider('abc1235zxc', 'Acme Example Corp');
+
+        self::assertNull($entity->getId());
+    }
+
     /**
      * Test that the name can be overridden.
      *
@@ -38,29 +87,5 @@ class ProviderTest extends EntityTestCase
         self::assertSame('abc1235zxc', $entity->getExternalId());
         self::assertSame('Acme Example Corp', $entity->getName());
         self::assertNull($entity->getProviderId());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getEntityClass(): string
-    {
-        return Provider::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getEntityInstance(): EntityInterface
-    {
-        return new Provider('test-provider', 'Test Provider');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getToArrayKeys(): array
-    {
-        return ['external_id', 'name'];
     }
 }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Traits;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
+use ReflectionClass;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Traits\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
@@ -21,11 +22,8 @@ class HasProviderTest extends AppTestCase
      */
     public function testTraitGetterSetter(): void
     {
-        $provider = $this->getProvider();
-        $dummy = new class
-        {
-            use HasProvider;
-        };
+        $provider = $this->createProvider();
+        $dummy = new EntityHasProviderStub();
         $dummy->setProvider($provider);
 
         self::assertSame($provider, $dummy->getProvider());
@@ -41,13 +39,10 @@ class HasProviderTest extends AppTestCase
      */
     public function testTraitProviderIdSet(): void
     {
-        $provider = $this->getProvider();
-        $dummy = new class
-        {
-            use HasProvider;
-        };
+        $provider = $this->createProvider();
+        $dummy = new EntityHasProviderStub();
         $dummy->setProvider($provider);
-        $property = (new \ReflectionClass($dummy))->getProperty('providerId');
+        $property = (new ReflectionClass($dummy))->getProperty('providerId');
         $property->setAccessible(true);
 
         self::assertSame(123, $property->getValue($dummy));
@@ -60,11 +55,11 @@ class HasProviderTest extends AppTestCase
      *
      * @throws \ReflectionException
      */
-    private function getProvider(): Provider
+    private function createProvider(): Provider
     {
         $provider = new Provider('test-provider', 'Test Provider');
 
-        $reflection = new \ReflectionClass($provider);
+        $reflection = new ReflectionClass($provider);
         $property = $reflection->getProperty('providerId');
         $property->setAccessible(true);
         $property->setValue($provider, 123);

@@ -37,8 +37,6 @@ trait HasProvider
      */
     public function getProvider(): ?Provider
     {
-        $this->providerId = $this->provider !== null ? $this->provider->getProviderId() : null;
-
         return $this->provider;
     }
 

@@ -22,6 +22,15 @@ trait HasProvider
     protected $provider;
 
     /**
+     * The id of the related provider entity.
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $providerId;
+
+    /**
      * Get linked provider to the entity.
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider|null
@@ -41,5 +50,6 @@ trait HasProvider
     public function setProvider(Provider $provider): void
     {
         $this->provider = $provider;
+        $this->providerId = $provider->getProviderId();
     }
 }

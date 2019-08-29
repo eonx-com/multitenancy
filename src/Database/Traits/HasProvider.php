@@ -15,7 +15,6 @@ trait HasProvider
      * Relationship to providerId in Provider
      *
      * @ORM\ManyToOne(targetEntity="LoyaltyCorp\Multitenancy\Database\Entities\Provider")
-     * @ORM\JoinColumn(name="providerId", referencedColumnName="id", nullable=true)
      *
      * @var \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */

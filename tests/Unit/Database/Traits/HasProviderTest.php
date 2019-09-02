@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Traits;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException;
 use ReflectionClass;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Traits\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
@@ -18,6 +19,7 @@ class HasProviderTest extends AppTestCase
      *
      * @return void
      *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
      * @throws \ReflectionException
      */
     public function testTraitGetterSetter(): void
@@ -35,6 +37,7 @@ class HasProviderTest extends AppTestCase
      *
      * @return void
      *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
      * @throws \ReflectionException
      */
     public function testTraitProviderIdSet(): void
@@ -42,10 +45,24 @@ class HasProviderTest extends AppTestCase
         $provider = $this->createProvider();
         $dummy = new EntityHasProviderStub();
         $dummy->setProvider($provider);
-        $property = (new ReflectionClass($dummy))->getProperty('providerId');
-        $property->setAccessible(true);
 
-        self::assertSame(123, $property->getValue($dummy));
+        self::assertSame(123, $dummy->getProviderId());
+    }
+
+    /**
+     * Test trait throws an exception if provider is called but not set
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
+     */
+    public function testTraitThrowsExceptionIfProviderNotSet(): void
+    {
+        $dummy = new EntityHasProviderStub();
+
+        $this->expectException(ProviderNotSetException::class);
+
+        $dummy->getProvider();
     }
 
     /**

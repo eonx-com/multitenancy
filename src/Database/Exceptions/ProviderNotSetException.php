@@ -5,7 +5,7 @@ namespace LoyaltyCorp\Multitenancy\Database\Exceptions;
 
 use EoneoPay\Utils\Exceptions\RuntimeException;
 
-final class InvalidEntityOwnershipException extends RuntimeException
+final class ProviderNotSetException extends RuntimeException
 {
     /**
      * Get Error code.
@@ -24,6 +24,6 @@ final class InvalidEntityOwnershipException extends RuntimeException
      */
     public function getErrorSubCode(): int
     {
-        return 2;
+        return 1;
     }
 }

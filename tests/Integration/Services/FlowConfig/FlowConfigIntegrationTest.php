@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Services\FlowConfig;
 
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\FlowConfigServiceProvider;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\FlowConfigEntityStub;
@@ -43,6 +44,29 @@ class FlowConfigIntegrationTest extends AppTestCase
         $flowConfig->set('key_1', 'value_1');
 
         $entity = new FlowConfigEntityStub('user_id');
+        $flowConfig->setByEntity($entity, 'key_2', 'value_2');
+
+        // flush the changes.
+        $this->getEntityManager()->flush();
+
+        $actualValueKey1 = $flowConfig->get('key_1');
+        $actualValueKey2 = $flowConfig->getByEntity($entity, 'key_2');
+
+        self::assertSame('value_1', $actualValueKey1);
+        self::assertSame('value_2', $actualValueKey2);
+    }
+
+    /**
+     * Test that provider is considered a real entity for flow config use.
+     *
+     * @return void
+     */
+    public function testProviderIntegrationWithRealFlowConfig(): void
+    {
+        $flowConfig = $this->getFlowConfig();
+        $flowConfig->set('key_1', 'value_1');
+
+        $entity = new Provider('id', 'name');
         $flowConfig->setByEntity($entity, 'key_2', 'value_2');
 
         // flush the changes.

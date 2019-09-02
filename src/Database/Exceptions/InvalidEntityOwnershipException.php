@@ -24,6 +24,6 @@ final class InvalidEntityOwnershipException extends RuntimeException
      */
     public function getErrorSubCode(): int
     {
-        return 2;
+        return 1;
     }
 }

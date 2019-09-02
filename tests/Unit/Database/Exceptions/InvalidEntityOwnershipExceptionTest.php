@@ -21,6 +21,6 @@ final class InvalidEntityOwnershipExceptionTest extends AppTestCase
         $exception = new InvalidEntityOwnershipException();
 
         self::assertSame(5000, $exception->getErrorCode());
-        self::assertSame(2, $exception->getErrorSubCode());
+        self::assertSame(1, $exception->getErrorSubCode());
     }
 }

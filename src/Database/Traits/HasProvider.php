@@ -5,7 +5,6 @@ namespace LoyaltyCorp\Multitenancy\Database\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException;
 
 /**
  * @ORM\MappedSuperclass
@@ -17,37 +16,27 @@ trait HasProvider
      *
      * @ORM\ManyToOne(targetEntity="LoyaltyCorp\Multitenancy\Database\Entities\Provider")
      *
-     * @var \LoyaltyCorp\Multitenancy\Database\Entities\Provider|null
+     * @var \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
     protected $provider;
 
     /**
-     * Get linked provider to the entity.
+     * The id of the related provider entity.
      *
-     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+     * @ORM\Column(type="integer", nullable=true)
      *
-     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
+     * @var int|null
      */
-    public function getProvider(): Provider
-    {
-        // Force provider to be set
-        if (($this->provider instanceof Provider) === false) {
-            throw new ProviderNotSetException();
-        }
-
-        return $this->provider;
-    }
+    protected $providerId;
 
     /**
-     * Get linked provider id.
+     * Get linked provider to the entity.
      *
-     * @return int|null
-     *
-     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider|null
      */
-    public function getProviderId(): ?int
+    public function getProvider(): ?Provider
     {
-        return $this->getProvider()->getProviderId();
+        return $this->provider;
     }
 
     /**
@@ -60,5 +49,6 @@ trait HasProvider
     public function setProvider(Provider $provider): void
     {
         $this->provider = $provider;
+        $this->providerId = $provider->getProviderId();
     }
 }

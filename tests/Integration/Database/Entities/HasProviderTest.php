@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Database\Entities;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException;
 use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\Integration\TestCases\HasProviderTestCase;
 
@@ -19,8 +18,6 @@ class HasProviderTest extends HasProviderTestCase
      * Test adding a provider to entity saves state to db.
      *
      * @return void
-     *
-     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
      */
     public function testHasProvider(): void
     {
@@ -35,11 +32,6 @@ class HasProviderTest extends HasProviderTestCase
         $entityManager->flush();
 
         $this->getEntityManager()->clear(EntityHasProviderStub::class);
-
-        // Test details were set on entity
-        self::assertSame($provider, $entity->getProvider());
-        self::assertSame($provider->getProviderId(), $entity->getProviderId());
-
         $repository = $entityManager->getRepository(EntityHasProviderStub::class);
         /**
          * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub $actual
@@ -53,10 +45,8 @@ class HasProviderTest extends HasProviderTestCase
      * Test has provider can accept null provider.
      *
      * @return void
-     *
-     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderNotSetException If provider isn't set prior to call
      */
-    public function testHasProviderThrowsExceptionIfProviderNotSet(): void
+    public function testHasProviderCanSaveNullProvider(): void
     {
         $entityManager = $this->getEntityManager();
 
@@ -71,8 +61,6 @@ class HasProviderTest extends HasProviderTestCase
          */
         $actual = $repository->findOneBy(['externalId' => 'ENTITY_ID']);
 
-        $this->expectException(ProviderNotSetException::class);
-
-        $actual->getProvider();
+        self::assertNull($actual->getProvider());
     }
 }

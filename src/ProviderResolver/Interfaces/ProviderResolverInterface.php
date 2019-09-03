@@ -9,11 +9,20 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 interface ProviderResolverInterface
 {
     /**
-     * Get resolved provider.
+     * Find provider by id
+     *
+     * @param int $providerId The id of the provider to find
+     *
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+     */
+    public function find(int $providerId): Provider;
+
+    /**
+     * Resolve provider from entity
      *
      * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function getProvider(EntityInterface $entity): Provider;
+    public function resolve(EntityInterface $entity): Provider;
 }

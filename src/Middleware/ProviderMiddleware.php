@@ -55,7 +55,7 @@ final class ProviderMiddleware
         }
 
         // get provider from resolver
-        $provider = $this->providerResolver->getProvider($user);
+        $provider = $this->providerResolver->resolve($user);
 
         // add provider to lumen route
         $route[2] = \array_merge($route[2] ?? [], [

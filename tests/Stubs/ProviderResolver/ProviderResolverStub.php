@@ -30,7 +30,15 @@ class ProviderResolverStub implements ProviderResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getProvider(EntityInterface $entity): Provider
+    public function find(int $providerId): Provider
+    {
+        return $this->provider ?? new Provider('PROVIDER_ID', 'Loyalty Corp');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resolve(EntityInterface $entity): Provider
     {
         return $this->provider ?? new Provider('PROVIDER_ID', 'Loyalty Corp');
     }

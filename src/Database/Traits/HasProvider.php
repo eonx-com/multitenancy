@@ -44,11 +44,13 @@ trait HasProvider
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      *
-     * @return void
+     * @return mixed Returns self for fluency
      */
-    public function setProvider(Provider $provider): void
+    public function setProvider(Provider $provider)
     {
         $this->provider = $provider;
         $this->providerId = $provider->getProviderId();
+
+        return $this;
     }
 }

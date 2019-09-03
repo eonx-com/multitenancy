@@ -63,4 +63,18 @@ class HasProviderTest extends HasProviderTestCase
 
         self::assertNull($actual->getProvider());
     }
+
+    /**
+     * Test fluency
+     *
+     * @return void
+     */
+    public function testHasProviderIsFluent(): void
+    {
+        $entity = new EntityHasProviderStub('ENTITY_ID', 'Test');
+
+        $provider = new Provider('99999991111111aaaaabbbbccccc', 'Acme Corp');
+
+        self::assertSame($entity, $entity->setProvider($provider));
+    }
 }

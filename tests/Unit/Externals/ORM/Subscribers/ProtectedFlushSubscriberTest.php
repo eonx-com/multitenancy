@@ -19,6 +19,8 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
      * Test the collections are checked for provider when cascading is automatic
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testCollectionsAreCheckedForProviderMatches(): void
     {
@@ -80,6 +82,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
      * @return void
      *
      * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException If provider mismatch
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testSubscriberThrowsExceptionIfProviderIdMismatchOnEntity(): void
     {
@@ -115,6 +118,8 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
      * Test subscriber unsets itself once successfully run
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testSubscriberUnsetsItselfAfterSuccessfulRun(): void
     {
@@ -149,6 +154,8 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
      * Test subscriber unsets itself even if an exception is thrown
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testSubscriberUnsetsItselfBeforeThrowningException(): void
     {

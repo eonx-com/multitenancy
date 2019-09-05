@@ -6,7 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Seeders;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Seeders\ProviderSeeder;
 use PHPUnit\Framework\TestCase;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\EntityManagerStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\EntityManagerStub;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Seeders\ProviderSeeder

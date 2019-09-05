@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Multitenancy\Database\Exceptions;
+namespace LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions;
 
 use EoneoPay\Utils\Exceptions\RuntimeException;
 
-final class InvalidEntityOwnershipException extends RuntimeException
+final class InvalidRepositoryException extends RuntimeException
 {
     /**
      * Get Error code.
@@ -24,6 +24,6 @@ final class InvalidEntityOwnershipException extends RuntimeException
      */
     public function getErrorSubCode(): int
     {
-        return 1;
+        return 10;
     }
 }

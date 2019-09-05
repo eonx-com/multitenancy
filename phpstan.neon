@@ -27,3 +27,15 @@ parameters:
         -
             message: '/Method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Externals\\FlowConfig\\DoctrineEntityConfigStub::setByEntity\(\) has parameter \$value with no typehint specified\./'
             path: tests/Stubs/Externals/FlowConfig/DoctrineEntityConfigStub.php
+        -
+            message: '/Parameter #2 \$entity of method LoyaltyCorp\\Multitenancy\\Externals\\Interfaces\\ORM\\EntityManagerInterface::findByIds\(\) expects object\|string, array given./'
+            path: tests/Unit/Externals/ORM/EntityManagerTest.php
+        -
+            message: '#Call to function is_object\(\) with object will always evaluate to true.#'
+            path: src/Externals/ORM/EntityManager.php
+        -
+            message: '#Result of && is always false.#'
+            path: src/Externals/ORM/EntityManager.php
+        -
+            message: '#Strict comparison using === between true and false will always evaluate to false.#'
+            path: src/Externals/ORM/EntityManager.php

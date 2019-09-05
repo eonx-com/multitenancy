@@ -135,7 +135,8 @@ final class EntityManagerTest extends DoctrineTestCase
 
         $this->expectException(InvalidEntityException::class);
 
-        // Find on the composite primary key entity
+        // Mangle entity entirely
+        /** @noinspection PhpParamsInspection Invalid parameter is intentional */
         $instance->findByIds($provider, [], []);
     }
 

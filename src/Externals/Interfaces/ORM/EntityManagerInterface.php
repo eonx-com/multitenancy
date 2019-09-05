@@ -15,7 +15,7 @@ interface EntityManagerInterface
      * Does NOT currently support composite identifiers.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own this entity
-     * @param mixed $entity An entity object or string containing a class name
+     * @param object|string $entity An entity object or string containing a class name
      * @param mixed[] $ids Multiple ids to find entities by
      *
      * @return object[]

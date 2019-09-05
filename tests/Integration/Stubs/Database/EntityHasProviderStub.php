@@ -6,15 +6,15 @@ namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 
 /**
- * This Stub entity is to test HasProvider trait.
+ * This stub entity is to test HasProvider trait.
  *
  * @ORM\Entity()
- * @ORM\Table()
  */
-class EntityHasProviderStub
+class EntityHasProviderStub implements HasProviderInterface
 {
     use HasProvider;
 
@@ -91,6 +91,16 @@ class EntityHasProviderStub
     }
 
     /**
+     * Get external id set in constructor
+     *
+     * @return string
+     */
+    public function getExternalId(): string
+    {
+        return $this->externalId;
+    }
+
+    /**
      * Get owned collection
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -98,6 +108,20 @@ class EntityHasProviderStub
     public function getOwned(): Collection
     {
         return $this->owned;
+    }
+
+    /**
+     * Set entity id
+     *
+     * @param string $entityId The id to set against the entity
+     *
+     * @return mixed
+     */
+    public function setEntityId(string $entityId)
+    {
+        $this->entityId = $entityId;
+
+        return $this;
     }
 
     /**

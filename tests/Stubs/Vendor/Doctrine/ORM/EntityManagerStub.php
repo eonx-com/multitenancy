@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;

@@ -18,6 +18,8 @@ class HasProviderTest extends HasProviderTestCase
      * Test adding a provider to entity saves state to db.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testHasProvider(): void
     {
@@ -68,6 +70,8 @@ class HasProviderTest extends HasProviderTestCase
      * Test fluency
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      */
     public function testHasProviderIsFluent(): void
     {

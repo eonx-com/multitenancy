@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Exceptions;
 
-use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
+use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
- * @covers \LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException
+ * @covers \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException
  */
-final class InvalidEntityOwnershipExceptionTest extends AppTestCase
+final class ProviderAlreadySetExceptionTest extends AppTestCase
 {
     /**
      * Test exception returns the correct codes
@@ -18,9 +18,9 @@ final class InvalidEntityOwnershipExceptionTest extends AppTestCase
      */
     public function testExceptionCodes(): void
     {
-        $exception = new InvalidEntityOwnershipException();
+        $exception = new ProviderAlreadySetException();
 
         self::assertSame(1129, $exception->getErrorCode());
-        self::assertSame(1, $exception->getErrorSubCode());
+        self::assertSame(2, $exception->getErrorSubCode());
     }
 }

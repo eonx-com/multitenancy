@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Traits;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException;
 use ReflectionClass;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Traits\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
@@ -14,38 +15,85 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 class HasProviderTest extends AppTestCase
 {
     /**
+     * Test provider does not allow a different provider to be set if one is already set
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
+     * @throws \ReflectionException
+     */
+    public function testSetProviderIsImmutable(): void
+    {
+        $provider1 = $this->createProvider();
+        $provider2 = $this->createProvider();
+
+        $entity = new EntityHasProviderStub();
+        $entity->setProvider($provider1);
+
+        // Test we can reset the same provider without issue
+        $entity->setProvider($provider1);
+        $this->addToAssertionCount(1);
+
+        // Test we can't change provider
+        $this->expectException(ProviderAlreadySetException::class);
+        $entity->setProvider($provider2);
+    }
+
+    /**
+     * Tests that when a provider is set, the `getProviderId` method returns the id from the associated provider and
+     * not what it previously saved on set.
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
+     * @throws \ReflectionException
+     */
+    public function testTraitGetProviderIdAlwaysReturnsProviderId(): void
+    {
+        // Create provider and set against an entity
+        $provider = $this->createProvider();
+        $entity = new EntityHasProviderStub();
+        $entity->setProvider($provider);
+
+        // Set up both classes so we can modify private properties
+        $reflectedEntity = new ReflectionClass($entity);
+        $reflectedProvider = new ReflectionClass($provider);
+
+        // Test provider id was set
+        $entityProviderId = $reflectedEntity->getProperty('providerId');
+        $entityProviderId->setAccessible(true);
+        self::assertSame(123, $entityProviderId->getValue($entity));
+
+        // Test getter returns correct value
+        self::assertSame(123, $entity->getProviderId());
+
+        // Change provider id
+        $providerProviderId = $reflectedProvider->getProperty('providerId');
+        $providerProviderId->setAccessible(true);
+        $providerProviderId->setValue($provider, 456);
+
+        // Test provider id hasn't changed on entity
+        self::assertSame(123, $entityProviderId->getValue($entity));
+
+        // Test getter returns correct value
+        self::assertSame(456, $entity->getProviderId());
+    }
+
+    /**
      * Tests that the getter returns the same provider instance as what was set through the setter.
      *
      * @return void
      *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
      * @throws \ReflectionException
      */
     public function testTraitGetterSetter(): void
     {
         $provider = $this->createProvider();
-        $dummy = new EntityHasProviderStub();
-        $dummy->setProvider($provider);
+        $entity = new EntityHasProviderStub();
+        $entity->setProvider($provider);
 
-        self::assertSame($provider, $dummy->getProvider());
-    }
-
-    /**
-     * Tests that when a provider is set, the `providerId` property in the class using the trait has its value updated
-     * to match that of the provider id.
-     *
-     * @return void
-     *
-     * @throws \ReflectionException
-     */
-    public function testTraitProviderIdSet(): void
-    {
-        $provider = $this->createProvider();
-        $dummy = new EntityHasProviderStub();
-        $dummy->setProvider($provider);
-        $property = (new ReflectionClass($dummy))->getProperty('providerId');
-        $property->setAccessible(true);
-
-        self::assertSame(123, $property->getValue($dummy));
+        self::assertSame($provider, $entity->getProvider());
     }
 
     /**

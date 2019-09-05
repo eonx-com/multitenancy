@@ -6,6 +6,7 @@ namespace LoyaltyCorp\Multitenancy\Externals\ORM;
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use Doctrine\ORM\Mapping\MappingException;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Query\FilterCollectionInterface;
@@ -37,11 +38,22 @@ final class EntityManager implements EntityManagerInterface
     /**
      * {@inheritdoc}
      *
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException If entity is invalid for method
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException If entity uses composite identifiers
      */
-    public function findByIds(Provider $provider, HasProviderInterface $entity, array $ids): array
+    public function findByIds(Provider $provider, $entity, array $ids): array
     {
-        $class = \get_class($entity);
+        // We only want a class or a string as entity and it must implement the correct interface
+        if ((\is_string($entity) === false && \is_object($entity) === false) ||
+            \in_array(HasProviderInterface::class, \class_implements($entity), true) === false) {
+            throw new InvalidEntityException(\sprintf(
+                'Entity must implement %s to use findByIds().',
+                HasProviderInterface::class
+            ));
+        }
+
+        // Determine class name
+        $class = \is_string($entity) === true ? $entity : \get_class($entity);
 
         $metadata = $this->entityManager->getClassMetadata($class);
 

@@ -15,12 +15,12 @@ interface EntityManagerInterface
      * Does NOT currently support composite identifiers.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own this entity
-     * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity The entity to find by ids
+     * @param mixed $entity An entity object or string containing a class name
      * @param mixed[] $ids Multiple ids to find entities by
      *
      * @return object[]
      */
-    public function findByIds(Provider $provider, HasProviderInterface $entity, array $ids): array;
+    public function findByIds(Provider $provider, $entity, array $ids): array;
 
     /**
      * Flush unit of work to the database, ensuring all entities belong to the correct provider if applicable

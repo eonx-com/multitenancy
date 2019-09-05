@@ -5,12 +5,14 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Externals\ORM;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\InvalidRepositoryException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
+use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityDoesNotHaveProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityDoesNotImplementRepositoryInterfaceStub;
 use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasCompositePrimaryKeyStub;
 use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
@@ -34,11 +36,8 @@ final class EntityManagerTest extends DoctrineTestCase
      */
     public function testFindByIdsFindsEntities(): void
     {
-        // Create doctrine instance and get filters
-        $doctrine = $this->getEntityManager();
-
         // Create entity manager instance
-        $instance = $this->createInstance($doctrine);
+        $instance = $this->createInstance($this->getEntityManager());
 
         // Create provider
         $provider = $this->createProvider('provider');
@@ -100,6 +99,44 @@ final class EntityManagerTest extends DoctrineTestCase
 
         // Find on the composite primary key entity
         $instance->findByIds($provider, $entity2, $ids);
+    }
+
+    /**
+     * Test find by id fails if an entity which doesn't implement the correct interface is used
+     *
+     * @return void
+     */
+    public function testFindByIdsThrowsExceptionIfNonProviderEntityUsed(): void
+    {
+        // Create entity manager instance
+        $instance = $this->createInstance($this->getEntityManager());
+
+        // Create provider
+        $provider = $this->createProvider('provider');
+
+        $this->expectException(InvalidEntityException::class);
+
+        // Find on the composite primary key entity
+        $instance->findByIds($provider, EntityDoesNotHaveProviderStub::class, []);
+    }
+
+    /**
+     * Test find by id fails if something completely invalid is used for the entity
+     *
+     * @return void
+     */
+    public function testFindByIdsThrowsExceptionIfWeirdnessPassedAsEntity(): void
+    {
+        // Create entity manager instance
+        $instance = $this->createInstance($this->getEntityManager());
+
+        // Create provider
+        $provider = $this->createProvider('provider');
+
+        $this->expectException(InvalidEntityException::class);
+
+        // Find on the composite primary key entity
+        $instance->findByIds($provider, [], []);
     }
 
     /**

@@ -8,7 +8,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
-use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
+use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 
 final class ProtectedFlushSubscriber implements EventSubscriber
 {
@@ -88,7 +88,7 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     {
         foreach ($entities as $entity) {
             // Skip check if the entity doesn't implement provider trait
-            if (\in_array(HasProvider::class, $this->getEntityTraitsRecursive($entity), true) === false) {
+            if (\in_array(HasProviderInterface::class, \class_implements($entity), true) === false) {
                 continue;
             }
 
@@ -125,50 +125,5 @@ final class ProtectedFlushSubscriber implements EventSubscriber
         }
 
         return \count($changes) > 0 ? \array_merge(...$changes) : [];
-    }
-
-    /**
-     * Get all traits used by a class and any parent classes.
-     *
-     * @param object $entity Entity to get traits for
-     *
-     * @return mixed[]
-     */
-    private function getEntityTraitsRecursive(object $entity): array
-    {
-        $results = [];
-
-        // Determine class name
-        $baseClass = \get_class($entity);
-
-        $classes = \array_reverse(\class_parents($baseClass));
-        $classes[$baseClass] = $baseClass;
-
-        foreach ($classes as $class) {
-            $results[] = $this->getTraitTraitsRecursive($class);
-        }
-
-        return \array_unique(\array_merge(...$results));
-    }
-
-    /**
-     * Get all traits used by a trait, recursively.
-     *
-     * @param string $base The base class or trait to get traits for
-     *
-     * @return mixed[]
-     */
-    private function getTraitTraitsRecursive(string $base): array
-    {
-        $traits = [];
-
-        // Start with base class
-        $traits[] = \class_uses($base) ?: [];
-
-        foreach (\reset($traits) as $trait) {
-            $traits[] = $this->getTraitTraitsRecursive($trait);
-        }
-
-        return \array_merge(...$traits);
     }
 }

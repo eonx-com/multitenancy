@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 
 interface ProviderResolverInterface
 {
@@ -20,9 +19,9 @@ interface ProviderResolverInterface
     /**
      * Resolve provider from entity.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity
+     * @param object $entity
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function resolve(HasProviderInterface $entity): Provider;
+    public function resolve(object $entity): Provider;
 }

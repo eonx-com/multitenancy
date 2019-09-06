@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\ProviderResolver;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
 final class ProviderResolverStub implements ProviderResolverInterface
@@ -35,7 +34,7 @@ final class ProviderResolverStub implements ProviderResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(HasProviderInterface $entity): Provider
+    public function resolve(object $entity): Provider
     {
         return $this->provider ?? new Provider('PROVIDER_ID', 'Loyalty Corp');
     }

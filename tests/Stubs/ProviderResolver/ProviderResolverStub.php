@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\ProviderResolver;
 
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
 /**
@@ -38,7 +38,7 @@ class ProviderResolverStub implements ProviderResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function resolve(EntityInterface $entity): Provider
+    public function resolve(HasProviderInterface $entity): Provider
     {
         return $this->provider ?? new Provider('PROVIDER_ID', 'Loyalty Corp');
     }

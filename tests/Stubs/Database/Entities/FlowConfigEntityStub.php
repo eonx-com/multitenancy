@@ -3,14 +3,19 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
+use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
 
 /**
- * @coversNothing
+ * @ORM\Entity()
  */
 class FlowConfigEntityStub implements FlowConfigurableInterface
 {
     /**
+     * @ORM\Column(type="string", name="id")
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Id()
+     *
      * @var string
      */
     private $entityId;

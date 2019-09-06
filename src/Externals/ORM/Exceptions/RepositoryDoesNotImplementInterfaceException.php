@@ -5,7 +5,7 @@ namespace LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions;
 
 use EoneoPay\Utils\Exceptions\RuntimeException;
 
-final class InvalidRepositoryException extends RuntimeException
+final class RepositoryDoesNotImplementInterfaceException extends RuntimeException
 {
     /**
      * Get Error code.

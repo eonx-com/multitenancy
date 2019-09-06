@@ -7,7 +7,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
@@ -206,21 +206,5 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     protected function createInstance(Provider $provider): ProtectedFlushSubscriber
     {
         return new ProtectedFlushSubscriber($provider);
-    }
-
-    /**
-     * Create a provider entity for testing
-     *
-     * @param string $externalId External id for the provider
-     *
-     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
-     */
-    private function createProvider(string $externalId): Provider
-    {
-        $provider = new Provider($externalId, 'Acme Corp');
-        $this->getEntityManager()->persist($provider);
-        $this->getEntityManager()->flush();
-
-        return $provider;
     }
 }

@@ -6,6 +6,7 @@ namespace LoyaltyCorp\Multitenancy\Middleware;
 use Closure;
 use EoneoPay\Externals\Auth\Interfaces\AuthInterface;
 use Illuminate\Http\Request;
+use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
 final class ProviderMiddleware
@@ -49,12 +50,17 @@ final class ProviderMiddleware
 
         $user = $this->auth->user();
 
-        // return and let others handle this.
-        if ($user === null) {
+        // If user isn't something with a provider, skip
+        if (($user instanceof HasProviderInterface) === false) {
             return $next($request);
         }
 
-        // get provider from resolver
+        // Get provider from resolver
+        /**
+         * @var \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $user
+         *
+         * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
+         */
         $provider = $this->providerResolver->resolve($user);
 
         // add provider to lumen route

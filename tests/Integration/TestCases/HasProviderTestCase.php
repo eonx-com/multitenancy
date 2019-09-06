@@ -20,7 +20,7 @@ class HasProviderTestCase extends DoctrineTestCase
      */
     protected function getDoctrineEntityManager(): EntityManagerInterface
     {
-        $paths = [__DIR__ . '/../../../src', __DIR__ . '/../Stubs/Database'];
+        $paths = [__DIR__ . '/../../../src', __DIR__ . '/../Stubs/Database/Entities'];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
         $dbParams = ['driver' => 'pdo_sqlite', 'memory' => true];

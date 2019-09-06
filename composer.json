@@ -21,6 +21,8 @@
   },
   "require-dev": {
     "eoneopay/standards": "dev-master",
+    "friendsofphp/php-cs-fixer": "^2.9",
+    "indigophp/doctrine-annotation-autoload": "^0.1.0",
     "laravel/lumen-framework": "^5.8",
     "phpmd/phpmd": "^2.6",
     "phpstan/phpstan": "^0.11",

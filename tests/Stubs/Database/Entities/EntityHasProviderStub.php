@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
  *
  * @ORM\Entity()
  */
-class EntityHasProviderStub implements HasProviderInterface
+final class EntityHasProviderStub implements HasProviderInterface
 {
     use HasProvider;
 
@@ -47,7 +47,7 @@ class EntityHasProviderStub implements HasProviderInterface
      * @ORM\OneToMany(
      *     cascade={"persist"},
      *     mappedBy="owner",
-     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub"
+     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub"
      * )
      *
      * @var \Doctrine\Common\Collections\Collection
@@ -59,10 +59,10 @@ class EntityHasProviderStub implements HasProviderInterface
      *
      * @ORM\ManyToOne(
      *     inversedBy="owned",
-     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub"
+     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub"
      * )
      *
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub
      */
     private $owner;
 
@@ -127,7 +127,7 @@ class EntityHasProviderStub implements HasProviderInterface
     /**
      * Set entity owner
      *
-     * @param \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub $owner
+     * @param \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub $owner
      *
      * @return void
      */

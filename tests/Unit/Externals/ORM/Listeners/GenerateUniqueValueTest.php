@@ -7,6 +7,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use EoneoPay\Utils\Generator;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Listeners\GenerateUniqueValue;
 use ReflectionClass;
@@ -14,7 +15,6 @@ use ReflectionException;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityWithGenerateUniqueValueCallbackInterfaceStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityWithGenerateUniqueValueInterfaceStub;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\ProviderResolver\ProviderResolverStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Utils\GeneratorStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
@@ -31,15 +31,18 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
      * @return void
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
     public function testGenerationWithCallbackInvokesCallback(): void
     {
         $entity = new EntityWithGenerateUniqueValueCallbackInterfaceStub();
+        $entity->setProvider($this->createProvider('provider'));
 
         // Invoke generator
-        $generator = new GenerateUniqueValue(new Generator(), new ProviderResolverStub());
+        $generator = new GenerateUniqueValue(new Generator());
         $generator->prePersist(new LifecycleEventArgs($entity, $this->getEntityManager()));
 
         // Callback should overwrite generated value
@@ -52,16 +55,18 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
      * @return void
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException If provider clashes
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
     public function testGenerationWithCheckDigit(): void
     {
-        $stub = new GeneratorStub();
         $entity = new EntityWithGenerateUniqueValueInterfaceStub(true);
+        $entity->setProvider($this->createProvider('provider'));
 
         // Invoke generate with known 'random' string
-        $generator = new GenerateUniqueValue($stub, new ProviderResolverStub());
+        $generator = new GenerateUniqueValue(new GeneratorStub());
         $generator->prePersist(new LifecycleEventArgs($entity, $this->getEntityManager()));
 
         self::assertSame('notrandom3', (string)$entity->getGeneratedValue());
@@ -73,6 +78,7 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
      * @return void
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
@@ -83,7 +89,7 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
         $expected = $this->getEntityContents($entity);
 
         // Invoke generator
-        $generator = new GenerateUniqueValue(new Generator(), new ProviderResolverStub());
+        $generator = new GenerateUniqueValue(new Generator());
         $generator->prePersist(new LifecycleEventArgs($entity, $this->getEntityManager()));
 
         // Remove entity id
@@ -107,7 +113,7 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
         self::assertNull($entity->getGeneratedValue());
 
         // Create generator and add to event manager
-        $generator = new GenerateUniqueValue(new Generator(), new ProviderResolverStub());
+        $generator = new GenerateUniqueValue(new Generator());
         $this->getEntityManager()->getEventManager()->addEventListener([Events::prePersist], $generator);
 
         // Persist entity
@@ -124,6 +130,7 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
      * @return void
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
@@ -142,12 +149,40 @@ final class GenerateUniqueValueTest extends DoctrineTestCase
         $entityManager->flush($provider);
 
         // For provider stub to return the right provider using a non-random unique value
-        $generator = new GenerateUniqueValue($generator, new ProviderResolverStub($provider));
+        $generator = new GenerateUniqueValue($generator);
+
+        // Create lifecycle arguements
+        $arguments = new LifecycleEventArgs($entity, $this->getEntityManager());
 
         $this->expectException(UniqueValueNotGeneratedException::class);
 
         // Attempt to generate a value but the generator should continuously return the same value
-        $generator->prePersist(new LifecycleEventArgs($entity, $this->getEntityManager()));
+        $generator->prePersist($arguments);
+    }
+
+    /**
+     * Test an exception is thrown if provider is not set on a HasProvider entity.
+     *
+     * @return void
+     *
+     * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
+     */
+    public function testPrePersistThrowsExceptionThrownIfProviderNotSet(): void
+    {
+        // Create entity but don't set provider
+        $entity = new EntityWithGenerateUniqueValueInterfaceStub();
+
+        $generator = new GenerateUniqueValue(new Generator());
+
+        // Create lifecycle arguements
+        $arguments = new LifecycleEventArgs($entity, $this->getEntityManager());
+
+        $this->expectException(ProviderNotSetException::class);
+
+        $generator->prePersist($arguments);
     }
 
     /**

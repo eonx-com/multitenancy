@@ -7,12 +7,13 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use EoneoPay\Externals\ORM\EntityManager as GenericEntityManager;
 use EoneoPay\Utils\CheckDigit;
 use EoneoPay\Utils\Interfaces\GeneratorInterface;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueWithCallbackInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException;
-use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
 /**
  * Doctrine listener that will be applied to entities that have the following interface implemented.
@@ -36,22 +37,13 @@ final class GenerateUniqueValue
     private $generator;
 
     /**
-     * Provider resolver.
-     *
-     * @var \LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface
-     */
-    private $providerResolver;
-
-    /**
      * Initialise the listener.
      *
      * @param \EoneoPay\Utils\Interfaces\GeneratorInterface $generator Generator to generate a random string
-     * @param \LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface $providerResolver Resolver
      */
-    public function __construct(GeneratorInterface $generator, ProviderResolverInterface $providerResolver)
+    public function __construct(GeneratorInterface $generator)
     {
         $this->generator = $generator;
-        $this->providerResolver = $providerResolver;
     }
 
     /**
@@ -62,6 +54,7 @@ final class GenerateUniqueValue
      * @return void
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
@@ -98,16 +91,21 @@ final class GenerateUniqueValue
     /**
      * Determine if this entity requires generation.
      *
-     * @param mixed $entity The entity to check
+     * @param object $entity The entity to check
      *
      * @return \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueInterface|null
      */
-    private function checkEntity($entity): ?GenerateUniqueValueInterface
+    private function checkEntity(object $entity): ?GenerateUniqueValueInterface
     {
         // Entity must be an application entity, implement the correct interface and have the genrator enabled
-        return (($entity instanceof HasProviderInterface) === true &&
-            ($entity instanceof GenerateUniqueValueInterface) === true &&
-            $entity->areGeneratorsEnabled() === true) ? $entity : null;
+        /**
+         * @var \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueInterface|object $entity
+         *
+         * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
+         */
+        return ($entity instanceof GenerateUniqueValueInterface) === true && $entity->areGeneratorsEnabled() === true ?
+            $entity :
+            null;
     }
 
     /**
@@ -119,6 +117,7 @@ final class GenerateUniqueValue
      * @return string
      *
      * @throws \EoneoPay\Externals\ORM\Exceptions\RepositoryClassDoesNotImplementInterfaceException If wrong interface
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedException If no value generated
      */
@@ -128,7 +127,6 @@ final class GenerateUniqueValue
         $entityManager = ($entity instanceof HasProviderInterface) === true ?
             new EntityManager($eventArgs->getEntityManager()) :
             new GenericEntityManager($eventArgs->getEntityManager());
-        $repository = $entityManager->getRepository(\get_class($entity));
 
         // Configure static settings
         $hasCheckDigit = $entity->hasGeneratedPropertyCheckDigit();
@@ -136,6 +134,9 @@ final class GenerateUniqueValue
             $entity->getGeneratedPropertyLength() - 1 :
             $entity->getGeneratedPropertyLength();
         $property = $entity->getGeneratedProperty();
+
+        // Create repository
+        $repository = $entityManager->getRepository(\get_class($entity));
 
         // Try 100 times to obtain a unique value
         for ($counter = 0; $counter < 100; $counter++) {
@@ -151,14 +152,14 @@ final class GenerateUniqueValue
                 $randomValue = \sprintf('%s%s', $randomValue, (new CheckDigit())->calculate($randomValue));
             }
 
-            // Determine if any records are already using this id
+            // Determine is value is unique for this entity
             /**
-             * @var \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity
+             * @var \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface|object $entity
              *
              * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === chec
              */
             $count = ($entity instanceof HasProviderInterface) === true ?
-                $repository->count($this->providerResolver->resolve($entity), [$property => $randomValue]) :
+                $repository->count($this->resolveProvider($entity), [$property => $randomValue]) :
                 $repository->count([$property => $randomValue]);
 
             // If records are using this id, try again
@@ -171,9 +172,30 @@ final class GenerateUniqueValue
 
         // If no return was completed, throw exception
         throw new UniqueValueNotGeneratedException(\sprintf(
-            'Unable to generate a unique value for %s on %s',
+            'Unable to generate a unique value for %s on %s.',
             $property,
             \get_class($entity)
         ));
+    }
+
+    /**
+     * Resolve provider from an entity.
+     *
+     * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity The entity to resolve from
+     *
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ProviderNotSetException If provider isn't set
+     */
+    private function resolveProvider(HasProviderInterface $entity): Provider
+    {
+        $provider = $entity->getProvider();
+
+        // If there is no provider, throw exception
+        if (($provider instanceof Provider) === false) {
+            throw new ProviderNotSetException('You must set a provider before persisting this entity.');
+        }
+
+        return $provider;
     }
 }

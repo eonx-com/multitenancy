@@ -21,6 +21,6 @@ final class RepositoryDoesNotImplementInterfaceExceptionTest extends AppTestCase
         $exception = new RepositoryDoesNotImplementInterfaceException();
 
         self::assertSame(1129, $exception->getErrorCode());
-        self::assertSame(10, $exception->getErrorSubCode());
+        self::assertSame(11, $exception->getErrorSubCode());
     }
 }

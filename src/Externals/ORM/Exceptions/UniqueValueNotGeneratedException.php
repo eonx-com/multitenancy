@@ -24,6 +24,6 @@ final class UniqueValueNotGeneratedException extends RuntimeException
      */
     public function getErrorSubCode(): int
     {
-        return 11;
+        return 12;
     }
 }

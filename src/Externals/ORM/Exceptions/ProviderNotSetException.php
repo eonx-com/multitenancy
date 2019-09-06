@@ -5,7 +5,7 @@ namespace LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions;
 
 use EoneoPay\Utils\Exceptions\RuntimeException;
 
-final class RepositoryDoesNotImplementInterfaceException extends RuntimeException
+final class ProviderNotSetException extends RuntimeException
 {
     /**
      * Get Error code.
@@ -24,6 +24,6 @@ final class RepositoryDoesNotImplementInterfaceException extends RuntimeExceptio
      */
     public function getErrorSubCode(): int
     {
-        return 11;
+        return 10;
     }
 }

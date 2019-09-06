@@ -6,10 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Providers;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 
-/**
- * @coversNothing
- */
-class ProviderServiceStub implements ProviderServiceInterface
+final class ProviderServiceStub implements ProviderServiceInterface
 {
     /**
      * Creates a new provider.

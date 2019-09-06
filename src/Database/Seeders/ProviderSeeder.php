@@ -6,7 +6,7 @@ namespace LoyaltyCorp\Multitenancy\Database\Seeders;
 use Doctrine\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 
-class ProviderSeeder
+final class ProviderSeeder
 {
     /**
      * @var \Doctrine\ORM\EntityManagerInterface
@@ -14,7 +14,7 @@ class ProviderSeeder
     private $entityManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */

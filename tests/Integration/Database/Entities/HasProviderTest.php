@@ -4,15 +4,15 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Database\Entities;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\TestCases\HasProviderTestCase;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
  * This test class tests an entity stub which is using HasProvider trait.
  *
- * @covers \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub
+ * @coversNothing
  */
-class HasProviderTest extends HasProviderTestCase
+final class HasProviderTest extends DoctrineTestCase
 {
     /**
      * Test adding a provider to entity saves state to db.
@@ -36,7 +36,7 @@ class HasProviderTest extends HasProviderTestCase
         $this->getEntityManager()->clear(EntityHasProviderStub::class);
         $repository = $entityManager->getRepository(EntityHasProviderStub::class);
         /**
-         * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub $actual
+         * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub $actual
          */
         $actual = $repository->findOneBy(['externalId' => 'ENTITY_ID']);
 
@@ -59,7 +59,7 @@ class HasProviderTest extends HasProviderTestCase
         $this->getEntityManager()->clear(EntityHasProviderStub::class);
         $repository = $entityManager->getRepository(EntityHasProviderStub::class);
         /**
-         * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub $actual
+         * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub $actual
          */
         $actual = $repository->findOneBy(['externalId' => 'ENTITY_ID']);
 
@@ -67,7 +67,7 @@ class HasProviderTest extends HasProviderTestCase
     }
 
     /**
-     * Test fluency
+     * Test fluency.
      *
      * @return void
      *

@@ -7,12 +7,13 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @coversNothing
  */
-class DoctrineTestCase extends TestCase
+abstract class DoctrineTestCase extends TestCase
 {
     /**
      * SQL queries to create database schema.
@@ -27,14 +28,30 @@ class DoctrineTestCase extends TestCase
     private $entityManager;
 
     /**
-     * Whether the database has been seeded or not
+     * Whether the database has been seeded or not.
      *
      * @var bool
      */
     private $seeded = false;
 
     /**
-     * Lazy load database schema only when required
+     * Create a provider entity for testing.
+     *
+     * @param string $externalId External id for the provider
+     *
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+     */
+    protected function createProvider(string $externalId): Provider
+    {
+        $provider = new Provider($externalId, 'Acme Corp');
+        $this->getEntityManager()->persist($provider);
+        $this->getEntityManager()->flush();
+
+        return $provider;
+    }
+
+    /**
+     * Lazy load database schema only when required.
      *
      * @return void
      */
@@ -65,7 +82,7 @@ class DoctrineTestCase extends TestCase
     }
 
     /**
-     * Get doctrine entity manager instance
+     * Get doctrine entity manager instance.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      *
@@ -77,7 +94,7 @@ class DoctrineTestCase extends TestCase
     {
         $paths = [
             \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', '..', 'src', 'Database', 'Entities']),
-            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'Integration', 'Stubs', 'Database'])
+            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'Stubs', 'Database', 'Entities']),
         ];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
@@ -87,7 +104,7 @@ class DoctrineTestCase extends TestCase
     }
 
     /**
-     * Get entity manager
+     * Get entity manager.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      */

@@ -6,10 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig;
 use CodeFoundation\FlowConfig\Interfaces\EntityConfigRepositoryInterface;
 use CodeFoundation\FlowConfig\Interfaces\EntityIdentifier;
 
-/**
- * @coversNothing
- */
-class DoctrineEntityConfigStub implements EntityConfigRepositoryInterface
+final class DoctrineEntityConfigStub implements EntityConfigRepositoryInterface
 {
     /**
      * @var mixed[]
@@ -31,6 +28,7 @@ class DoctrineEntityConfigStub implements EntityConfigRepositoryInterface
      */
     public function canSetByEntity(): bool
     {
+        return true;
     }
 
     /**

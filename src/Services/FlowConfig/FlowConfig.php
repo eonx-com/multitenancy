@@ -39,7 +39,9 @@ final class FlowConfig implements FlowConfigInterface
      */
     public function get(string $key, ?string $default = null): ?string
     {
-        return $this->flowConfig->get($key, $default);
+        $value = $this->flowConfig->get($key, $default);
+
+        return \is_scalar($value) === true ? (string)$value : null;
     }
 
     /**

@@ -7,9 +7,9 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
- * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+ * @coversNothing
  */
-class ProviderTest extends DoctrineTestCase
+final class ProviderTest extends DoctrineTestCase
 {
     /**
      * Test that Tenants can be successfully persisted to the database.

@@ -23,7 +23,7 @@ interface EntityManagerInterface
     public function findByIds(Provider $provider, $entity, array $ids): array;
 
     /**
-     * Flush unit of work to the database, ensuring all entities belong to the correct provider if applicable
+     * Flush unit of work to the database, ensuring all entities belong to the correct provider if applicable.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own all entities in UOW
      *
@@ -39,7 +39,7 @@ interface EntityManagerInterface
     public function getFilters(): FilterCollectionInterface;
 
     /**
-     * Gets the repository from a entity class
+     * Gets the repository from a entity class.
      *
      * @param string $class The class name of the entity to generate a repository for
      *
@@ -48,7 +48,7 @@ interface EntityManagerInterface
     public function getRepository(string $class);
 
     /**
-     * Merge entity to the database, similar to REPLACE INTO in SQL
+     * Merge entity to the database, similar to REPLACE INTO in SQL.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own this entity
      * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity The entity to merge
@@ -58,7 +58,7 @@ interface EntityManagerInterface
     public function merge(Provider $provider, HasProviderInterface $entity): void;
 
     /**
-     * Persist entity to the database
+     * Persist entity to the database.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own this entity
      * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity The entity to persist

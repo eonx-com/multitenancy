@@ -11,22 +11,22 @@ use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Query\FilterCollectionInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
-use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\InvalidRepositoryException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Query\FilterCollection;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
 
 final class EntityManager implements EntityManagerInterface
 {
     /**
-     * Doctrine entity manager
+     * Doctrine entity manager.
      *
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $entityManager;
 
     /**
-     * Create an internal entity manager
+     * Create an internal entity manager.
      *
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */
@@ -106,7 +106,7 @@ final class EntityManager implements EntityManagerInterface
     /**
      * {@inheritdoc}
      *
-     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\InvalidRepositoryException If repository isn't mtenant
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      */
     public function getRepository(string $class)
     {
@@ -114,7 +114,7 @@ final class EntityManager implements EntityManagerInterface
 
         // Repository must be a multitenancy repository or die
         if (($repository instanceof RepositoryInterface) === false) {
-            throw new InvalidRepositoryException(\sprintf(
+            throw new RepositoryDoesNotImplementInterfaceException(\sprintf(
                 'Invalid repository. %s does not implement multitenancy repository interface.',
                 \get_class($repository)
             ));

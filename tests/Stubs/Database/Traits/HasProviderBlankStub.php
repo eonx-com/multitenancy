@@ -9,10 +9,8 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
  * A blank stub used to test the HasProvider trait.
  *
  * @see \Tests\LoyaltyCorp\Multitenancy\Unit\Database\Traits\HasProviderTest
- *
- * @coversNothing
  */
-class EntityHasProviderStub
+final class HasProviderBlankStub
 {
     use HasProvider;
 }

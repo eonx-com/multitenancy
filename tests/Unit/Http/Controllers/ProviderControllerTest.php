@@ -10,12 +10,15 @@ use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 use LoyaltyCorp\Multitenancy\Services\Providers\ProviderService;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerSpy;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Providers\ProviderServiceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerSpy;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ControllerTestCase;
 
-class ProviderControllerTest extends ControllerTestCase
+/**
+ * @covers \LoyaltyCorp\Multitenancy\Http\Controllers\ProviderController
+ */
+final class ProviderControllerTest extends ControllerTestCase
 {
     /**
      * Tests that the `create` method on the controller is successful.
@@ -26,7 +29,7 @@ class ProviderControllerTest extends ControllerTestCase
     {
         $entityManager = new EntityManagerSpy();
         $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
-        $json = <<<JSON
+        $json = <<<'JSON'
 {
     "id": "test-provider",
     "name": "Test Provider"
@@ -35,7 +38,7 @@ JSON;
 
         $expected = [
             'id' => 'test-provider',
-            'name' => 'Test Provider'
+            'name' => 'Test Provider',
         ];
 
         /**
@@ -61,7 +64,7 @@ JSON;
         $entityManager->persist($provider);
         $entityManager->flush();
         $controller = $this->getControllerInstance($entityManager);
-        $json = <<<JSON
+        $json = <<<'JSON'
 {
     "name": "Something Different"
 }
@@ -69,7 +72,7 @@ JSON;
 
         $expected = [
             'id' => 'test-provider',
-            'name' => 'Something Different'
+            'name' => 'Something Different',
         ];
 
         /**

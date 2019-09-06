@@ -7,10 +7,7 @@ use EoneoPay\Externals\Auth\Interfaces\AuthInterface;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub;
 
-/**
- * @coversNothing
- */
-class AuthStub implements AuthInterface
+final class AuthStub implements AuthInterface
 {
     /**
      * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\UserStub|null

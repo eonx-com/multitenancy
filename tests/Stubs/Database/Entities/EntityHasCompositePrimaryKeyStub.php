@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 /**
  * This stub has composite primary keys.
  *
- * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\RepositoryStub")
+ * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
  */
 final class EntityHasCompositePrimaryKeyStub implements HasProviderInterface
 {

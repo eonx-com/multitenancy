@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,7 +22,7 @@ final class EntityDoesNotHaveProviderStub
     private $entityId;
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */

@@ -5,13 +5,13 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\Providers;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Services\Providers\ProviderService;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database\EntityManagerStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Services\Providers\ProviderService
  */
-class ProviderServiceTest extends AppTestCase
+final class ProviderServiceTest extends AppTestCase
 {
     /**
      * Tests that the provider service successfully creates the expected Provider entity.

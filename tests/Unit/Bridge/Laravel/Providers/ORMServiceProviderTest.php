@@ -11,7 +11,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ServiceProviderTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\ORMServiceProvider
  */
-class ORMServiceProviderTest extends ServiceProviderTestCase
+final class ORMServiceProviderTest extends ServiceProviderTestCase
 {
     /**
      * {@inheritdoc}
@@ -19,7 +19,7 @@ class ORMServiceProviderTest extends ServiceProviderTestCase
     protected function getBindings(): array
     {
         return [
-            EntityManagerInterface::class => EntityManager::class
+            EntityManagerInterface::class => EntityManager::class,
         ];
     }
 

@@ -11,7 +11,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Externals\ORM\Query\FilterCollection
  */
-class FilterCollectionTest extends DoctrineTestCase
+final class FilterCollectionTest extends DoctrineTestCase
 {
     /**
      * Test filters collection methods enable/disable filters on entity manager.
@@ -49,7 +49,7 @@ class FilterCollectionTest extends DoctrineTestCase
     }
 
     /**
-     * Test an invalid filter throws an exception
+     * Test an invalid filter throws an exception.
      *
      * @return void
      */

@@ -25,7 +25,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 abstract class RequestTestCase extends AppTestCase
 {
     /**
-     * Request object test helper - this is marked as @internal to ensure it's used for test purposes only
+     * Request object test helper - this is marked as @internal to ensure it's used for test purposes only.
      *
      * @var \LoyaltyCorp\RequestHandlers\TestHelper\RequestObjectTestHelper
      */
@@ -55,7 +55,7 @@ abstract class RequestTestCase extends AppTestCase
     }
 
     /**
-     * Tests that the Request has a valid Exception class
+     * Tests that the Request has a valid Exception class.
      *
      * @return void
      *
@@ -91,7 +91,7 @@ abstract class RequestTestCase extends AppTestCase
             return $property->getName();
         }, $untypedProperties);
 
-        static::assertSame([], $propertyNames, 'Properties without types');
+        self::assertSame([], $propertyNames, 'Properties without types');
     }
 
     /**

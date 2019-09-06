@@ -10,7 +10,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Http\Controllers\BaseController
  */
-class BaseControllerTest extends AppTestCase
+final class BaseControllerTest extends AppTestCase
 {
     /**
      * Test formattedApiResponse() successfully.

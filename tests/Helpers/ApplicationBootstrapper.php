@@ -37,6 +37,8 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\Persistence\Mana
 /**
  * This class bootstraps an application for use in testing.
  *
+ * @coversNothing
+ *
  * @internal Only for use with tests within this library.
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Ignore coupling as the bootstrapper is used for testing.
@@ -52,8 +54,8 @@ final class ApplicationBootstrapper
     public static function create(): Application
     {
         // Set the base path and include the autoloader
-        $basePath = \dirname(__DIR__, 2);
-        require_once $basePath . '/vendor/autoload.php';
+        $basePath = \dirname(__DIR__);
+        require_once $basePath . '/../vendor/autoload.php';
 
         // Until Doctrine Annotations v2.0, we need to register an autoloader, which is just 'class_exists'.
         /** @noinspection PhpDeprecationInspection Will be removed with doctrine annotations v2.0 */
@@ -97,7 +99,7 @@ final class ApplicationBootstrapper
         // Register route middlewares
         $app->routeMiddleware([
             'param_converter' => ParamConverterMiddleware::class,
-            'request_validator' => ValidatingMiddleware::class
+            'request_validator' => ValidatingMiddleware::class,
         ]);
 
         return $app;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
  *
  * @ORM\Entity()
  */
-class EntityHasProviderStub implements HasProviderInterface
+final class EntityHasProviderStub implements HasProviderInterface
 {
     use HasProvider;
 
@@ -42,12 +42,12 @@ class EntityHasProviderStub implements HasProviderInterface
     private $name;
 
     /**
-     * Collection of owned entities
+     * Collection of owned entities.
      *
      * @ORM\OneToMany(
      *     cascade={"persist"},
      *     mappedBy="owner",
-     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub"
+     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub"
      * )
      *
      * @var \Doctrine\Common\Collections\Collection
@@ -55,14 +55,14 @@ class EntityHasProviderStub implements HasProviderInterface
     private $owned;
 
     /**
-     * Owner relationship, inverse of owned collection
+     * Owner relationship, inverse of owned collection.
      *
      * @ORM\ManyToOne(
      *     inversedBy="owned",
-     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub"
+     *     targetEntity="Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub"
      * )
      *
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub
      */
     private $owner;
 
@@ -81,7 +81,7 @@ class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */
@@ -91,7 +91,7 @@ class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get external id set in constructor
+     * Get external id set in constructor.
      *
      * @return string
      */
@@ -101,7 +101,7 @@ class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get owned collection
+     * Get owned collection.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -111,7 +111,7 @@ class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Set entity id
+     * Set entity id.
      *
      * @param string $entityId The id to set against the entity
      *
@@ -125,9 +125,9 @@ class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Set entity owner
+     * Set entity owner.
      *
-     * @param \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub $owner
+     * @param \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub $owner
      *
      * @return void
      */

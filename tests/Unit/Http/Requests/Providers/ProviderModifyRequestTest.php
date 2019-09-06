@@ -1,12 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests;
+namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests\Providers;
 
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\RequestTestCase;
 
-class ProviderModifyRequestTest extends RequestTestCase
+/**
+ * @covers \LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest
+ * @covers \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest
+ */
+final class ProviderModifyRequestTest extends RequestTestCase
 {
     /**
      * Returns the class to be tested.
@@ -25,14 +29,14 @@ class ProviderModifyRequestTest extends RequestTestCase
      */
     public function testFailingEmptyJson(): void
     {
-        $json = <<<JSON
+        $json = <<<'JSON'
 {}
 JSON;
 
         $expected = [
             'name' => [
-                'This value should not be blank.'
-            ]
+                'This value should not be blank.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
@@ -47,7 +51,7 @@ JSON;
      */
     public function testFailingInvalidDataTypes(): void
     {
-        $json = <<<JSON
+        $json = <<<'JSON'
 {
     "name": false
 }
@@ -55,8 +59,8 @@ JSON;
 
         $expected = [
             'name' => [
-                'This value should be of type string.'
-            ]
+                'This value should be of type string.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
@@ -81,12 +85,32 @@ JSON;
 
         $expected = [
             'name' => [
-                'This value is too long. It should have 255 characters or less.'
-            ]
+                'This value is too long. It should have 255 characters or less.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
 
         self::assertSame($expected, $result);
+    }
+
+    /**
+     * Test successful object creation.
+     *
+     * @return void
+     */
+    public function testSuccessfulCreation(): void
+    {
+        $json = <<<'JSON'
+{
+    "name": "test"
+}
+JSON;
+
+        $result = $this->buildValidatedRequest($json);
+
+        self::assertInstanceOf(ProviderModifyRequest::class, $result);
+        /** @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest $result */
+        self::assertSame('test', $result->getName());
     }
 }

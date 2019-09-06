@@ -4,19 +4,18 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Externals\ORM;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
-use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
-use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\InvalidRepositoryException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityDoesNotHaveProviderStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityDoesNotImplementRepositoryInterfaceStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasCompositePrimaryKeyStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityDoesNotHaveProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityDoesNotImplementRepositoryInterfaceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasCompositePrimaryKeyStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\EventManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\Query\FilterStub;
@@ -30,7 +29,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class EntityManagerTest extends DoctrineTestCase
 {
     /**
-     * Test repository method findByIds
+     * Test repository method findByIds.
      *
      * @return void
      */
@@ -68,7 +67,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if composite primary key used
+     * Test find by id fails if composite primary key used.
      *
      * @return void
      */
@@ -102,7 +101,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if an entity which doesn't implement the correct interface is used
+     * Test find by id fails if an entity which doesn't implement the correct interface is used.
      *
      * @return void
      */
@@ -121,7 +120,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if something completely invalid is used for the entity
+     * Test find by id fails if something completely invalid is used for the entity.
      *
      * @return void
      */
@@ -141,7 +140,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test flush binds (and removes) the subscriber
+     * Test flush binds (and removes) the subscriber.
      *
      * @return void
      */
@@ -212,7 +211,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test get repository method
+     * Test get repository method.
      *
      * @return void
      */
@@ -226,7 +225,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test get repository throws an exception if interface is not implemented
+     * Test get repository throws an exception if interface is not implemented.
      *
      * @return void
      */
@@ -234,7 +233,7 @@ final class EntityManagerTest extends DoctrineTestCase
     {
         $instance = $this->createInstance();
 
-        $this->expectException(InvalidRepositoryException::class);
+        $this->expectException(RepositoryDoesNotImplementInterfaceException::class);
 
         $instance->getRepository(EntityDoesNotImplementRepositoryInterfaceStub::class);
     }
@@ -270,7 +269,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test remove method
+     * Test remove method.
      *
      * @return void
      */
@@ -306,7 +305,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Get entity manager instance
+     * Get entity manager instance.
      *
      * @param \Doctrine\ORM\EntityManagerInterface|null $entityManager Entity manager to use
      *
@@ -315,21 +314,5 @@ final class EntityManagerTest extends DoctrineTestCase
     protected function createInstance(?DoctrineEntityManager $entityManager = null): EntityManagerInterface
     {
         return new EntityManager($entityManager ?? $this->getEntityManager());
-    }
-
-    /**
-     * Create a provider entity for testing
-     *
-     * @param string $externalId External id for the provider
-     *
-     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
-     */
-    private function createProvider(string $externalId): Provider
-    {
-        $provider = new Provider($externalId, 'Acme Corp');
-        $this->getEntityManager()->persist($provider);
-        $this->getEntityManager()->flush();
-
-        return $provider;
     }
 }

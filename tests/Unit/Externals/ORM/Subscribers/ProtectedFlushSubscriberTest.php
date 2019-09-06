@@ -7,7 +7,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityOwnershipException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
@@ -16,7 +16,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class ProtectedFlushSubscriberTest extends DoctrineTestCase
 {
     /**
-     * Test the collections are checked for provider when cascading is automatic
+     * Test the collections are checked for provider when cascading is automatic.
      *
      * @return void
      *
@@ -50,7 +50,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test protected flush bypasses entities which don't have the HasProvider trait
+     * Test protected flush bypasses entities which don't have the HasProvider trait.
      *
      * @return void
      *
@@ -77,7 +77,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
 
     /**
      * Test protected flush throws exception if there is an entity with an mismatched
-     * provider id from what is passed to the flush method
+     * provider id from what is passed to the flush method.
      *
      * @return void
      *
@@ -115,7 +115,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test subscriber unsets itself once successfully run
+     * Test subscriber unsets itself once successfully run.
      *
      * @return void
      *
@@ -151,7 +151,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test subscriber unsets itself even if an exception is thrown
+     * Test subscriber unsets itself even if an exception is thrown.
      *
      * @return void
      *
@@ -197,7 +197,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Get entity manager instance
+     * Get entity manager instance.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      *
@@ -206,21 +206,5 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     protected function createInstance(Provider $provider): ProtectedFlushSubscriber
     {
         return new ProtectedFlushSubscriber($provider);
-    }
-
-    /**
-     * Create a provider entity for testing
-     *
-     * @param string $externalId External id for the provider
-     *
-     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
-     */
-    private function createProvider(string $externalId): Provider
-    {
-        $provider = new Provider($externalId, 'Acme Corp');
-        $this->getEntityManager()->persist($provider);
-        $this->getEntityManager()->flush();
-
-        return $provider;
     }
 }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 /**
  * This stub has a repository with the right interface.
  *
- * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\RepositoryStub")
+ * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
  */
 final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterface
 {
@@ -33,7 +33,7 @@ final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterf
     private $string;
 
     /**
-     * Create entity stub
+     * Create entity stub.
      *
      * @param string $string
      */
@@ -43,7 +43,7 @@ final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterf
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */

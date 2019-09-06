@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
@@ -26,7 +26,7 @@ final class EntityDoesNotImplementRepositoryInterfaceStub implements HasProvider
     private $entityId;
 
     /**
-     * Get generated entity id
+     * Get generated entity id.
      *
      * @return string|null
      */

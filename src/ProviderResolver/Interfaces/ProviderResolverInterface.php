@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces;
 
-use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 
 interface ProviderResolverInterface
 {
     /**
-     * Find provider by id
+     * Find provider by id.
      *
      * @param int $providerId The id of the provider to find
      *
@@ -18,11 +18,11 @@ interface ProviderResolverInterface
     public function find(int $providerId): Provider;
 
     /**
-     * Resolve provider from entity
+     * Resolve provider from entity.
      *
-     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity
+     * @param \LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface $entity
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function resolve(EntityInterface $entity): Provider;
+    public function resolve(HasProviderInterface $entity): Provider;
 }

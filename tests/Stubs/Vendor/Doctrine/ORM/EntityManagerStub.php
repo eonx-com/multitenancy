@@ -4,26 +4,15 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM;
 
 use Doctrine\Common\EventManager;
-use Doctrine\Common\Persistence\Mapping\ClassMetadataFactory;
-use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\DBAL\Connection;
-use Doctrine\ORM\Cache;
-use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
-use Doctrine\ORM\NativeQuery;
-use Doctrine\ORM\Proxy\ProxyFactory;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\UnitOfWork;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
 
 /**
- * @coversNothing
- *
  * @SuppressWarnings(PHPMD) Doctrine interface requires this implementation
  */
-class EntityManagerStub implements EntityManagerInterface
+final class EntityManagerStub implements EntityManagerInterface
 {
     /**
      * @var \Doctrine\Common\EventManager
@@ -52,7 +41,7 @@ class EntityManagerStub implements EntityManagerInterface
     private $removed = [];
 
     /**
-     * Create entity manager stub
+     * Create entity manager stub.
      *
      * @param \Doctrine\Common\EventManager $eventManager Event manager instance
      */
@@ -92,49 +81,49 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function contains($object): bool
+    public function contains($object)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function copy($entity, $deep = null): object
+    public function copy($entity, $deep = null)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNamedNativeQuery($name): NativeQuery
+    public function createNamedNativeQuery($name)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNamedQuery($name): Query
+    public function createNamedQuery($name)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNativeQuery($sql, ResultSetMapping $rsm): NativeQuery
+    public function createNativeQuery($sql, ResultSetMapping $rsm)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createQuery($dql = null): Query
+    public function createQuery($dql = null)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilder(): QueryBuilder
+    public function createQueryBuilder()
     {
     }
 
@@ -147,8 +136,10 @@ class EntityManagerStub implements EntityManagerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable) Parameter is inherited from interface
      */
-    public function find($className, $id): ?object
+    public function find($className, $id)
     {
     }
 
@@ -163,28 +154,31 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getCache(): ?Cache
+    public function getCache()
+    {
+    }
+
+    /**
+     * @param mixed $className
+     *
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getClassMetadata($className): ClassMetadata
+    {
+        return new ClassMetadata($className ?? EntityHasProviderStub::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfiguration()
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getClassMetadata($className)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfiguration(): Configuration
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConnection(): Connection
+    public function getConnection()
     {
     }
 
@@ -199,14 +193,14 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpressionBuilder(): Query\Expr
+    public function getExpressionBuilder()
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFilters(): Query\FilterCollection
+    public function getFilters()
     {
     }
 
@@ -222,22 +216,24 @@ class EntityManagerStub implements EntityManagerInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @deprecated
      */
-    public function getHydrator($hydrationMode): AbstractHydrator
+    public function getHydrator($hydrationMode)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMetadataFactory(): ClassMetadataFactory
+    public function getMetadataFactory()
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPartialReference($entityName, $identifier): ?object
+    public function getPartialReference($entityName, $identifier)
     {
     }
 
@@ -254,14 +250,16 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getProxyFactory(): ProxyFactory
+    public function getProxyFactory()
     {
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable) Parameter is inherited from interface
      */
-    public function getReference($entityName, $id): ?object
+    public function getReference($entityName, $id)
     {
     }
 
@@ -278,21 +276,21 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRepository($className): ObjectRepository
+    public function getRepository($className)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUnitOfWork(): UnitOfWork
+    public function getUnitOfWork()
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasFilters(): bool
+    public function hasFilters()
     {
     }
 
@@ -306,14 +304,14 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function isFiltersStateClean(): bool
+    public function isFiltersStateClean()
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isOpen(): bool
+    public function isOpen()
     {
     }
 
@@ -327,14 +325,14 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function merge($object): object
+    public function merge($object)
     {
     }
 
     /**
      * {@inheritdoc}
      */
-    public function newHydrator($hydrationMode): AbstractHydrator
+    public function newHydrator($hydrationMode)
     {
     }
 
@@ -371,7 +369,7 @@ class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function transactional($func): void
+    public function transactional($func)
     {
     }
 }

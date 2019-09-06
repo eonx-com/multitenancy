@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
-use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\InvalidRepositoryException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException;
+use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException;
 use ReflectionClass;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityHasCompositePrimaryKeyStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub;
-use Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\RepositoryStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasCompositePrimaryKeyStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**
@@ -21,27 +21,27 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class RepositoryTest extends DoctrineTestCase
 {
     /**
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub
      */
     private $entity1;
 
     /**
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub
      */
     private $entity2;
 
     /**
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub
      */
     private $entity3;
 
     /**
-     * @var \Tests\LoyaltyCorp\Multitenancy\Integration\Stubs\Database\EntityImplementsRepositoryInterfaceStub
+     * @var \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub
      */
     private $entity4;
 
     /**
-     * Test count works with criteria and provider
+     * Test count works with criteria and provider.
      *
      * @return void
      */
@@ -78,7 +78,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test create query builder
+     * Test create query builder.
      *
      * @return void
      *
@@ -99,7 +99,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test exceptions thrown by doctrine are converted by the repository
+     * Test exceptions thrown by doctrine are converted by the repository.
      *
      * @return void
      */
@@ -121,7 +121,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find all works with criteria and provider
+     * Test find all works with criteria and provider.
      *
      * @return void
      */
@@ -146,7 +146,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by works with criteria and provider
+     * Test find by works with criteria and provider.
      *
      * @return void
      */
@@ -183,7 +183,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find works with criteria and provider
+     * Test find works with criteria and provider.
      *
      * @return void
      */
@@ -208,7 +208,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find one by works with criteria and provider
+     * Test find one by works with criteria and provider.
      *
      * @return void
      */
@@ -245,7 +245,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find works with criteria and provider
+     * Test find works with criteria and provider.
      *
      * @return void
      */
@@ -263,7 +263,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test get class name functionality
+     * Test get class name functionality.
      *
      * @return void
      */
@@ -276,7 +276,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Create repository instance
+     * Create repository instance.
      *
      * @param string|null $class Class to instantiate repository for
      *
@@ -288,7 +288,7 @@ final class RepositoryTest extends DoctrineTestCase
 
         try {
             return $entityManager->getRepository($class ?? EntityImplementsRepositoryInterfaceStub::class);
-        } catch (InvalidRepositoryException $exception) {
+        } catch (RepositoryDoesNotImplementInterfaceException $exception) {
             self::fail(\sprintf('Exception thrown when creating repository: %s', $exception->getMessage()));
         }
 
@@ -296,7 +296,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Create entities for two providers
+     * Create entities for two providers.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider1
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider2
@@ -319,21 +319,5 @@ final class RepositoryTest extends DoctrineTestCase
 
         $entityManager->persist($provider2, $this->entity4);
         $entityManager->flush($provider2);
-    }
-
-    /**
-     * Create a provider entity for testing
-     *
-     * @param string $externalId External id for the provider
-     *
-     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
-     */
-    private function createProvider(string $externalId): Provider
-    {
-        $provider = new Provider($externalId, 'Acme Corp');
-        $this->getEntityManager()->persist($provider);
-        $this->getEntityManager()->flush();
-
-        return $provider;
     }
 }

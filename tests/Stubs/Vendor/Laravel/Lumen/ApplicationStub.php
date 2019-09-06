@@ -9,8 +9,6 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
- * @coversNothing
- *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity) This class is implemented from a Laravel interface
  * @SuppressWarnings(PHPMD.ExcessivePublicCount) This class is implemented from a Laravel interface
  * @SuppressWarnings(PHPMD.TooManyMethods) This class is implemented from a Laravel interface
@@ -19,21 +17,21 @@ use Illuminate\Contracts\Foundation\Application;
 final class ApplicationStub implements Application, ArrayAccess
 {
     /**
-     * Container bindings
+     * Container bindings.
      *
      * @var string[]
      */
     private $bindings = [];
 
     /**
-     * Container instance
+     * Container instance.
      *
      * @var \Illuminate\Contracts\Container\Container
      */
     private $container;
 
     /**
-     * Create container
+     * Create container.
      *
      * @param \Illuminate\Contracts\Container\Container $container Testing container
      */
@@ -67,7 +65,7 @@ final class ApplicationStub implements Application, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function basePath()
+    public function basePath(): string
     {
         return \sprintf('%s/../../../../../', __DIR__);
     }
@@ -229,7 +227,7 @@ final class ApplicationStub implements Application, ArrayAccess
     }
 
     /**
-     * Get container bindings
+     * Get container bindings.
      *
      * @return string[]
      */
@@ -525,7 +523,7 @@ final class ApplicationStub implements Application, ArrayAccess
     }
 
     /**
-     * Call a container method
+     * Call a container method.
      *
      * @param string $method The method to call
      * @param mixed[]|null $parameters Parameters to pass to the method
@@ -540,7 +538,7 @@ final class ApplicationStub implements Application, ArrayAccess
             'bind',
             'extend',
             'instance',
-            'singleton'
+            'singleton',
         ];
 
         if (\in_array($method, $setMethods, true) === true) {

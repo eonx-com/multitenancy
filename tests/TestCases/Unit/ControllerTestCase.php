@@ -10,10 +10,10 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @coversNothing
  */
-class ControllerTestCase extends AppTestCase
+abstract class ControllerTestCase extends AppTestCase
 {
     /**
-     * Request object test helper - this is marked as @internal to ensure it's used for test purposes only
+     * Request object test helper - this is marked as @internal to ensure it's used for test purposes only.
      *
      * @var \LoyaltyCorp\RequestHandlers\TestHelper\RequestObjectTestHelper
      */

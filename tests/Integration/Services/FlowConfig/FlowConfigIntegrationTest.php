@@ -13,7 +13,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @coversNothing
  */
-class FlowConfigIntegrationTest extends AppTestCase
+final class FlowConfigIntegrationTest extends AppTestCase
 {
     /**
      * Test config values are not flushed automatically.

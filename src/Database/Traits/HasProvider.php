@@ -8,12 +8,12 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException;
 
 /**
- * @ORM\MappedSuperclass
+ * @ORM\MappedSuperclass()
  */
 trait HasProvider
 {
     /**
-     * Relationship to providerId in Provider
+     * Relationship to providerId in Provider.
      *
      * @ORM\ManyToOne(targetEntity="LoyaltyCorp\Multitenancy\Database\Entities\Provider")
      *
@@ -41,7 +41,7 @@ trait HasProvider
     }
 
     /**
-     * Get provider id from provider entity
+     * Get provider id from provider entity.
      *
      * @return int|null
      */

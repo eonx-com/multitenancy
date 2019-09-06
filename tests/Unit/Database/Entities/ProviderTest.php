@@ -10,7 +10,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Entities\Provider
  */
-class ProviderTest extends AppTestCase
+final class ProviderTest extends AppTestCase
 {
     /**
      * Tests that the flow config methods return expected data.

@@ -7,12 +7,6 @@ parameters:
             message: '/Call to an undefined method object::getProvider\(\)./'
             path: src/Externals/ORM/Subscribers/ProtectedFlushSubscriber.php
         -
-            message: '/Parameter \#1 \$className \(string\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\ORM\\EntityManagerStub::getClassMetadata\(\) should be contravariant with parameter \$className \(mixed\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
-            path: tests/Stubs/Vendor/Doctrine/ORM/EntityManagerStub.php
-        -
-            message: '/Return type \(Doctrine\\Common\\Persistence\\Mapping\\ClassMetadata\) of method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Vendor\\Doctrine\\ORM\\EntityManagerStub::getClassMetadata\(\) should be covariant with return type \(Doctrine\\ORM\\Mapping\\ClassMetadata\) of method Doctrine\\ORM\\EntityManagerInterface::getClassMetadata\(\)/'
-            path: tests/Stubs/Vendor/Doctrine/ORM/EntityManagerStub.php
-        -
             message: '#Call to function is_array\(\) with object|string will always evaluate to false\.#'
             path: src/Middleware/ProviderMiddleware.php
         -

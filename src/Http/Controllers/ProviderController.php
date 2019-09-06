@@ -11,7 +11,7 @@ use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderModifyRequest;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
-class ProviderController extends BaseController
+final class ProviderController extends BaseController
 {
     /**
      * @var \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface
@@ -84,7 +84,7 @@ class ProviderController extends BaseController
     {
         return [
             'id' => $provider->getExternalId(),
-            'name' => $provider->getName()
+            'name' => $provider->getName(),
         ];
     }
 }

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @SuppressWarnings(PHPMD.ShortVariable) Ignore short variable $id, required for entity relationship
  */
-class ProviderCreateRequest extends BaseRequest
+final class ProviderCreateRequest extends BaseRequest
 {
     /**
      * The identifier of the provider.

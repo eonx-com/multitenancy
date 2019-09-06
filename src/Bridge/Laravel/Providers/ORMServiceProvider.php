@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
 
-class ORMServiceProvider extends ServiceProvider
+final class ORMServiceProvider extends ServiceProvider
 {
     /**
      * @noinspection PhpMissingParentCallCommonInspection Parent implementation is empty

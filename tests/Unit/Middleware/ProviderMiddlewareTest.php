@@ -16,7 +16,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Middleware\ProviderMiddleware
  */
-class ProviderMiddlewareTest extends AppTestCase
+final class ProviderMiddlewareTest extends AppTestCase
 {
     /**
      * Test handle adds provider to route and attributes.
@@ -35,14 +35,14 @@ class ProviderMiddlewareTest extends AppTestCase
         $expectedRoute = [
             null,
             ['uses' => 'Class@method'],
-            ['provider' => $provider]
+            ['provider' => $provider],
         ];
 
         $request = new Request();
         $request->setRouteResolver(static function () {
             return [
                 null,
-                ['uses' => 'Class@method']
+                ['uses' => 'Class@method'],
             ];
         });
 
@@ -118,7 +118,7 @@ class ProviderMiddlewareTest extends AppTestCase
         $expectedRoute = [
             null,
             ['uses' => 'Class@method'],
-            ['this' => 'that', 'provider' => $provider]
+            ['this' => 'that', 'provider' => $provider],
         ];
 
         $request = new Request();
@@ -126,7 +126,7 @@ class ProviderMiddlewareTest extends AppTestCase
             return [
                 null,
                 ['uses' => 'Class@method'],
-                ['this' => 'that']
+                ['this' => 'that'],
             ];
         });
 
@@ -143,7 +143,7 @@ class ProviderMiddlewareTest extends AppTestCase
     }
 
     /**
-     * Get middleware instance
+     * Get middleware instance.
      *
      * @param \EoneoPay\Externals\Auth\Interfaces\AuthInterface|null $auth
      * @param \LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface|null $providerResolver

@@ -12,7 +12,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig\DoctrineEntityConf
 /**
  * @covers \LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig
  */
-class FlowConfigTest extends TestCase
+final class FlowConfigTest extends TestCase
 {
     /**
      * Test basic class initialization works.

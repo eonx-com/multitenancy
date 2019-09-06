@@ -12,7 +12,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 final class InvalidEntityOwnershipExceptionTest extends AppTestCase
 {
     /**
-     * Test exception returns the correct codes
+     * Test exception returns the correct codes.
      *
      * @return void
      */

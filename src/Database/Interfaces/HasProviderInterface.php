@@ -15,7 +15,7 @@ interface HasProviderInterface
     public function getProvider(): ?Provider;
 
     /**
-     * Get provider id from provider entity
+     * Get provider id from provider entity.
      *
      * @return int|null
      */

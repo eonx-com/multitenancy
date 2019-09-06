@@ -25,7 +25,7 @@ abstract class Repository implements RepositoryInterface
     protected $entityManager;
 
     /**
-     * Initialise a new repository
+     * Initialise a new repository.
      *
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager Entity manager instance
      * @param \Doctrine\ORM\Mapping\ClassMetadata $classMetadata The class descriptor
@@ -119,7 +119,7 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
-     * Create query build instance
+     * Create query build instance.
      *
      * @param string $alias The select alias
      * @param string|null $indexBy The index to use
@@ -134,7 +134,7 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
-     * Call a method on the entity manager and catch any exception
+     * Call a method on the entity manager and catch any exception.
      *
      * @param string $method The method torc/ORM/Subscribers/SoftDeleteEventSubscriber.php call
      * @param mixed ...$parameters The parameters to pass to the method
@@ -158,10 +158,13 @@ abstract class Repository implements RepositoryInterface
             // Wrap all thrown exceptions as an ORM exception
             throw new ORMException(\sprintf('Database Error: %s', $exception->getMessage()), null, null, $exception);
         }
+
+        // Something has gone massively wrong, this should not really be possible since method is private
+        throw new ORMException(\sprintf('Invalid method called: %s()', $method)); // @codeCoverageIgnore
     }
 
     /**
-     * Create criteria forcing provider
+     * Create criteria forcing provider.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider The provider who should own entities
      * @param mixed[]|null $criteria The search criteria
@@ -174,7 +177,7 @@ abstract class Repository implements RepositoryInterface
     }
 
     /**
-     * Get id property for the underlying entity
+     * Get id property for the underlying entity.
      *
      * @return string
      *

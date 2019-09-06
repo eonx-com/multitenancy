@@ -10,7 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
 use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigInterface;
 
-class FlowConfigServiceProvider extends ServiceProvider
+final class FlowConfigServiceProvider extends ServiceProvider
 {
     /**
      * @noinspection PhpMissingParentCallCommonInspection Parent implementation is empty

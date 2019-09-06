@@ -16,7 +16,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class ProtectedFlushSubscriberTest extends DoctrineTestCase
 {
     /**
-     * Test the collections are checked for provider when cascading is automatic
+     * Test the collections are checked for provider when cascading is automatic.
      *
      * @return void
      *
@@ -50,7 +50,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test protected flush bypasses entities which don't have the HasProvider trait
+     * Test protected flush bypasses entities which don't have the HasProvider trait.
      *
      * @return void
      *
@@ -77,7 +77,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
 
     /**
      * Test protected flush throws exception if there is an entity with an mismatched
-     * provider id from what is passed to the flush method
+     * provider id from what is passed to the flush method.
      *
      * @return void
      *
@@ -115,7 +115,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test subscriber unsets itself once successfully run
+     * Test subscriber unsets itself once successfully run.
      *
      * @return void
      *
@@ -151,7 +151,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Test subscriber unsets itself even if an exception is thrown
+     * Test subscriber unsets itself even if an exception is thrown.
      *
      * @return void
      *
@@ -197,7 +197,7 @@ final class ProtectedFlushSubscriberTest extends DoctrineTestCase
     }
 
     /**
-     * Get entity manager instance
+     * Get entity manager instance.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      *

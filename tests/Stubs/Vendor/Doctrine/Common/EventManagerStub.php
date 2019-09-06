@@ -6,10 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\EventSubscriber;
 
-/**
- * @coversNothing
- */
-class EventManagerStub extends EventManager
+final class EventManagerStub extends EventManager
 {
     /**
      * @var \Doctrine\Common\EventSubscriber[]
@@ -32,7 +29,7 @@ class EventManagerStub extends EventManager
     }
 
     /**
-     * Get subscribers which have been added via addEventSubscriber
+     * Get subscribers which have been added via addEventSubscriber.
      *
      * @return \Doctrine\Common\EventSubscriber[]
      */
@@ -42,7 +39,7 @@ class EventManagerStub extends EventManager
     }
 
     /**
-     * Get subscribers which have been removed via removeEventSubscriber
+     * Get subscribers which have been removed via removeEventSubscriber.
      *
      * @return \Doctrine\Common\EventSubscriber[]
      */

@@ -7,7 +7,7 @@ use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 
-class ProviderService implements ProviderServiceInterface
+final class ProviderService implements ProviderServiceInterface
 {
     /**
      * @var \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface

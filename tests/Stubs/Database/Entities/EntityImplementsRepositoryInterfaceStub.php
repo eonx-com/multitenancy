@@ -33,7 +33,7 @@ final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterf
     private $string;
 
     /**
-     * Create entity stub
+     * Create entity stub.
      *
      * @param string $string
      */
@@ -43,7 +43,7 @@ final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterf
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */

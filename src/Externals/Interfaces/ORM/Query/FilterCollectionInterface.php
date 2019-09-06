@@ -12,8 +12,8 @@ interface FilterCollectionInterface
      *
      * @return void.
      *
-     * @phpcsSuppress EoneoPay.Commenting.FunctionComment.ScalarTypeHintMissing
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress() EoneoPay.Commenting.FunctionComment.ScalarTypeHintMissing
+     * @phpcsSuppress() SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function disable($name): void;
 
@@ -24,8 +24,8 @@ interface FilterCollectionInterface
      *
      * @return void
      *
-     * @phpcsSuppress EoneoPay.Commenting.FunctionComment.ScalarTypeHintMissing
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
+     * @phpcsSuppress() EoneoPay.Commenting.FunctionComment.ScalarTypeHintMissing
+     * @phpcsSuppress() SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint
      */
     public function enable($name): void;
 }

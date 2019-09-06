@@ -15,7 +15,7 @@ use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\UniqueValueNotGeneratedExc
 use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
 /**
- * Doctrine listener that will be applied to entities that have the following interface implemented
+ * Doctrine listener that will be applied to entities that have the following interface implemented.
  *
  * This listener supports both tenanted and non-tenanted entities
  *
@@ -36,14 +36,14 @@ final class GenerateUniqueValue
     private $generator;
 
     /**
-     * Provider resolver
+     * Provider resolver.
      *
      * @var \LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface
      */
     private $providerResolver;
 
     /**
-     * Initialise the listener
+     * Initialise the listener.
      *
      * @param \EoneoPay\Utils\Interfaces\GeneratorInterface $generator Generator to generate a random string
      * @param \LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface $providerResolver Resolver
@@ -55,7 +55,7 @@ final class GenerateUniqueValue
     }
 
     /**
-     * Generate unique value for property if required
+     * Generate unique value for property if required.
      *
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $eventArgs Event arguments
      *
@@ -96,7 +96,7 @@ final class GenerateUniqueValue
     }
 
     /**
-     * Determine if this entity requires generation
+     * Determine if this entity requires generation.
      *
      * @param mixed $entity The entity to check
      *
@@ -111,7 +111,7 @@ final class GenerateUniqueValue
     }
 
     /**
-     * Generate a random value for this entity
+     * Generate a random value for this entity.
      *
      * @param \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueInterface $entity Entity
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $eventArgs Life cycle call back arguments

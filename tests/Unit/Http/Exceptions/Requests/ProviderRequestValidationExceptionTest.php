@@ -9,7 +9,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\ProviderRequestValidationException
  */
-class ProviderRequestValidationExceptionTest extends AppTestCase
+final class ProviderRequestValidationExceptionTest extends AppTestCase
 {
     /**
      * Tests that the exception codes match the expected.

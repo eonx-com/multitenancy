@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
+use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
+use EoneoPay\Externals\ORM\Interfaces\Query\FilterCollectionInterface;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\Query\FilterCollectionStub;
 
-/**
- * @coversNothing
- */
-class EntityManagerSpy extends EntityManagerStub
+final class EntityManagerSpy implements EntityManagerInterface
 {
     /**
      * If it's flushed.
@@ -59,15 +59,28 @@ class EntityManagerSpy extends EntityManagerStub
 
     /**
      * {@inheritdoc}
-     * Set as flushed.
+     */
+    public function findByIds(string $class, array $ids): array
+    {
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function flush(): void
     {
-        parent::flush();
-
         $this->flushedEntities = $this->persistedEntities;
 
         $this->flushed = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters(): FilterCollectionInterface
+    {
+        return new FilterCollectionStub();
     }
 
     /**
@@ -133,6 +146,13 @@ class EntityManagerSpy extends EntityManagerStub
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getRepository(string $class)
+    {
+    }
+
+    /**
      * If it's flushed.
      *
      * @return bool
@@ -154,20 +174,23 @@ class EntityManagerSpy extends EntityManagerStub
 
     /**
      * {@inheritdoc}
+     */
+    public function merge(EntityInterface $entity): void
+    {
+    }
+
+    /**
+     * {@inheritdoc}
      * Set as persisted.
      */
     public function persist(EntityInterface $entity): void
     {
-        parent::persist($entity);
-
         $this->persistedEntities[] = $entity;
 
         $this->persisted = true;
     }
 
     /**
-     * @noinspection PhpMissingParentCallCommonInspection
-     *
      * {@inheritdoc}
      */
     public function remove(EntityInterface $entity): void

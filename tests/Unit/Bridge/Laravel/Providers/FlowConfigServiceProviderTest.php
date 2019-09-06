@@ -11,7 +11,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ServiceProviderTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\FlowConfigServiceProvider
  */
-class FlowConfigServiceProviderTest extends ServiceProviderTestCase
+final class FlowConfigServiceProviderTest extends ServiceProviderTestCase
 {
     /**
      * {@inheritdoc}
@@ -19,7 +19,7 @@ class FlowConfigServiceProviderTest extends ServiceProviderTestCase
     protected function getBindings(): array
     {
         return [
-            FlowConfigInterface::class => FlowConfig::class
+            FlowConfigInterface::class => FlowConfig::class,
         ];
     }
 

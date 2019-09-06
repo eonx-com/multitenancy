@@ -95,7 +95,7 @@ class Provider implements EntityInterface, FlowConfigurableInterface
     }
 
     /**
-     * Get provider id
+     * Get provider id.
      *
      * @return int|null
      */

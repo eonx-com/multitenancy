@@ -22,7 +22,7 @@ final class EntityDoesNotHaveProviderStub
     private $entityId;
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */

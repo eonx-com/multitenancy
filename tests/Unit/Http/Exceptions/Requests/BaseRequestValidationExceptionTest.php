@@ -11,7 +11,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\BaseRequestValidationException
  */
-class BaseRequestValidationExceptionTest extends AppTestCase
+final class BaseRequestValidationExceptionTest extends AppTestCase
 {
     /**
      * Tests the base exception method.
@@ -32,8 +32,8 @@ class BaseRequestValidationExceptionTest extends AppTestCase
 
         $expected = [
             'path' => [
-                'Message'
-            ]
+                'Message',
+            ],
         ];
 
         $exception = new BaseRequestValidationExceptionStub($violations);

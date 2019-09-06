@@ -7,10 +7,7 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\ProviderResolver\Interfaces\ProviderResolverInterface;
 
-/**
- * @coversNothing
- */
-class ProviderResolverStub implements ProviderResolverInterface
+final class ProviderResolverStub implements ProviderResolverInterface
 {
     /**
      * @var \LoyaltyCorp\Multitenancy\Database\Entities\Provider|null

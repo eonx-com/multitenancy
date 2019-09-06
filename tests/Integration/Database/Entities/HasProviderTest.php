@@ -10,9 +10,9 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 /**
  * This test class tests an entity stub which is using HasProvider trait.
  *
- * @covers \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub
+ * @coversNothing
  */
-class HasProviderTest extends DoctrineTestCase
+final class HasProviderTest extends DoctrineTestCase
 {
     /**
      * Test adding a provider to entity saves state to db.
@@ -67,7 +67,7 @@ class HasProviderTest extends DoctrineTestCase
     }
 
     /**
-     * Test fluency
+     * Test fluency.
      *
      * @return void
      *

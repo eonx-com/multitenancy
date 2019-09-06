@@ -41,7 +41,7 @@ use Throwable;
  * @SuppressWarnings(PHPMD.StaticAccess) Static access required for testing
  * @SuppressWarnings(PHPMD.TooManyFields) Required for base test functionality
  */
-class AppTestCase extends BaseTestCase
+abstract class AppTestCase extends BaseTestCase
 {
     /**
      * Lumen application instance for testing.
@@ -125,7 +125,7 @@ class AppTestCase extends BaseTestCase
     }
 
     /**
-     * Lazy load database schema only when required
+     * Lazy load database schema only when required.
      *
      * @return void
      */
@@ -148,12 +148,13 @@ class AppTestCase extends BaseTestCase
             }
 
             $entityManager->getConnection()->exec(self::$sql);
-
-            $this->entityManager = new EntityManager($entityManager);
         } catch (Exception $exception) {
             self::fail(\sprintf('Exception thrown when creating database schema: %s', $exception->getMessage()));
+
+            return;
         }
 
+        $this->entityManager = new EntityManager($entityManager);
         $this->seeded = true;
     }
 
@@ -168,7 +169,7 @@ class AppTestCase extends BaseTestCase
     }
 
     /**
-     * Get doctrine entity manager instance
+     * Get doctrine entity manager instance.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      *
@@ -183,7 +184,7 @@ class AppTestCase extends BaseTestCase
     }
 
     /**
-     * Get entity manager
+     * Get entity manager.
      *
      * @return \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface
      */
@@ -213,7 +214,7 @@ class AppTestCase extends BaseTestCase
         // Get validator factory from app so the extensions are loaded by app service provider
         try {
             $this->validator = new Validator($this->app->make(Factory::class));
-        } catch (BindingResolutionException $exception) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (BindingResolutionException $exception) {
             self::fail(\sprintf('Unable to create validator instance: %s', $exception->getMessage()));
         }
 
@@ -368,10 +369,10 @@ class AppTestCase extends BaseTestCase
         $annotationReader = $this->app->make(AnnotationReader::class);
         $annotationDriver = new AnnotationDriver(
             $annotationReader,
-            [\sprintf('%s/src/Database/Entities', $this->app->basePath())]
+            [\sprintf('%s/../src/Database/Entities', $this->app->basePath())]
         );
 
-        $path = \sprintf('%s/vendor/code-foundation/flow-config/src/Entity/DoctrineMaps/', $this->app->basePath());
+        $path = \sprintf('%s/../vendor/code-foundation/flow-config/src/Entity/DoctrineMaps/', $this->app->basePath());
         $xmlDriver = new XmlDriver(
             new DefaultFileLocator($path, '.orm.xml')
         );

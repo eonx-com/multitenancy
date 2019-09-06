@@ -1,12 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests;
+namespace Tests\LoyaltyCorp\Multitenancy\Unit\Http\Requests\Providers;
 
 use LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\RequestTestCase;
 
-class ProviderCreateRequestTest extends RequestTestCase
+/**
+ * @covers \LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest
+ * @covers \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest
+ */
+final class ProviderCreateRequestTest extends RequestTestCase
 {
     /**
      * Returns the class to be tested.
@@ -25,17 +29,17 @@ class ProviderCreateRequestTest extends RequestTestCase
      */
     public function testFailingEmptyJson(): void
     {
-        $json = <<<JSON
+        $json = <<<'JSON'
 {}
 JSON;
 
         $expected = [
             'id' => [
-                'This value should not be blank.'
+                'This value should not be blank.',
             ],
             'name' => [
-                'This value should not be blank.'
-            ]
+                'This value should not be blank.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
@@ -50,7 +54,7 @@ JSON;
      */
     public function testFailingInvalidDataTypes(): void
     {
-        $json = <<<JSON
+        $json = <<<'JSON'
 {
     "id": false,
     "name": false
@@ -59,11 +63,11 @@ JSON;
 
         $expected = [
             'id' => [
-                'This value should be of type string.'
+                'This value should be of type string.',
             ],
             'name' => [
-                'This value should be of type string.'
-            ]
+                'This value should be of type string.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
@@ -90,15 +94,37 @@ JSON;
 
         $expected = [
             'id' => [
-                'This value is too long. It should have 100 characters or less.'
+                'This value is too long. It should have 100 characters or less.',
             ],
             'name' => [
-                'This value is too long. It should have 255 characters or less.'
-            ]
+                'This value is too long. It should have 255 characters or less.',
+            ],
         ];
 
         $result = $this->buildFailingRequest($json);
 
         self::assertSame($expected, $result);
+    }
+
+    /**
+     * Test successful object creation.
+     *
+     * @return void
+     */
+    public function testSuccessfulCreation(): void
+    {
+        $json = <<<'JSON'
+{
+    "id": "10",
+    "name": "test"
+}
+JSON;
+
+        $result = $this->buildValidatedRequest($json);
+
+        self::assertInstanceOf(ProviderCreateRequest::class, $result);
+        /** @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $result */
+        self::assertSame('10', $result->getId());
+        self::assertSame('test', $result->getName());
     }
 }

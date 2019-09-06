@@ -7,10 +7,7 @@ use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 
-/**
- * @coversNothing
- */
-class UserStub implements EntityInterface, HasProviderInterface
+final class UserStub implements EntityInterface, HasProviderInterface
 {
     /**
      * {@inheritdoc}

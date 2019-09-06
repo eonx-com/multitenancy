@@ -29,7 +29,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 final class EntityManagerTest extends DoctrineTestCase
 {
     /**
-     * Test repository method findByIds
+     * Test repository method findByIds.
      *
      * @return void
      */
@@ -67,7 +67,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if composite primary key used
+     * Test find by id fails if composite primary key used.
      *
      * @return void
      */
@@ -101,7 +101,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if an entity which doesn't implement the correct interface is used
+     * Test find by id fails if an entity which doesn't implement the correct interface is used.
      *
      * @return void
      */
@@ -120,7 +120,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by id fails if something completely invalid is used for the entity
+     * Test find by id fails if something completely invalid is used for the entity.
      *
      * @return void
      */
@@ -140,7 +140,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test flush binds (and removes) the subscriber
+     * Test flush binds (and removes) the subscriber.
      *
      * @return void
      */
@@ -211,7 +211,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test get repository method
+     * Test get repository method.
      *
      * @return void
      */
@@ -225,7 +225,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test get repository throws an exception if interface is not implemented
+     * Test get repository throws an exception if interface is not implemented.
      *
      * @return void
      */
@@ -269,7 +269,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Test remove method
+     * Test remove method.
      *
      * @return void
      */
@@ -305,7 +305,7 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
-     * Get entity manager instance
+     * Get entity manager instance.
      *
      * @param \Doctrine\ORM\EntityManagerInterface|null $entityManager Entity manager to use
      *

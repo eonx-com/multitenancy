@@ -7,7 +7,7 @@ use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\ProviderRequestValidationE
 use LoyaltyCorp\Multitenancy\Http\Requests\BaseRequest;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ProviderModifyRequest extends BaseRequest
+final class ProviderModifyRequest extends BaseRequest
 {
     /**
      * The name of the provider.

@@ -5,7 +5,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Utils;
 
 use EoneoPay\Utils\Interfaces\GeneratorInterface;
 
-class GeneratorStub implements GeneratorInterface
+final class GeneratorStub implements GeneratorInterface
 {
     /**
      * {@inheritdoc}

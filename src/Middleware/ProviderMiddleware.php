@@ -65,7 +65,7 @@ final class ProviderMiddleware
 
         // add provider to lumen route
         $route[2] = \array_merge($route[2] ?? [], [
-            'provider' => $provider
+            'provider' => $provider,
         ]);
 
         // add provider to symfony request

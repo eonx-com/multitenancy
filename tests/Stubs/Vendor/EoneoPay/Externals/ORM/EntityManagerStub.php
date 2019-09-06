@@ -1,22 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use EoneoPay\Externals\ORM\Interfaces\Query\FilterCollectionInterface;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\Query\FilterCollectionStub;
 
-/**
- * @coversNothing
- */
-class EntityManagerStub implements EntityManagerInterface
+final class EntityManagerStub implements EntityManagerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function findByIds(string $class, array $ids): array
     {
+        return [];
     }
 
     /**
@@ -31,6 +30,7 @@ class EntityManagerStub implements EntityManagerInterface
      */
     public function getFilters(): FilterCollectionInterface
     {
+        return new FilterCollectionStub();
     }
 
     /**

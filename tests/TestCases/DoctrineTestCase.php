@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @coversNothing
  */
-class DoctrineTestCase extends TestCase
+abstract class DoctrineTestCase extends TestCase
 {
     /**
      * SQL queries to create database schema.
@@ -28,14 +28,14 @@ class DoctrineTestCase extends TestCase
     private $entityManager;
 
     /**
-     * Whether the database has been seeded or not
+     * Whether the database has been seeded or not.
      *
      * @var bool
      */
     private $seeded = false;
 
     /**
-     * Create a provider entity for testing
+     * Create a provider entity for testing.
      *
      * @param string $externalId External id for the provider
      *
@@ -51,7 +51,7 @@ class DoctrineTestCase extends TestCase
     }
 
     /**
-     * Lazy load database schema only when required
+     * Lazy load database schema only when required.
      *
      * @return void
      */
@@ -82,7 +82,7 @@ class DoctrineTestCase extends TestCase
     }
 
     /**
-     * Get doctrine entity manager instance
+     * Get doctrine entity manager instance.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      *
@@ -94,7 +94,7 @@ class DoctrineTestCase extends TestCase
     {
         $paths = [
             \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', '..', 'src', 'Database', 'Entities']),
-            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'Stubs', 'Database', 'Entities'])
+            \implode(\DIRECTORY_SEPARATOR, [\realpath(__DIR__), '..', 'Stubs', 'Database', 'Entities']),
         ];
         $setup = new Setup();
         $config = $setup::createAnnotationMetadataConfiguration($paths, true, null, null, false);
@@ -104,7 +104,7 @@ class DoctrineTestCase extends TestCase
     }
 
     /**
-     * Get entity manager
+     * Get entity manager.
      *
      * @return \Doctrine\ORM\EntityManagerInterface
      */

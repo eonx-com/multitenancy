@@ -23,10 +23,10 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Coupling is required to fully test listener
  */
-class GenerateUniqueValueTest extends DoctrineTestCase
+final class GenerateUniqueValueTest extends DoctrineTestCase
 {
     /**
-     * Test callback is invoked if it exists
+     * Test callback is invoked if it exists.
      *
      * @return void
      *
@@ -47,7 +47,7 @@ class GenerateUniqueValueTest extends DoctrineTestCase
     }
 
     /**
-     * Test generation with check digit consitently adds the same check digit
+     * Test generation with check digit consitently adds the same check digit.
      *
      * @return void
      *
@@ -68,7 +68,7 @@ class GenerateUniqueValueTest extends DoctrineTestCase
     }
 
     /**
-     * Ensure generator will only execute against entities that have the interface implemented
+     * Ensure generator will only execute against entities that have the interface implemented.
      *
      * @return void
      *
@@ -152,7 +152,7 @@ class GenerateUniqueValueTest extends DoctrineTestCase
 
     /**
      * Get entity contents via reflection, this is used so there's no reliance
-     * on entity methods such as toArray for tests to work
+     * on entity methods such as toArray for tests to work.
      *
      * @param object $entity The entity to get data from
      *

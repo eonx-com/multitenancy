@@ -5,10 +5,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests;
 
 use LoyaltyCorp\Multitenancy\Http\Exceptions\Requests\BaseRequestValidationException;
 
-/**
- * @coversNothing
- */
-class BaseRequestValidationExceptionStub extends BaseRequestValidationException
+final class BaseRequestValidationExceptionStub extends BaseRequestValidationException
 {
     /**
      * {@inheritdoc}

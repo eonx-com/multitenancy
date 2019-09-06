@@ -6,10 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Http;
 use EoneoPay\ApiFormats\Interfaces\FormattedApiResponseInterface;
 use LoyaltyCorp\Multitenancy\Http\Controllers\BaseController;
 
-/**
- * @coversNothing
- */
-class ControllerStub extends BaseController
+final class ControllerStub extends BaseController
 {
     /**
      * Returns a simple 200 repsonse.

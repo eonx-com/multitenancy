@@ -5,10 +5,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig;
 
 use CodeFoundation\FlowConfig\Interfaces\ConfigRepositoryInterface;
 
-/**
- * @coversNothing
- */
-class DoctrineConfigStub implements ConfigRepositoryInterface
+final class DoctrineConfigStub implements ConfigRepositoryInterface
 {
     /**
      * @var mixed[]
@@ -30,6 +27,7 @@ class DoctrineConfigStub implements ConfigRepositoryInterface
      */
     public function canSet(): bool
     {
+        return true;
     }
 
     /**

@@ -42,7 +42,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     private $name;
 
     /**
-     * Collection of owned entities
+     * Collection of owned entities.
      *
      * @ORM\OneToMany(
      *     cascade={"persist"},
@@ -55,7 +55,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     private $owned;
 
     /**
-     * Owner relationship, inverse of owned collection
+     * Owner relationship, inverse of owned collection.
      *
      * @ORM\ManyToOne(
      *     inversedBy="owned",
@@ -81,7 +81,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */
@@ -91,7 +91,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get external id set in constructor
+     * Get external id set in constructor.
      *
      * @return string
      */
@@ -101,7 +101,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Get owned collection
+     * Get owned collection.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -111,7 +111,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Set entity id
+     * Set entity id.
      *
      * @param string $entityId The id to set against the entity
      *
@@ -125,7 +125,7 @@ final class EntityHasProviderStub implements HasProviderInterface
     }
 
     /**
-     * Set entity owner
+     * Set entity owner.
      *
      * @param \Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub $owner
      *

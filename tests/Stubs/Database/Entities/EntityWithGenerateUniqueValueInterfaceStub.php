@@ -9,7 +9,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueInterface;
 
 /**
- * This stub entity is to test unique value generation
+ * This stub entity is to test unique value generation.
  *
  * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
  */
@@ -27,7 +27,7 @@ final class EntityWithGenerateUniqueValueInterfaceStub implements GenerateUnique
     private $entityId;
 
     /**
-     * Generated property
+     * Generated property.
      *
      * @var string
      *
@@ -36,14 +36,14 @@ final class EntityWithGenerateUniqueValueInterfaceStub implements GenerateUnique
     private $generatedValue;
 
     /**
-     * Whether this entity has a check digit or not
+     * Whether this entity has a check digit or not.
      *
      * @var bool
      */
     private $withCheckDigit;
 
     /**
-     * Create entity stub
+     * Create entity stub.
      *
      * @param bool|null $withCheckDigit
      */
@@ -75,7 +75,7 @@ final class EntityWithGenerateUniqueValueInterfaceStub implements GenerateUnique
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */
@@ -101,7 +101,7 @@ final class EntityWithGenerateUniqueValueInterfaceStub implements GenerateUnique
     }
 
     /**
-     * Get generated value
+     * Get generated value.
      *
      * @return string|null
      */
@@ -119,7 +119,7 @@ final class EntityWithGenerateUniqueValueInterfaceStub implements GenerateUnique
     }
 
     /**
-     * Set generated value
+     * Set generated value.
      *
      * @param string $value The value to set
      *

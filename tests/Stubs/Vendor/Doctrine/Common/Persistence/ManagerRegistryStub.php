@@ -5,7 +5,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\Persistenc
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class ManagerRegistryStub implements ManagerRegistry
+final class ManagerRegistryStub implements ManagerRegistry
 {
     /**
      * {@inheritdoc}

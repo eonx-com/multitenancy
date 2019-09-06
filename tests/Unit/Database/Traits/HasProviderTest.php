@@ -6,16 +6,16 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Database\Traits;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\ProviderAlreadySetException;
 use ReflectionClass;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Traits\EntityHasProviderStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Traits\HasProviderBlankStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
 /**
  * @covers \LoyaltyCorp\Multitenancy\Database\Traits\HasProvider
  */
-class HasProviderTest extends AppTestCase
+final class HasProviderTest extends AppTestCase
 {
     /**
-     * Test provider does not allow a different provider to be set if one is already set
+     * Test provider does not allow a different provider to be set if one is already set.
      *
      * @return void
      *
@@ -27,7 +27,7 @@ class HasProviderTest extends AppTestCase
         $provider1 = $this->createProvider();
         $provider2 = $this->createProvider();
 
-        $entity = new EntityHasProviderStub();
+        $entity = new HasProviderBlankStub();
         $entity->setProvider($provider1);
 
         // Test we can reset the same provider without issue
@@ -52,7 +52,7 @@ class HasProviderTest extends AppTestCase
     {
         // Create provider and set against an entity
         $provider = $this->createProvider();
-        $entity = new EntityHasProviderStub();
+        $entity = new HasProviderBlankStub();
         $entity->setProvider($provider);
 
         // Set up both classes so we can modify private properties
@@ -90,7 +90,7 @@ class HasProviderTest extends AppTestCase
     public function testTraitGetterSetter(): void
     {
         $provider = $this->createProvider();
-        $entity = new EntityHasProviderStub();
+        $entity = new HasProviderBlankStub();
         $entity->setProvider($provider);
 
         self::assertSame($provider, $entity->getProvider());

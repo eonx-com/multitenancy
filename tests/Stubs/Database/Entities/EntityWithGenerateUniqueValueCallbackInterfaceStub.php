@@ -9,7 +9,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueValueWithCallbackInterface;
 
 /**
- * This stub entity is to test unique value generation with callback
+ * This stub entity is to test unique value generation with callback.
  *
  * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
  */
@@ -29,7 +29,7 @@ final class EntityWithGenerateUniqueValueCallbackInterfaceStub implements
     private $entityId;
 
     /**
-     * Generated property
+     * Generated property.
      *
      * @var string
      *
@@ -60,7 +60,7 @@ final class EntityWithGenerateUniqueValueCallbackInterfaceStub implements
     }
 
     /**
-     * Get entity id
+     * Get entity id.
      *
      * @return string|null
      */
@@ -94,7 +94,7 @@ final class EntityWithGenerateUniqueValueCallbackInterfaceStub implements
     }
 
     /**
-     * Get generated value
+     * Get generated value.
      *
      * @return string|null
      */
@@ -112,7 +112,7 @@ final class EntityWithGenerateUniqueValueCallbackInterfaceStub implements
     }
 
     /**
-     * Set generated value
+     * Set generated value.
      *
      * @param string $value The value to set
      *

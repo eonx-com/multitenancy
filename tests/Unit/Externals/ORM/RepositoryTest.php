@@ -41,7 +41,7 @@ final class RepositoryTest extends DoctrineTestCase
     private $entity4;
 
     /**
-     * Test count works with criteria and provider
+     * Test count works with criteria and provider.
      *
      * @return void
      */
@@ -78,7 +78,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test create query builder
+     * Test create query builder.
      *
      * @return void
      *
@@ -99,7 +99,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test exceptions thrown by doctrine are converted by the repository
+     * Test exceptions thrown by doctrine are converted by the repository.
      *
      * @return void
      */
@@ -121,7 +121,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find all works with criteria and provider
+     * Test find all works with criteria and provider.
      *
      * @return void
      */
@@ -146,7 +146,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find by works with criteria and provider
+     * Test find by works with criteria and provider.
      *
      * @return void
      */
@@ -183,7 +183,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find works with criteria and provider
+     * Test find works with criteria and provider.
      *
      * @return void
      */
@@ -208,7 +208,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find one by works with criteria and provider
+     * Test find one by works with criteria and provider.
      *
      * @return void
      */
@@ -245,7 +245,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test find works with criteria and provider
+     * Test find works with criteria and provider.
      *
      * @return void
      */
@@ -263,7 +263,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Test get class name functionality
+     * Test get class name functionality.
      *
      * @return void
      */
@@ -276,7 +276,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Create repository instance
+     * Create repository instance.
      *
      * @param string|null $class Class to instantiate repository for
      *
@@ -296,7 +296,7 @@ final class RepositoryTest extends DoctrineTestCase
     }
 
     /**
-     * Create entities for two providers
+     * Create entities for two providers.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider1
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider2

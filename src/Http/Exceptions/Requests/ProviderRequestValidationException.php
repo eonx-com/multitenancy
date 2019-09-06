@@ -6,7 +6,7 @@ namespace LoyaltyCorp\Multitenancy\Http\Exceptions\Requests;
 /**
  * An exception that is thrown when validation of the Provider request object fails.
  */
-class ProviderRequestValidationException extends BaseRequestValidationException
+final class ProviderRequestValidationException extends BaseRequestValidationException
 {
     /**
      * Get Error code.

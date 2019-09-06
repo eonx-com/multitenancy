@@ -26,7 +26,7 @@ final class EntityDoesNotImplementRepositoryInterfaceStub implements HasProvider
     private $entityId;
 
     /**
-     * Get generated entity id
+     * Get generated entity id.
      *
      * @return string|null
      */

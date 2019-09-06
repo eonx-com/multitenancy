@@ -19,14 +19,14 @@ use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
 final class EntityManager implements EntityManagerInterface
 {
     /**
-     * Doctrine entity manager
+     * Doctrine entity manager.
      *
      * @var \Doctrine\ORM\EntityManagerInterface
      */
     private $entityManager;
 
     /**
-     * Create an internal entity manager
+     * Create an internal entity manager.
      *
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */

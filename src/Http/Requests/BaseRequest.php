@@ -8,7 +8,9 @@ use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 abstract class BaseRequest implements RequestObjectInterface
 {
     /**
-     * Request DTO objects are not intended to be created manually.
+     * Create base request.
+     *
+     * @noinspection PhpUnused Request DTO objects are not intended to be created manually.
      */
     private function __construct()
     {

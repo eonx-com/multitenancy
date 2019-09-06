@@ -18,7 +18,7 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     private $provider;
 
     /**
-     * Create protected flush subscriber
+     * Create protected flush subscriber.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider The provider to ensure owns entities
      */
@@ -33,12 +33,12 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     public function getSubscribedEvents(): array
     {
         return [
-            Events::onFlush
+            Events::onFlush,
         ];
     }
 
     /**
-     * Ensure all entities being flushed are owned by the current provider, if applicable
+     * Ensure all entities being flushed are owned by the current provider, if applicable.
      *
      * @param \Doctrine\ORM\Event\OnFlushEventArgs $args On flush event arguments
      *
@@ -53,12 +53,12 @@ final class ProtectedFlushSubscriber implements EventSubscriber
         $unitOfWork = $entityManager->getUnitOfWork();
 
         // Get entity and collection changes
-        $changes = \array_merge(... [
+        $changes = \array_merge(...[
             $unitOfWork->getScheduledEntityDeletions(),
             $unitOfWork->getScheduledEntityInsertions(),
             $unitOfWork->getScheduledEntityUpdates(),
             $this->getCollectionChanges($unitOfWork->getScheduledCollectionUpdates()),
-            $this->getCollectionChanges($unitOfWork->getScheduledCollectionDeletions())
+            $this->getCollectionChanges($unitOfWork->getScheduledCollectionDeletions()),
         ]);
 
         // Check ownership of entities
@@ -77,7 +77,7 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     }
 
     /**
-     * Check the ownership of entities
+     * Check the ownership of entities.
      *
      * @param object[] $entities Entities that are scheduled for an update
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider The provider entities should belong to
@@ -110,7 +110,7 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     }
 
     /**
-     * Get entities from a collection for checking
+     * Get entities from a collection for checking.
      *
      * @param \Doctrine\Common\Collections\Collection[] $collections Collection changes to check
      *
@@ -124,11 +124,11 @@ final class ProtectedFlushSubscriber implements EventSubscriber
             $changes[] = $collection->toArray();
         }
 
-        return \count($changes) > 0 ? \array_merge(... $changes) : [];
+        return \count($changes) > 0 ? \array_merge(...$changes) : [];
     }
 
     /**
-     * Get all traits used by a class and any parent classes
+     * Get all traits used by a class and any parent classes.
      *
      * @param object $entity Entity to get traits for
      *
@@ -152,7 +152,7 @@ final class ProtectedFlushSubscriber implements EventSubscriber
     }
 
     /**
-     * Get all traits used by a trait, recursively
+     * Get all traits used by a trait, recursively.
      *
      * @param string $base The base class or trait to get traits for
      *

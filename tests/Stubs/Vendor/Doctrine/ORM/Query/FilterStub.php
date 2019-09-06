@@ -6,13 +6,13 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\Query;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
 
-class FilterStub extends SQLFilter
+final class FilterStub extends SQLFilter
 {
     /**
-     * Add filter constraint
+     * Add filter constraint.
      *
      * @param \Doctrine\ORM\Mapping\ClassMetadata $targetEntity The entity to add the constraint to
-     * @param string|mixed $targetTableAlias The target table
+     * @param mixed|string $targetTableAlias The target table
      *
      * @return string
      */

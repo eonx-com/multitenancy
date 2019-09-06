@@ -40,8 +40,10 @@ return PhpCsFixer\Config::create()
         // When using annotations, a comment block is converted to a phpdoc
         'comment_to_phpdoc' => true,
 
-        // Enforces no space around the concat operator
-        'concat_space' => true,
+        // Enforces single space around the concat operator
+        'concat_space' => [
+            'spacing' => 'one'
+        ],
 
         // No spaces around declare equals
         'declare_equal_normalize' => [

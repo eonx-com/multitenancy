@@ -46,7 +46,7 @@ final class FilterCollection implements FilterCollectionInterface
     }
 
     /**
-     * Call a method on the entity manager and catch any exception
+     * Call a method on the entity manager and catch any exception.
      *
      * @param string $method The method to call
      * @param mixed ...$parameters The parameters to pass to the method
@@ -67,5 +67,8 @@ final class FilterCollection implements FilterCollectionInterface
             // Wrap exceptions in ORMException
             throw new ORMException(\sprintf('Database Error: %s', $exception->getMessage()), null, null, $exception);
         }
+
+        // Something has gone massively wrong, this should not really be possible since method is private
+        throw new ORMException(\sprintf('Invalid method called: %s()', $method)); // @codeCoverageIgnore
     }
 }

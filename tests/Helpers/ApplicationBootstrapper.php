@@ -32,7 +32,9 @@ use LoyaltyCorp\RequestHandlers\Bridge\Laravel\Providers\ParamConverterProvider;
 use LoyaltyCorp\RequestHandlers\Middleware\ParamConverterMiddleware;
 use LoyaltyCorp\RequestHandlers\Middleware\ValidatingMiddleware;
 use LoyaltyCorp\RequestHandlers\Serializer\DoctrineDenormalizer;
+use LoyaltyCorp\RequestHandlers\Serializer\Interfaces\DoctrineDenormalizerEntityFinderInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\Persistence\ManagerRegistryStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\LoyaltyCorp\RequestHandlers\Serializer\EntityFinderStub;
 
 /**
  * This class bootstraps an application for use in testing.
@@ -84,11 +86,13 @@ final class ApplicationBootstrapper
         $app->singleton(ArrInterface::class, Arr::class);
         $app->singleton(ClientInterface::class, LoggingClient::class);
         $app->singleton(ControllerResolverInterface::class, ControllerResolver::class);
+        $app->singleton(DoctrineDenormalizerEntityFinderInterface::class, EntityFinderStub::class);
         $app->singleton(EventDispatcherInterface::class, EventDispatcher::class);
         $app->singleton(GeneratorInterface::class, Generator::class);
         $app->singleton(MathInterface::class, Math::class);
         $app->singleton(DoctrineDenormalizer::class, static function (Container $app): DoctrineDenormalizer {
             return new DoctrineDenormalizer(
+                new EntityFinderStub(),
                 $app->make(ManagerRegistry::class)
             );
         });

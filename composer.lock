@@ -2825,16 +2825,16 @@
         },
         {
             "name": "loyaltycorp/requesthandlers",
-            "version": "v1.1.11",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/requesthandlers.git",
-                "reference": "38b2dd958703ddd6877f3c7e82e1af194a9677c1"
+                "reference": "54b64dc95070d4d13b10d4989000a59358c1d14d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/38b2dd958703ddd6877f3c7e82e1af194a9677c1",
-                "reference": "38b2dd958703ddd6877f3c7e82e1af194a9677c1",
+                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/54b64dc95070d4d13b10d4989000a59358c1d14d",
+                "reference": "54b64dc95070d4d13b10d4989000a59358c1d14d",
                 "shasum": ""
             },
             "require": {
@@ -2877,20 +2877,20 @@
                 "lumen",
                 "paramconverters"
             ],
-            "time": "2019-09-02T23:16:20+00:00"
+            "time": "2019-09-09T03:18:53+00:00"
         },
         {
             "name": "monolog/monolog",
-            "version": "1.24.0",
+            "version": "1.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
                 "shasum": ""
             },
             "require": {
@@ -2955,7 +2955,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2018-11-05T09:00:11+00:00"
+            "time": "2019-09-06T13:49:17+00:00"
         },
         {
             "name": "nesbot/carbon",

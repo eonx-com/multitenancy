@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23c3274ac3a0888a8a68a6ad0e3e5b5f",
+    "content-hash": "b669a4eebb94c35ce0f90b6faa9eb716",
     "packages": [
         {
             "name": "code-foundation/flow-config",
@@ -2822,6 +2822,61 @@
                 "rest"
             ],
             "time": "2017-06-12T11:04:56+00:00"
+        },
+        {
+            "name": "loyaltycorp/flowconfig-wrapper",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loyaltycorp/flowconfig-wrapper.git",
+                "reference": "1d3e522fdd852841f961644972ad8f0936737f66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loyaltycorp/flowconfig-wrapper/zipball/1d3e522fdd852841f961644972ad8f0936737f66",
+                "reference": "1d3e522fdd852841f961644972ad8f0936737f66",
+                "shasum": ""
+            },
+            "require": {
+                "code-foundation/flow-config": "^0.1.0"
+            },
+            "require-dev": {
+                "eoneopay/standards": "dev-master",
+                "friendsofphp/php-cs-fixer": "^2.9",
+                "indigophp/doctrine-annotation-autoload": "^0.1.0",
+                "laravel/lumen-framework": "^5.8",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpunit/phpunit": "^8.0",
+                "roave/security-advisories": "dev-master",
+                "sebastian/phpcpd": "^4.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LoyaltyCorp\\FlowConfig\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\LoyaltyCorp\\FlowConfig\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Wrapper for Flow Config",
+            "keywords": [
+                "external",
+                "flow-config"
+            ],
+            "support": {
+                "source": "https://github.com/loyaltycorp/flowconfig-wrapper/tree/master"
+            },
+            "time": "2019-09-17T05:24:45+00:00"
         },
         {
             "name": "loyaltycorp/requesthandlers",
@@ -9802,6 +9857,7 @@
         "eoneopay/apiformats": 20,
         "eoneopay/externals": 5,
         "eoneopay/framework": 20,
+        "loyaltycorp/flowconfig-wrapper": 20,
         "eoneopay/standards": 20,
         "roave/security-advisories": 20
     },

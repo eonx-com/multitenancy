@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\FlowConfig;
 
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
+use LoyaltyCorp\FlowConfig\Services\FlowConfig;
 use PHPUnit\Framework\TestCase;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\FlowConfigEntityStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\FlowConfig\DoctrineConfigStub;

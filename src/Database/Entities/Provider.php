@@ -5,7 +5,7 @@ namespace LoyaltyCorp\Multitenancy\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
+use LoyaltyCorp\FlowConfig\Entities\FlowConfigurableInterface;
 
 /**
  * Provider represents a customer of Loyalty Corp in this product.

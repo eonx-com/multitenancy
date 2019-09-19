@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigurableInterface;
+use LoyaltyCorp\FlowConfig\Entities\FlowConfigurableInterface;
 
 /**
  * @ORM\Entity()

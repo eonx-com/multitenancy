@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Bridge\Laravel\Providers;
 
+use LoyaltyCorp\FlowConfig\Services\FlowConfig;
+use LoyaltyCorp\FlowConfig\Services\Interfaces\FlowConfigInterface;
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\FlowConfigServiceProvider;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigInterface;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ServiceProviderTestCase;
 
 /**

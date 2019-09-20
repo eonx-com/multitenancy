@@ -2829,16 +2829,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/flowconfig-wrapper.git",
-                "reference": "1d3e522fdd852841f961644972ad8f0936737f66"
+                "reference": "ced3fc7f8332acb5cad1da2856fb6951a4dc2810"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/flowconfig-wrapper/zipball/1d3e522fdd852841f961644972ad8f0936737f66",
-                "reference": "1d3e522fdd852841f961644972ad8f0936737f66",
+                "url": "https://api.github.com/repos/loyaltycorp/flowconfig-wrapper/zipball/ced3fc7f8332acb5cad1da2856fb6951a4dc2810",
+                "reference": "ced3fc7f8332acb5cad1da2856fb6951a4dc2810",
                 "shasum": ""
             },
             "require": {
-                "code-foundation/flow-config": "^0.1.0"
+                "code-foundation/flow-config": "^0.1.0",
+                "doctrine/orm": "^2.6.3",
+                "eoneopay/externals": "^1.0@rc",
+                "eoneopay/framework": "dev-master",
+                "eoneopay/utils": "^0.2.8",
+                "ext-json": "*",
+                "php": ">=7.3"
             },
             "require-dev": {
                 "eoneopay/standards": "dev-master",
@@ -2860,11 +2866,7 @@
                     "LoyaltyCorp\\FlowConfig\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\LoyaltyCorp\\FlowConfig\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2873,10 +2875,7 @@
                 "external",
                 "flow-config"
             ],
-            "support": {
-                "source": "https://github.com/loyaltycorp/flowconfig-wrapper/tree/master"
-            },
-            "time": "2019-09-17T05:24:45+00:00"
+            "time": "2019-09-19T01:56:30+00:00"
         },
         {
             "name": "loyaltycorp/requesthandlers",

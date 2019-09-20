@@ -15,8 +15,8 @@
     "eoneopay/externals": "^1.0@rc",
     "eoneopay/framework": "dev-master",
     "eoneopay/utils": "^0.2.8",
-    "loyaltycorp/requesthandlers": "^1.1",
     "loyaltycorp/flowconfig-wrapper": "dev-master",
+    "loyaltycorp/requesthandlers": "^1.1",
     "symfony/validator": "^4.3"
   },
   "require-dev": {

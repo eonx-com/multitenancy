@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23c3274ac3a0888a8a68a6ad0e3e5b5f",
+    "content-hash": "b669a4eebb94c35ce0f90b6faa9eb716",
     "packages": [
         {
             "name": "code-foundation/flow-config",
@@ -2824,17 +2824,71 @@
             "time": "2017-06-12T11:04:56+00:00"
         },
         {
-            "name": "loyaltycorp/requesthandlers",
-            "version": "v1.1.11",
+            "name": "loyaltycorp/flowconfig-wrapper",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/loyaltycorp/requesthandlers.git",
-                "reference": "38b2dd958703ddd6877f3c7e82e1af194a9677c1"
+                "url": "https://github.com/loyaltycorp/flowconfig-wrapper.git",
+                "reference": "ced3fc7f8332acb5cad1da2856fb6951a4dc2810"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/38b2dd958703ddd6877f3c7e82e1af194a9677c1",
-                "reference": "38b2dd958703ddd6877f3c7e82e1af194a9677c1",
+                "url": "https://api.github.com/repos/loyaltycorp/flowconfig-wrapper/zipball/ced3fc7f8332acb5cad1da2856fb6951a4dc2810",
+                "reference": "ced3fc7f8332acb5cad1da2856fb6951a4dc2810",
+                "shasum": ""
+            },
+            "require": {
+                "code-foundation/flow-config": "^0.1.0",
+                "doctrine/orm": "^2.6.3",
+                "eoneopay/externals": "^1.0@rc",
+                "eoneopay/framework": "dev-master",
+                "eoneopay/utils": "^0.2.8",
+                "ext-json": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "eoneopay/standards": "dev-master",
+                "friendsofphp/php-cs-fixer": "^2.9",
+                "indigophp/doctrine-annotation-autoload": "^0.1.0",
+                "laravel/lumen-framework": "^5.8",
+                "phpmd/phpmd": "^2.6",
+                "phpstan/phpstan": "^0.11",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-strict-rules": "^0.11",
+                "phpunit/phpunit": "^8.0",
+                "roave/security-advisories": "dev-master",
+                "sebastian/phpcpd": "^4.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LoyaltyCorp\\FlowConfig\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Wrapper for Flow Config",
+            "keywords": [
+                "external",
+                "flow-config"
+            ],
+            "time": "2019-09-19T01:56:30+00:00"
+        },
+        {
+            "name": "loyaltycorp/requesthandlers",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/loyaltycorp/requesthandlers.git",
+                "reference": "54b64dc95070d4d13b10d4989000a59358c1d14d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/54b64dc95070d4d13b10d4989000a59358c1d14d",
+                "reference": "54b64dc95070d4d13b10d4989000a59358c1d14d",
                 "shasum": ""
             },
             "require": {
@@ -2877,20 +2931,20 @@
                 "lumen",
                 "paramconverters"
             ],
-            "time": "2019-09-02T23:16:20+00:00"
+            "time": "2019-09-09T03:18:53+00:00"
         },
         {
             "name": "monolog/monolog",
-            "version": "1.24.0",
+            "version": "1.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
                 "shasum": ""
             },
             "require": {
@@ -2955,7 +3009,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2018-11-05T09:00:11+00:00"
+            "time": "2019-09-06T13:49:17+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -9802,6 +9856,7 @@
         "eoneopay/apiformats": 20,
         "eoneopay/externals": 5,
         "eoneopay/framework": 20,
+        "loyaltycorp/flowconfig-wrapper": 20,
         "eoneopay/standards": 20,
         "roave/security-advisories": 20
     },

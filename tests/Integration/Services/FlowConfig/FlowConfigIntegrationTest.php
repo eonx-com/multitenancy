@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Integration\Services\FlowConfig;
 
-use LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\FlowConfigServiceProvider;
+use LoyaltyCorp\FlowConfig\Bridge\Laravel\Providers\FlowConfigServiceProvider;
+use LoyaltyCorp\FlowConfig\Services\FlowConfig;
+use LoyaltyCorp\FlowConfig\Services\Interfaces\FlowConfigInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig;
-use LoyaltyCorp\Multitenancy\Services\FlowConfig\Interfaces\FlowConfigInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\FlowConfigEntityStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
@@ -20,6 +20,8 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * This is because the library is setup to not auto flush.
      *
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testConfigIsNotFlushedAutomatically(): void
     {
@@ -37,6 +39,8 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * Test integration with real flow config library.
      *
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testIntegrationWithRealFlowConfig(): void
     {
@@ -60,6 +64,8 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * Test that provider is considered a real entity for flow config use.
      *
      * @return void
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testProviderIntegrationWithRealFlowConfig(): void
     {
@@ -82,7 +88,9 @@ final class FlowConfigIntegrationTest extends AppTestCase
     /**
      * Get flow config instance from container.
      *
-     * @return \LoyaltyCorp\Multitenancy\Services\FlowConfig\FlowConfig
+     * @return \LoyaltyCorp\FlowConfig\Services\FlowConfig
+     *
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function getFlowConfig(): FlowConfig
     {

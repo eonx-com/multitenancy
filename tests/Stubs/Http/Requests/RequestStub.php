@@ -9,7 +9,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Exceptions\Requests\BaseRequestVal
 /**
  * @coversNothing
  */
-class RequestStub implements RequestObjectInterface
+final class RequestStub implements RequestObjectInterface
 {
     /**
      * Test property.

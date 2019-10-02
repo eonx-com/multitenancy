@@ -25,7 +25,7 @@ final class ProviderAwareObjectBuilder implements ProviderAwareObjectBuilderInte
     private $validator;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \Symfony\Component\Serializer\SerializerInterface $serializer
      * @param \LoyaltyCorp\RequestHandlers\Builder\Interfaces\ObjectValidatorInterface $validator
@@ -56,14 +56,14 @@ final class ProviderAwareObjectBuilder implements ProviderAwareObjectBuilderInte
             [
                 PropertyNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
                 PropertyNormalizer::EXTRA_PARAMETERS => $context ?? [],
-                RequestBodyContextConfigurator::MULTITENANCY_PROVIDER => $provider
+                RequestBodyContextConfigurator::MULTITENANCY_PROVIDER => $provider,
             ]
         );
 
         if (($instance instanceof $objectClass) === false) {
             throw new MisconfiguredSerializerException(\sprintf(
                 'The serializer returned an object of type "%s" but it is not an instance of "%s"',
-                \get_class($instance),
+                \is_object($instance) ? \get_class($instance) : \gettype($instance),
                 $objectClass
             ));
         }
@@ -81,7 +81,6 @@ final class ProviderAwareObjectBuilder implements ProviderAwareObjectBuilderInte
          *
          * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === check
          */
-
         $this->validator->ensureValidated($instance);
 
         return $instance;

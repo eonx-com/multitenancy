@@ -18,7 +18,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Services\Requests\ProviderAwareObjectBuilder
  */
-class ProviderAwareObjectBuilderTest extends AppTestCase
+final class ProviderAwareObjectBuilderTest extends AppTestCase
 {
     /**
      * Tests that build returns the object the serializer returned.
@@ -40,7 +40,7 @@ class ProviderAwareObjectBuilderTest extends AppTestCase
 
         $result = $builder->build($provider, RequestStub::class, '');
 
-        static::assertSame($expected, $result);
+        self::assertSame($expected, $result);
     }
 
     /**
@@ -89,7 +89,7 @@ class ProviderAwareObjectBuilderTest extends AppTestCase
 
         $result = $builder->buildWithContext($provider, RequestStub::class, []);
 
-        static::assertSame($expected, $result);
+        self::assertSame($expected, $result);
     }
 
     /**

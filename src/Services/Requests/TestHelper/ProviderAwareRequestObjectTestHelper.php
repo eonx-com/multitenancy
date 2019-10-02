@@ -11,6 +11,7 @@ use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 use LoyaltyCorp\RequestHandlers\Serializer\PropertyNormalizer;
 use LoyaltyCorp\RequestHandlers\TestHelper\Exceptions\ValidationFailedException;
 use LoyaltyCorp\RequestHandlers\TestHelper\RequestObjectTestHelper;
+use RuntimeException;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -41,7 +42,7 @@ final class ProviderAwareRequestObjectTestHelper
     private $testHelper;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \LoyaltyCorp\Multitenancy\Services\Requests\Interfaces\ProviderAwareObjectBuilderInterface $objectBuilder
      * @param \Symfony\Component\Serializer\SerializerInterface $serializer
@@ -50,7 +51,8 @@ final class ProviderAwareRequestObjectTestHelper
     public function __construct(
         ProviderAwareObjectBuilderInterface $objectBuilder,
         SerializerInterface $serializer,
-        /** @noinspection PhpInternalEntityUsedInspection */ RequestObjectTestHelper $testHelper
+        /** @noinspection PhpInternalEntityUsedInspection */
+        RequestObjectTestHelper $testHelper
     ) {
         $this->objectBuilder = $objectBuilder;
         $this->serializer = $serializer;
@@ -79,7 +81,7 @@ final class ProviderAwareRequestObjectTestHelper
             return $exception->getErrors();
         }
 
-        throw new \RuntimeException('There were no validation errors.');
+        throw new RuntimeException('There were no validation errors.');
     }
 
     /**
@@ -107,7 +109,7 @@ final class ProviderAwareRequestObjectTestHelper
             [
                 PropertyNormalizer::DISABLE_TYPE_ENFORCEMENT => true,
                 PropertyNormalizer::EXTRA_PARAMETERS => $context ?? [],
-                RequestBodyContextConfigurator::MULTITENANCY_PROVIDER => $provider
+                RequestBodyContextConfigurator::MULTITENANCY_PROVIDER => $provider,
             ]
         );
 

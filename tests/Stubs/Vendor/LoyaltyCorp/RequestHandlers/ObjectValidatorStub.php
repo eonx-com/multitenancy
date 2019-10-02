@@ -10,7 +10,7 @@ use LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface;
 /**
  * @coversNothing
  */
-class ObjectValidatorStub implements ObjectValidatorInterface
+final class ObjectValidatorStub implements ObjectValidatorInterface
 {
     /**
      * @var \LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException|null
@@ -18,7 +18,7 @@ class ObjectValidatorStub implements ObjectValidatorInterface
     private $exception;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException|null $exception
      */

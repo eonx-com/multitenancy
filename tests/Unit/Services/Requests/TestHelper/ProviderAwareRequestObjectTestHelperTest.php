@@ -19,10 +19,15 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\LoyaltyCorp\RequestHandlers\Obje
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Symfony\SerializerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
-class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Required to test
+ *
+ * @covers \LoyaltyCorp\Multitenancy\Services\Requests\TestHelper\ProviderAwareRequestObjectTestHelper
+ */
+final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 {
     /**
-     * Tests buildFailedRequest
+     * Tests buildFailedRequest.
      *
      * @return void
      */
@@ -31,7 +36,7 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
         $provider = new Provider('id', 'name');
         $object = new RequestStub();
         $expected = [
-            'property' => ['Message']
+            'property' => ['Message'],
         ];
 
         $helper = $this->getHelper($object, new BaseRequestValidationExceptionStub(
@@ -43,17 +48,17 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
                     '',
                     'property',
                     ''
-                )
+                ),
             ])
         ));
 
         $result = $helper->buildFailingRequest($provider, RequestStub::class, '');
 
-        static::assertSame($expected, $result);
+        self::assertSame($expected, $result);
     }
 
     /**
-     * Tests buildFailedRequest
+     * Tests buildFailedRequest.
      *
      * @return void
      */
@@ -71,7 +76,7 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
     }
 
     /**
-     * Tests unvalidated request creation
+     * Tests unvalidated request creation.
      *
      * @return void
      */
@@ -79,18 +84,18 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
     {
         $object = new RequestStub();
         $expected = [
-            'property' => 'test'
+            'property' => 'test',
         ];
 
         $helper = $this->getHelper($object);
 
         $properties = $helper->getRequestProperties($object);
 
-        static::assertSame($expected, $properties);
+        self::assertSame($expected, $properties);
     }
 
     /**
-     * Tests unvalidated request creation
+     * Tests unvalidated request creation.
      *
      * @return void
      */
@@ -104,11 +109,11 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 
         $thing = $helper->buildUnvalidatedRequest($provider, RequestStub::class, '');
 
-        static::assertSame($object, $thing);
+        self::assertSame($object, $thing);
     }
 
     /**
-     * Tests validated request creation
+     * Tests validated request creation.
      *
      * @return void
      *
@@ -124,11 +129,11 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 
         $thing = $helper->buildValidatedRequest($provider, RequestStub::class, '');
 
-        static::assertSame($object, $thing);
+        self::assertSame($object, $thing);
     }
 
     /**
-     * Tests validated request creation when theres a validation failure
+     * Tests validated request creation when theres a validation failure.
      *
      * @return void
      *
@@ -152,13 +157,15 @@ class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
     /**
      * Gets helper under test.
      *
-     * @param \Throwable|object $object
-     * @param RequestValidationException|null $exception
+     * @param object|\Throwable $object
+     * @param \LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException|null $exception
      *
      * @return \LoyaltyCorp\Multitenancy\Services\Requests\TestHelper\ProviderAwareRequestObjectTestHelper
      */
-    private function getHelper($object = null, ?RequestValidationException $exception = null): ProviderAwareRequestObjectTestHelper
-    {
+    private function getHelper(
+        $object = null,
+        ?RequestValidationException $exception = null
+    ): ProviderAwareRequestObjectTestHelper {
         $serializer = new SerializerStub($object);
         $validator = new ObjectValidatorStub($exception);
 

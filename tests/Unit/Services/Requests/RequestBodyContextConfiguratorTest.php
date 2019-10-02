@@ -12,7 +12,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Services\Requests\RequestBodyContextConfigurator
  */
-class RequestBodyContextConfiguratorTest extends AppTestCase
+final class RequestBodyContextConfiguratorTest extends AppTestCase
 {
     /**
      * Tests that the configurator correctly sets the provider on the serialiser context.
@@ -32,14 +32,14 @@ class RequestBodyContextConfiguratorTest extends AppTestCase
 
         $configurator->configure($context, $request);
 
-        static::assertSame(
+        self::assertSame(
             $provider,
             $context->getAttribute(RequestBodyContextConfigurator::MULTITENANCY_PROVIDER)
         );
     }
 
     /**
-     * Tests that the configurator ignores invalid data
+     * Tests that the configurator ignores invalid data.
      *
      * @return void
      */
@@ -54,11 +54,11 @@ class RequestBodyContextConfiguratorTest extends AppTestCase
 
         $configurator->configure($context, $request);
 
-        static::assertNull($context->getAttribute(RequestBodyContextConfigurator::MULTITENANCY_PROVIDER));
+        self::assertNull($context->getAttribute(RequestBodyContextConfigurator::MULTITENANCY_PROVIDER));
     }
 
     /**
-     * Tests that the configurator ignores invalid data
+     * Tests that the configurator ignores invalid data.
      *
      * @return void
      */
@@ -72,6 +72,6 @@ class RequestBodyContextConfiguratorTest extends AppTestCase
 
         $configurator->configure($context, $request);
 
-        static::assertNull($context->getAttribute(RequestBodyContextConfigurator::MULTITENANCY_PROVIDER));
+        self::assertNull($context->getAttribute(RequestBodyContextConfigurator::MULTITENANCY_PROVIDER));
     }
 }

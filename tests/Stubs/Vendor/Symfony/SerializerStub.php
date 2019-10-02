@@ -9,7 +9,7 @@ use Throwable;
 /**
  * @coversNothing
  */
-class SerializerStub implements SerializerInterface
+final class SerializerStub implements SerializerInterface
 {
     /**
      * @var mixed[]
@@ -22,7 +22,7 @@ class SerializerStub implements SerializerInterface
     private $object;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param mixed|\Throwable $object
      */

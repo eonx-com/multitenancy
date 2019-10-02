@@ -26,7 +26,7 @@ final class CoversTest extends TestCase
         $path = \realpath(\dirname(__DIR__)) ?: \dirname(__DIR__);
         $filenames = $this->getTestFilenames($path);
 
-        // Group all failures together
+        // Group all failures togethergst
         $failures = [];
 
         foreach ($filenames as $filename) {

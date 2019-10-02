@@ -5,6 +5,6 @@ namespace LoyaltyCorp\Multitenancy\Services\Requests\Exceptions;
 
 use LoyaltyCorp\RequestHandlers\Exceptions\UnsupportedClassException as BaseException;
 
-class UnsupportedClassException extends BaseException
+final class UnsupportedClassException extends BaseException
 {
 }

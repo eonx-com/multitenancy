@@ -1,6 +1,8 @@
 includes:
+    - vendor/loyaltycorp/requesthandlers/src/Bridge/PhpStan/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
     ignoreErrors:
         -
@@ -33,3 +35,9 @@ parameters:
         -
             message: '#Strict comparison using === between true and false will always evaluate to false.#'
             path: src/Externals/ORM/EntityManager.php
+        -
+            message: '#Method Doctrine\\Common\\Persistence\\ObjectRepository::findOneBy\(\) invoked with 2 parameters, 1 required\.#'
+            path: src/Services/Requests/ProviderAwareEntityFinder.php
+        -
+            message: '/Parameter #1 \$criteria of method Doctrine\\Common\\Persistence\\ObjectRepository::findOneBy\(\) expects array, LoyaltyCorp\\Multitenancy\\Database\\Entities\\Provider given\./'
+            path: src/Services/Requests/ProviderAwareEntityFinder.php

@@ -8,6 +8,21 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 final class ManagerRegistryStub implements ManagerRegistry
 {
     /**
+     * @var mixed[]
+     */
+    private $repositories;
+
+    /**
+     * Constructor.
+     *
+     * @param mixed[] $repositories
+     */
+    public function __construct(?array $repositories = null)
+    {
+        $this->repositories = $repositories ?? [];
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getAliasNamespace($alias)
@@ -85,6 +100,7 @@ final class ManagerRegistryStub implements ManagerRegistry
      */
     public function getRepository($persistentObject, $persistentManagerName = null)
     {
+        return $this->repositories[$persistentObject];
     }
 
     /**

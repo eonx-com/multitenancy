@@ -28,7 +28,7 @@ final class EntityFinderStub implements DoctrineDenormalizerEntityFinderInterfac
     /**
      * {@inheritdoc}
      */
-    public function findOneBy(string $class, array $criteria): ?object
+    public function findOneBy(string $class, array $criteria, ?array $context = null): ?object
     {
         return $this->entity;
     }

@@ -2881,16 +2881,16 @@
         },
         {
             "name": "loyaltycorp/requesthandlers",
-            "version": "v1.2.4",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/requesthandlers.git",
-                "reference": "6870441ba99fa4366c02e0b95f6a6eabb998739f"
+                "reference": "d9e83520fabfc91eb49ea7579dfa2e648de8f194"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/6870441ba99fa4366c02e0b95f6a6eabb998739f",
-                "reference": "6870441ba99fa4366c02e0b95f6a6eabb998739f",
+                "url": "https://api.github.com/repos/loyaltycorp/requesthandlers/zipball/d9e83520fabfc91eb49ea7579dfa2e648de8f194",
+                "reference": "d9e83520fabfc91eb49ea7579dfa2e648de8f194",
                 "shasum": ""
             },
             "require": {
@@ -2933,7 +2933,7 @@
                 "lumen",
                 "paramconverters"
             ],
-            "time": "2019-10-02T00:02:27+00:00"
+            "time": "2019-10-02T02:52:27+00:00"
         },
         {
             "name": "monolog/monolog",

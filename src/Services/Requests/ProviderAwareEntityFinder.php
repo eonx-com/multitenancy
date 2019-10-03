@@ -45,7 +45,7 @@ final class ProviderAwareEntityFinder implements DoctrineDenormalizerEntityFinde
 
             // Look up the provider inside the context.
             $provider = \is_array($context) === true
-                ? $context[RequestBodyContextConfigurator::MULTITENANCY_PROVIDER]
+                ? ($context[RequestBodyContextConfigurator::MULTITENANCY_PROVIDER] ?? null)
                 : null;
 
             // If we dont have a provider we cannot continue.
@@ -68,6 +68,6 @@ final class ProviderAwareEntityFinder implements DoctrineDenormalizerEntityFinde
         }
 
         // The repository type is unknown or not part of our application
-        return null; // @codeCoverageIgnore
+        return null;
     }
 }

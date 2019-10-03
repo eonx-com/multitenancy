@@ -79,6 +79,32 @@ final class ProviderAwareEntityFinderTest extends AppTestCase
      *
      * @throws \LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderException
      */
+    public function testMultiRepositoryWithNoContext(): void
+    {
+        $object = new stdClass();
+        $repository = new MultitenancyRepositoryStub($object);
+
+        $registry = new ManagerRegistryStub([
+            'EntityClass' => $repository,
+        ]);
+
+        $finder = new ProviderAwareEntityFinder($registry);
+
+        $this->setExpectedException(
+            InvalidProviderException::class,
+            'A provider was not found in context when deserialising.'
+        );
+
+        $finder->findOneBy('EntityClass', ['purple' => 'elephants']);
+    }
+
+    /**
+     * Tests that the finder returns null when no repository is returned.
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderException
+     */
     public function testMultiRepositoryRepositoryNoProvider(): void
     {
         $object = new stdClass();

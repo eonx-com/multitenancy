@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Externals\ORM;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
@@ -33,6 +34,16 @@ final class EntityManager implements EntityManagerInterface
     public function __construct(DoctrineEntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
+     */
+    public function find(Provider $provider, $className, $id)
+    {
+        return $this->getRepository($className)->find($provider, $id);
     }
 
     /**
@@ -93,6 +104,14 @@ final class EntityManager implements EntityManagerInterface
 
         // Clean up by removing the subscriber
         $eventManager->removeEventSubscriber($protectedFlush);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClassMetadata($className): ClassMetadata
+    {
+        return $this->entityManager->getClassMetadata($className);
     }
 
     /**

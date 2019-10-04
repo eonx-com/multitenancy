@@ -140,6 +140,45 @@ final class EntityManagerTest extends DoctrineTestCase
     }
 
     /**
+     * Test repository method find.
+     *
+     * @return void
+     */
+    public function testFindEmulatesRepositoryFind(): void
+    {
+        // Create entity manager instance
+        $instance = $this->createInstance($this->getEntityManager());
+
+        // Create provider
+        $provider = $this->createProvider('provider');
+
+        // Create and entity
+        $entity = new EntityImplementsRepositoryInterfaceStub('entity');
+
+        // Persist entity
+        $instance->persist($provider, $entity);
+        $instance->flush($provider);
+
+        // Get entity id
+        $entityId = $entity->getEntityId();
+
+        // Find using entity manager
+        $entityManagerResult = $instance->find($provider, EntityImplementsRepositoryInterfaceStub::class, $entityId);
+
+        // Find using repository
+        $repositoryResult = $instance->getRepository(EntityImplementsRepositoryInterfaceStub::class)
+            ->find($provider, $entityId);
+
+        // Make sure something was found
+        self::assertNotNull($entityManagerResult);
+        self::assertNotNull($repositoryResult);
+
+        // Make sure entities match
+        self::assertSame($entity, $entityManagerResult);
+        self::assertSame($entity, $repositoryResult);
+    }
+
+    /**
      * Test flush binds (and removes) the subscriber.
      *
      * @return void
@@ -179,6 +218,22 @@ final class EntityManagerTest extends DoctrineTestCase
             }
         }
         self::assertTrue($removed);
+    }
+
+    /**
+     * Test getting class metadata works.
+     *
+     * @return void
+     */
+    public function testGetClassMetadata(): void
+    {
+        // Create entity manager instance
+        $instance = $this->createInstance($this->getEntityManager());
+
+        $instance->getClassMetadata(EntityHasProviderStub::class);
+
+        // Method is pass through only
+        $this->addToAssertionCount(1);
     }
 
     /**

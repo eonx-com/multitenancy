@@ -8,7 +8,7 @@ use LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderExcepti
 use LoyaltyCorp\Multitenancy\Services\Requests\ProviderAwareEntityFinder;
 use LoyaltyCorp\Multitenancy\Services\Requests\RequestBodyContextConfigurator;
 use stdClass;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\MultitenancyRepositoryStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\MultitenancyRepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\Persistence\ManagerRegistryStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\EntityRepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
@@ -79,32 +79,6 @@ final class ProviderAwareEntityFinderTest extends AppTestCase
      *
      * @throws \LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderException
      */
-    public function testMultiRepositoryWithNoContext(): void
-    {
-        $object = new stdClass();
-        $repository = new MultitenancyRepositoryStub($object);
-
-        $registry = new ManagerRegistryStub([
-            'EntityClass' => $repository,
-        ]);
-
-        $finder = new ProviderAwareEntityFinder($registry);
-
-        $this->setExpectedException(
-            InvalidProviderException::class,
-            'A provider was not found in context when deserialising.'
-        );
-
-        $finder->findOneBy('EntityClass', ['purple' => 'elephants']);
-    }
-
-    /**
-     * Tests that the finder returns null when no repository is returned.
-     *
-     * @return void
-     *
-     * @throws \LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderException
-     */
     public function testMultiRepositoryRepositoryNoProvider(): void
     {
         $object = new stdClass();
@@ -122,6 +96,32 @@ final class ProviderAwareEntityFinderTest extends AppTestCase
         );
 
         $finder->findOneBy('EntityClass', []);
+    }
+
+    /**
+     * Tests that the finder returns null when no repository is returned.
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Requests\Exceptions\InvalidProviderException
+     */
+    public function testMultiRepositoryWithNoContext(): void
+    {
+        $object = new stdClass();
+        $repository = new MultitenancyRepositoryStub($object);
+
+        $registry = new ManagerRegistryStub([
+            'EntityClass' => $repository,
+        ]);
+
+        $finder = new ProviderAwareEntityFinder($registry);
+
+        $this->setExpectedException(
+            InvalidProviderException::class,
+            'A provider was not found in context when deserialising.'
+        );
+
+        $finder->findOneBy('EntityClass', ['purple' => 'elephants']);
     }
 
     /**

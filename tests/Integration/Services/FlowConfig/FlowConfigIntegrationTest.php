@@ -20,8 +20,6 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * This is because the library is setup to not auto flush.
      *
      * @return void
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testConfigIsNotFlushedAutomatically(): void
     {
@@ -39,8 +37,6 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * Test integration with real flow config library.
      *
      * @return void
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testIntegrationWithRealFlowConfig(): void
     {
@@ -64,8 +60,6 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * Test that provider is considered a real entity for flow config use.
      *
      * @return void
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function testProviderIntegrationWithRealFlowConfig(): void
     {
@@ -89,8 +83,6 @@ final class FlowConfigIntegrationTest extends AppTestCase
      * Get flow config instance from container.
      *
      * @return \LoyaltyCorp\FlowConfig\Services\FlowConfig
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function getFlowConfig(): FlowConfig
     {

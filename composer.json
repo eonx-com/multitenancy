@@ -15,6 +15,7 @@
     "eoneopay/externals": "^1.0@rc",
     "eoneopay/framework": "^0.1",
     "eoneopay/utils": "^0.2.8",
+    "eoneopay/webhooks": "^0.10",
     "loyaltycorp/flowconfig-wrapper": "^1.0",
     "loyaltycorp/requesthandlers": "^1.1",
     "symfony/validator": "^4.3"

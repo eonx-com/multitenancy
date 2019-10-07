@@ -6,38 +6,35 @@ includes:
 parameters:
     ignoreErrors:
         -
-            message: '/Call to an undefined method object::getProvider\(\)./'
-            path: src/Externals/ORM/Subscribers/ProtectedFlushSubscriber.php
-        -
             message: '#Call to function is_array\(\) with object|string will always evaluate to false\.#'
             path: src/Middleware/ProviderMiddleware.php
-        -
-            message: '#Strict comparison using === between false and false will always evaluate to true\.#'
-            path: src/Middleware/ProviderMiddleware.php
-        -
-            message: '#Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with (.*) and object|string will always evaluate to false.\.#'
-            path: tests/Unit/Middleware/ProviderMiddlewareTest.php
-        -
-            message: '/Method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Externals\\FlowConfig\\DoctrineConfigStub::set\(\) has parameter \$value with no typehint specified\./'
-            path: tests/Stubs/Externals/FlowConfig/DoctrineConfigStub.php
-        -
-            message: '/Method Tests\\LoyaltyCorp\\Multitenancy\\Stubs\\Externals\\FlowConfig\\DoctrineEntityConfigStub::setByEntity\(\) has parameter \$value with no typehint specified\./'
-            path: tests/Stubs/Externals/FlowConfig/DoctrineEntityConfigStub.php
-        -
-            message: '/Parameter #2 \$entity of method LoyaltyCorp\\Multitenancy\\Externals\\Interfaces\\ORM\\EntityManagerInterface::findByIds\(\) expects object\|string, array given./'
-            path: tests/Unit/Externals/ORM/EntityManagerTest.php
         -
             message: '#Call to function is_object\(\) with object will always evaluate to true.#'
             path: src/Externals/ORM/EntityManager.php
         -
-            message: '#Result of && is always false.#'
-            path: src/Externals/ORM/EntityManager.php
+            message: '#Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with (.*) and object|string will always evaluate to false.\.#'
+            path: tests/Unit/Middleware/ProviderMiddlewareTest.php
         -
-            message: '#Strict comparison using === between true and false will always evaluate to false.#'
-            path: src/Externals/ORM/EntityManager.php
+            message: '/Call to an undefined method object::getProvider\(\)./'
+            path: src/Externals/ORM/Subscribers/ProtectedFlushSubscriber.php
         -
             message: '#Method Doctrine\\Common\\Persistence\\ObjectRepository::findOneBy\(\) invoked with 2 parameters, 1 required\.#'
             path: src/Services/Requests/ProviderAwareEntityFinder.php
         -
+            message: '/Parameter #1 \$app of class [A-Z][\w\\]+ constructor expects Illuminate\\(Contracts\\)?Foundation\\Application(\|Illuminate\\(Contracts\\)?Foundation\\Application)?, Laravel\\Lumen\\Application given./'
+            path: tests/Unit/Services/Webhooks/Bridge/Laravel/Providers/ProviderAwareWebhookServiceProviderTest.php
+        -
             message: '/Parameter #1 \$criteria of method Doctrine\\Common\\Persistence\\ObjectRepository::findOneBy\(\) expects array, LoyaltyCorp\\Multitenancy\\Database\\Entities\\Provider given\./'
             path: src/Services/Requests/ProviderAwareEntityFinder.php
+        -
+            message: '/Parameter #2 \$entity of method LoyaltyCorp\\Multitenancy\\Externals\\Interfaces\\ORM\\EntityManagerInterface::findByIds\(\) expects object\|string, array given./'
+            path: tests/Unit/Externals/ORM/EntityManagerTest.php
+        -
+            message: '#Result of && is always false.#'
+            path: src/Externals/ORM/EntityManager.php
+        -
+            message: '#Strict comparison using === between false and false will always evaluate to true\.#'
+            path: src/Middleware/ProviderMiddleware.php
+        -
+            message: '#Strict comparison using === between true and false will always evaluate to false.#'
+            path: src/Externals/ORM/EntityManager.php

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Externals\ORM;
 
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
@@ -16,6 +17,9 @@ use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplement
 use LoyaltyCorp\Multitenancy\Externals\ORM\Query\FilterCollection;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Subscribers\ProtectedFlushSubscriber;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) Coupling is required when introducing provider
+ */
 final class EntityManager implements EntityManagerInterface
 {
     /**
@@ -33,6 +37,16 @@ final class EntityManager implements EntityManagerInterface
     public function __construct(DoctrineEntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
+     */
+    public function find(Provider $provider, string $className, $entityId): ?object
+    {
+        return $this->getRepository($className)->find($provider, $entityId);
     }
 
     /**
@@ -98,6 +112,14 @@ final class EntityManager implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function getClassMetadata(string $className): ClassMetadata
+    {
+        return $this->entityManager->getClassMetadata($className);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getFilters(): FilterCollectionInterface
     {
         return new FilterCollection($this->entityManager->getFilters());
@@ -108,7 +130,7 @@ final class EntityManager implements EntityManagerInterface
      *
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      */
-    public function getRepository(string $class)
+    public function getRepository(string $class): RepositoryInterface
     {
         $repository = $this->entityManager->getRepository($class);
 
@@ -120,6 +142,11 @@ final class EntityManager implements EntityManagerInterface
             ));
         }
 
+        /**
+         * @var \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface $repository
+         *
+         * @see https://youtrack.jetbrains.com/issue/WI-37859 - typehint required until PhpStorm recognises === check
+         */
         return $repository;
     }
 

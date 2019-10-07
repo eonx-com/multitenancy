@@ -130,7 +130,7 @@ final class EntityManager implements EntityManagerInterface
      *
      * @throws \LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException Wrong int
      */
-    public function getRepository(string $class): RepositoryInterface
+    public function getRepository(string $class)
     {
         $repository = $this->entityManager->getRepository($class);
 

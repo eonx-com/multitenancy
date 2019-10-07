@@ -8,7 +8,6 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Query\FilterCollectionInterface;
-use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\Query\FilterCollectionStub;
 
 final class EntityManagerStub implements EntityManagerInterface
@@ -87,7 +86,7 @@ final class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRepository(string $class): RepositoryInterface
+    public function getRepository(string $class)
     {
         return $this->repositories[$class] ?? new MultitenancyRepositoryStub();
     }

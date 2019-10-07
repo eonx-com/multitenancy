@@ -69,9 +69,9 @@ interface EntityManagerInterface
      *
      * @param string $class The class name of the entity to generate a repository for
      *
-     * @return \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface
+     * @return mixed
      */
-    public function getRepository(string $class): RepositoryInterface;
+    public function getRepository(string $class);
 
     /**
      * Merge entity to the database, similar to REPLACE INTO in SQL.

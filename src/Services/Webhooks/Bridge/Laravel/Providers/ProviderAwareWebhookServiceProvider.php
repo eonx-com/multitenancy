@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\ProviderAwareActivityF
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\ActivityHandler;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Persister\ActivityPersister;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
 
 final class ProviderAwareWebhookServiceProvider extends ServiceProvider
 {

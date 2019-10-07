@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\DoctrineMisconfiguredException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\EntityNotCreatedException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\ActivityHandler;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 use stdClass;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Entities\ProviderAwareActivityStub;
@@ -37,7 +37,8 @@ final class ActivityHandlerTest extends AppTestCase
         $classMetadata = $this->createMock(ClassMetadata::class);
         $classMetadata->expects(self::once())
             ->method('newInstance')
-            ->willThrowException(new class() extends Exception implements ExceptionInterface {
+            ->willThrowException(new class() extends Exception implements ExceptionInterface
+            {
             });
 
         $requestHandler = $this->createInstance($classMetadata);

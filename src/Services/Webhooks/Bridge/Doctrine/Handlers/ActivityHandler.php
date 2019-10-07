@@ -9,7 +9,7 @@ use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\DoctrineMisconfiguredException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\EntityNotCreatedException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 
 final class ActivityHandler implements ActivityHandlerInterface
 {
@@ -37,7 +37,7 @@ final class ActivityHandler implements ActivityHandlerInterface
     {
         try {
             /**
-             * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface $instance
+             * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface $instance
              */
             $instance = $this->entityManager->getClassMetadata(ProviderAwareActivityInterface::class)->newInstance();
         } /** @noinspection PhpRedundantCatchClauseInspection */ catch (ExceptionInterface $exception) {

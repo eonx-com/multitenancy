@@ -5,7 +5,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Entities\ProviderAwareActivityStub;
 
 /**
@@ -14,12 +14,12 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Entit
 final class ActivityHandlerStub implements ActivityHandlerInterface
 {
     /**
-     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface|null
+     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface|null
      */
     private $next;
 
     /**
-     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface[]
+     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface[]
      */
     private $saved = [];
 
@@ -42,7 +42,7 @@ final class ActivityHandlerStub implements ActivityHandlerInterface
     /**
      * Returns saved activities.
      *
-     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface[]
+     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface[]
      */
     public function getSaved(): array
     {
@@ -60,7 +60,7 @@ final class ActivityHandlerStub implements ActivityHandlerInterface
     /**
      * Set next.
      *
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface $activity
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface $activity
      *
      * @return void
      */

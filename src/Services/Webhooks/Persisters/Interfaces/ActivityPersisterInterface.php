@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces;
+namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces;
 
 use DateTime;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 
 interface ActivityPersisterInterface
 {
@@ -26,7 +26,7 @@ interface ActivityPersisterInterface
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param int $activityId
      *
-     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface|null
+     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface|null
      */
     public function get(Provider $provider, int $activityId): ?ProviderAwareActivityInterface;
 

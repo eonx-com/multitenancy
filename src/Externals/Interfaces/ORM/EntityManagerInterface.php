@@ -17,11 +17,11 @@ interface EntityManagerInterface
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own all entities in UOW
      * @param string $className The class name of the object to find.
-     * @param mixed $id The identity of the object to find.
+     * @param mixed $entityId The identity of the object to find.
      *
      * @return object|null The found object.
      */
-    public function find(Provider $provider, $className, $id);
+    public function find(Provider $provider, string $className, $entityId): ?object;
 
     /**
      * Finds an entity by its identifier.
@@ -55,7 +55,7 @@ interface EntityManagerInterface
      *
      * @return \Doctrine\ORM\Mapping\ClassMetadata
      */
-    public function getClassMetadata($className): ClassMetadata;
+    public function getClassMetadata(string $className): ClassMetadata;
 
     /**
      * Gets the filters attached to the entity manager.
@@ -69,9 +69,9 @@ interface EntityManagerInterface
      *
      * @param string $class The class name of the entity to generate a repository for
      *
-     * @return mixed The instantiated repository
+     * @return \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface
      */
-    public function getRepository(string $class);
+    public function getRepository(string $class): RepositoryInterface;
 
     /**
      * Merge entity to the database, similar to REPLACE INTO in SQL.

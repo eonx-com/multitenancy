@@ -12,6 +12,7 @@ final class EntityRepositoryStub implements RepositoryInterface
      */
     public function count(?array $criteria = null): int
     {
+        return 0;
     }
 
     /**

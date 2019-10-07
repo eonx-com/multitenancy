@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Laravel\Providers;
 
+use EoneoPay\Webhooks\Bridge\Laravel\Providers\WebhookServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\Interfaces\ProviderAwareActivityFactoryInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\ProviderAwareActivityFactory;
@@ -20,6 +21,9 @@ final class ProviderAwareWebhookServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Ensure webhooks service provider is bound
+        $this->app->register(WebhookServiceProvider::class);
+
         $this->app->singleton(ActivityHandlerInterface::class, ActivityHandler::class);
         $this->app->singleton(ActivityPersisterInterface::class, ActivityPersister::class);
         $this->app->singleton(ProviderAwareActivityFactoryInterface::class, ProviderAwareActivityFactory::class);

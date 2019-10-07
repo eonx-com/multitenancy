@@ -9,7 +9,7 @@ use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterf
 interface ActivityHandlerInterface
 {
     /**
-     * Creates a new real instance of ActivityInterface
+     * Creates a new real instance of ActivityInterface.
      *
      * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface
      */
@@ -26,7 +26,7 @@ interface ActivityHandlerInterface
     public function get(Provider $provider, int $activityId): ?ProviderAwareActivityInterface;
 
     /**
-     * Saves the webhook
+     * Saves the webhook.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface $activity

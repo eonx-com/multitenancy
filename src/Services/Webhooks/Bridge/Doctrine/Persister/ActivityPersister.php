@@ -5,9 +5,8 @@ namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Persister;
 
 use DateTime;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
-use EoneoPay\Webhooks\Bridge\Laravel\Exceptions\ActivityNotFoundException;
-use EoneoPay\Webhooks\Model\ActivityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\ActivityNotFoundException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
@@ -20,9 +19,13 @@ final class ActivityPersister implements ActivityPersisterInterface
     private $activityHandler;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface $activityHandler // phpcs:ignore
+     * phpcs:disable
+     *
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface $activityHandler
+     *
+     * phpcs:enable
      */
     public function __construct(ActivityHandlerInterface $activityHandler)
     {
@@ -36,7 +39,7 @@ final class ActivityPersister implements ActivityPersisterInterface
     {
         $activity = $this->get($provider, $activityId);
 
-        if (($activity instanceof ActivityInterface) !== true) {
+        if (($activity instanceof ProviderAwareActivityInterface) !== true) {
             throw new ActivityNotFoundException(
                 \sprintf('No activity "%s" found to add sequence to payload.', $activityId)
             );
@@ -44,7 +47,7 @@ final class ActivityPersister implements ActivityPersisterInterface
 
         $payload = $activity->getPayload();
         $activity->setPayload(\array_merge($payload, [
-            '_sequence' => $activityId
+            '_sequence' => $activityId,
         ]));
 
         $this->activityHandler->save($provider, $activity);

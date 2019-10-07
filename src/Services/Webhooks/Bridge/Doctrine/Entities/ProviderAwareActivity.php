@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use EoneoPay\Externals\ORM\Entity;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use EoneoPay\Utils\Interfaces\UtcDateTimeInterface;
-use EoneoPay\Webhooks\Bridge\Doctrine\Entities\Schemas\ActivitySchema;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Entities\Schemas\ProviderAwareActivitySchema;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
 
 /**
@@ -18,10 +18,10 @@ use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterf
  */
 class ProviderAwareActivity extends Entity implements ProviderAwareActivityInterface
 {
-    use ActivitySchema;
     use HasProvider;
+    use ProviderAwareActivitySchema;
 
-    // @codeCoverageIgnoreStart
+    /** @codeCoverageIgnoreStart */
 
     /**
      * The Activity entity in this package is not intended to be created
@@ -31,8 +31,10 @@ class ProviderAwareActivity extends Entity implements ProviderAwareActivityInter
      */
     private function __construct()
     {
+        parent::__construct(); // @codeCoverageIgnore
     }
-    // @codeCoverageIgnoreEnd
+
+    /** @codeCoverageIgnoreEnd */
 
     /**
      * {@inheritdoc}
@@ -128,7 +130,7 @@ class ProviderAwareActivity extends Entity implements ProviderAwareActivityInter
             'occurred_at' => ($this->getOccurredAt() instanceof DateTime) === true
                 ? $this->getOccurredAt()->format(UtcDateTimeInterface::FORMAT_ZULU)
                 : null,
-            'payload' => $this->getPayload()
+            'payload' => $this->getPayload(),
         ];
     }
 

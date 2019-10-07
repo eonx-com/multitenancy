@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
@@ -33,6 +33,7 @@ final class MultitenancyRepositoryStub implements RepositoryInterface
      */
     public function count(Provider $provider, ?array $criteria = null): int
     {
+        return 0;
     }
 
     /**
@@ -40,6 +41,7 @@ final class MultitenancyRepositoryStub implements RepositoryInterface
      */
     public function find(Provider $provider, $entityId): ?object
     {
+        return null;
     }
 
     /**
@@ -47,6 +49,7 @@ final class MultitenancyRepositoryStub implements RepositoryInterface
      */
     public function findAll(Provider $provider): array
     {
+        return [];
     }
 
     /**
@@ -59,6 +62,7 @@ final class MultitenancyRepositoryStub implements RepositoryInterface
         ?int $limit = null,
         ?int $offset = null
     ): array {
+        return [];
     }
 
     /**
@@ -84,5 +88,6 @@ final class MultitenancyRepositoryStub implements RepositoryInterface
      */
     public function getClassName(): string
     {
+        return '';
     }
 }

@@ -6,7 +6,6 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Externals\ORM;
 use Doctrine\ORM\EntityManagerInterface as DoctrineEntityManager;
 use LoyaltyCorp\Multitenancy\Database\Exceptions\InvalidEntityException;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\EntityManagerInterface;
-use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\RepositoryInterface;
 use LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\ORMException;
 use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplementInterfaceException;
@@ -16,6 +15,7 @@ use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityDoesNotImplemen
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasCompositePrimaryKeyStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasProviderStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\RepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\Common\EventManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Doctrine\ORM\Query\FilterStub;
@@ -25,6 +25,7 @@ use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
  * @covers \LoyaltyCorp\Multitenancy\Externals\ORM\EntityManager
  *
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) High coupling required to fully test aspects of entity manager
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods) All tests must be public
  */
 final class EntityManagerTest extends DoctrineTestCase
 {
@@ -276,7 +277,7 @@ final class EntityManagerTest extends DoctrineTestCase
 
         $repository = $instance->getRepository(EntityImplementsRepositoryInterfaceStub::class);
 
-        self::assertInstanceOf(RepositoryInterface::class, $repository);
+        self::assertInstanceOf(RepositoryStub::class, $repository);
     }
 
     /**

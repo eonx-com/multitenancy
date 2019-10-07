@@ -6,6 +6,6 @@ namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions;
 use EoneoPay\Webhooks\Exceptions\WebhooksException;
 use RuntimeException;
 
-class EntityNotCreatedException extends RuntimeException implements WebhooksException
+final class EntityNotCreatedException extends RuntimeException implements WebhooksException
 {
 }

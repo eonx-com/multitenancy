@@ -142,7 +142,7 @@ final class ProviderAwareRequestObjectTestHelper
                 $json,
                 $context
             );
-        } catch (RequestValidationException $exception) {
+        } /** @noinspection PhpRedundantCatchClauseInspection */ catch (RequestValidationException $exception) {
             throw new ValidationFailedException(
                 $exception->getViolations(),
                 'Got validation failures when trying to build a validated request.',

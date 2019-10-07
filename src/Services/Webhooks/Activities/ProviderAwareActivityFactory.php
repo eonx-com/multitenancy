@@ -29,7 +29,7 @@ final class ProviderAwareActivityFactory implements ProviderAwareActivityFactory
     private $payloadManager;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param \EoneoPay\Webhooks\Events\Interfaces\EventDispatcherInterface $eventDispatcher
      * @param \EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface $payloadManager

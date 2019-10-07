@@ -13,7 +13,7 @@ use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Entities\Schemas\
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="\LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Repositories\ProviderAwareActivityRepository") // phpcs:ignore
  * @ORM\Table(name="event_activities")
  */
 class ProviderAwareActivity extends Entity implements ProviderAwareActivityInterface

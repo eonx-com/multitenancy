@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 /**
  * This stub has composite primary keys.
  *
- * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
+ * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\RepositoryStub")
  */
 final class EntityHasCompositePrimaryKeyStub implements HasProviderInterface
 {

@@ -10,7 +10,7 @@ use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 /**
  * This stub has a repository with the right interface.
  *
- * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
+ * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\RepositoryStub")
  */
 final class EntityImplementsRepositoryInterfaceStub implements HasProviderInterface
 {

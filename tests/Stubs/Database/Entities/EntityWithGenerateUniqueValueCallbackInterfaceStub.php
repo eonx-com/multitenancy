@@ -11,7 +11,7 @@ use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Listeners\GenerateUniqueVa
 /**
  * This stub entity is to test unique value generation with callback.
  *
- * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub")
+ * @ORM\Entity(repositoryClass="\Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\RepositoryStub")
  */
 final class EntityWithGenerateUniqueValueCallbackInterfaceStub implements
     GenerateUniqueValueWithCallbackInterface,

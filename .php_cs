@@ -38,7 +38,7 @@ return PhpCsFixer\Config::create()
         'class_attributes_separation' => true,
 
         // When using annotations, a comment block is converted to a phpdoc
-        'comment_to_phpdoc' => true,
+        'comment_to_phpdoc' => false,
 
         // Enforces single space around the concat operator
         'concat_space' => [

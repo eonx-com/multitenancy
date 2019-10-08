@@ -5,11 +5,11 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\Webhooks\Activities;
 
 use EoneoPay\Utils\DateTime;
 use EoneoPay\Webhooks\Events\Interfaces\EventDispatcherInterface;
-use EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface;
+use EoneoPay\Webhooks\Payloads\Interfaces\PayloadManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\ProviderAwareActivityFactory;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Persister\ActivityPersisterStub;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Persisters\ActivityPersisterStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Webhooks\Activity\ActivityDataStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Webhooks\Event\EventDispatcherStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Webhooks\Payload\PayloadManagerStub;
@@ -24,8 +24,8 @@ final class ProviderAwareActivityFactoryTest extends AppTestCase
      * Returns the instance under test.
      *
      * @param \EoneoPay\Webhooks\Events\Interfaces\EventDispatcherInterface $dispatcher
-     * @param \EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface $payloadManager
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface $persister
+     * @param \EoneoPay\Webhooks\Payloads\Interfaces\PayloadManagerInterface $payloadManager
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface $persister
      *
      * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\ProviderAwareActivityFactory
      */

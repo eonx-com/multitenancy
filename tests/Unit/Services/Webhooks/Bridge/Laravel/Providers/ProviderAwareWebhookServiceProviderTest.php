@@ -14,7 +14,7 @@ use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Activity
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Persister\ActivityPersister;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Laravel\Providers\ProviderAwareWebhookServiceProvider;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerStub as ExternalEntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;

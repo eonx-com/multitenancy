@@ -10,10 +10,10 @@ use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use EoneoPay\Utils\Interfaces\UtcDateTimeInterface;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Entities\Schemas\ProviderAwareActivitySchema;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="\LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Repositories\ProviderAwareActivityRepository") // phpcs:ignore
  * @ORM\Table(name="event_activities")
  */
 class ProviderAwareActivity extends Entity implements ProviderAwareActivityInterface
@@ -21,20 +21,18 @@ class ProviderAwareActivity extends Entity implements ProviderAwareActivityInter
     use HasProvider;
     use ProviderAwareActivitySchema;
 
-    /** @codeCoverageIgnoreStart */
-
     /**
      * The Activity entity in this package is not intended to be created
      * manually. Use the ActivityPersister to create new Activity objects.
      *
      * @noinspection MagicMethodsValidityInspection PhpMissingParentConstructorInspection
+     *
+     * @codeCoverageIgnoreStart
      */
     private function __construct()
     {
-        parent::__construct(); // @codeCoverageIgnore
+        parent::__construct();
     }
-
-    /** @codeCoverageIgnoreEnd */
 
     /**
      * {@inheritdoc}

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Persister;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine\Persisters;
 
 use DateTime;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
 
 /**
  * @coversNothing
@@ -22,7 +22,7 @@ final class ActivityPersisterStub implements ActivityPersisterInterface
     private $addedSequence;
 
     /**
-     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface|null
+     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface|null
      */
     private $nextActivity;
 
@@ -88,7 +88,7 @@ final class ActivityPersisterStub implements ActivityPersisterInterface
     /**
      * Sets next activity returned by get.
      *
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface $activity
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface $activity
      *
      * @return void
      */

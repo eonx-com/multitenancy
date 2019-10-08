@@ -1306,12 +1306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/webhooks.git",
-                "reference": "40d977e35d558c073b6fcdfe16e129b68c181187"
+                "reference": "67cb5abf35a5e73fea65c801fa6fc5e1e3e2b634"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/webhooks/zipball/40d977e35d558c073b6fcdfe16e129b68c181187",
-                "reference": "40d977e35d558c073b6fcdfe16e129b68c181187",
+                "url": "https://api.github.com/repos/loyaltycorp/webhooks/zipball/67cb5abf35a5e73fea65c801fa6fc5e1e3e2b634",
+                "reference": "67cb5abf35a5e73fea65c801fa6fc5e1e3e2b634",
                 "shasum": ""
             },
             "require": {
@@ -1355,7 +1355,7 @@
                 "eoneopay",
                 "webhook"
             ],
-            "time": "2019-10-07T23:05:51+00:00"
+            "time": "2019-10-08T00:43:27+00:00"
         },
         {
             "name": "friendsofsymfony/rest-bundle",

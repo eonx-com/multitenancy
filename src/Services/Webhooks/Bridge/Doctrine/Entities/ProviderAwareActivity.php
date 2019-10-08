@@ -26,13 +26,13 @@ class ProviderAwareActivity extends Entity implements ProviderAwareActivityInter
      * manually. Use the ActivityPersister to create new Activity objects.
      *
      * @noinspection MagicMethodsValidityInspection PhpMissingParentConstructorInspection
+     *
+     * @codeCoverageIgnoreStart
      */
-    // @codeCoverageIgnoreStart
     private function __construct()
     {
         parent::__construct();
     }
-    // @codeCoverageIgnoreEnd
 
     /**
      * {@inheritdoc}

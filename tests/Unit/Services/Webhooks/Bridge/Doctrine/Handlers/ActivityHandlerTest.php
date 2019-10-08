@@ -37,8 +37,7 @@ final class ActivityHandlerTest extends AppTestCase
         $classMetadata = $this->createMock(ClassMetadata::class);
         $classMetadata->expects(self::once())
             ->method('newInstance')
-            ->willThrowException(new class() extends Exception implements ExceptionInterface
-            {
+            ->willThrowException(new class() extends Exception implements ExceptionInterface {
             });
 
         $requestHandler = $this->createInstance($classMetadata);

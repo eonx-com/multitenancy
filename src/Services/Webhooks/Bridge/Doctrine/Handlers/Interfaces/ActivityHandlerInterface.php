@@ -4,14 +4,14 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 
 interface ActivityHandlerInterface
 {
     /**
      * Creates a new real instance of ActivityInterface.
      *
-     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface
+     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface
      */
     public function create(): ProviderAwareActivityInterface;
 
@@ -21,7 +21,7 @@ interface ActivityHandlerInterface
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param int $activityId
      *
-     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface|null
+     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface|null
      */
     public function get(Provider $provider, int $activityId): ?ProviderAwareActivityInterface;
 
@@ -29,7 +29,7 @@ interface ActivityHandlerInterface
      * Saves the webhook.
      *
      * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface $activity
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface $activity
      *
      * @return void
      */

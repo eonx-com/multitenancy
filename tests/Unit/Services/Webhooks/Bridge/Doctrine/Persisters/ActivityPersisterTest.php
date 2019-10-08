@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\Webhooks\Bridge\Doctrine\Persister;
+namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\Webhooks\Bridge\Doctrine\Persisters;
 
 use EoneoPay\Utils\DateTime;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;

@@ -6,15 +6,15 @@ namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Activities;
 use EoneoPay\Utils\DateTime;
 use EoneoPay\Webhooks\Activities\Interfaces\ActivityDataInterface;
 use EoneoPay\Webhooks\Events\Interfaces\EventDispatcherInterface;
-use EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface;
+use EoneoPay\Webhooks\Payloads\Interfaces\PayloadManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Activities\Interfaces\ProviderAwareActivityFactoryInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
 
 final class ProviderAwareActivityFactory implements ProviderAwareActivityFactoryInterface
 {
     /**
-     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface
+     * @var \LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface
      */
     private $activityPersister;
 
@@ -24,7 +24,7 @@ final class ProviderAwareActivityFactory implements ProviderAwareActivityFactory
     private $eventDispatcher;
 
     /**
-     * @var \EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface
+     * @var \EoneoPay\Webhooks\Payloads\Interfaces\PayloadManagerInterface
      */
     private $payloadManager;
 
@@ -32,8 +32,8 @@ final class ProviderAwareActivityFactory implements ProviderAwareActivityFactory
      * Constructor.
      *
      * @param \EoneoPay\Webhooks\Events\Interfaces\EventDispatcherInterface $eventDispatcher
-     * @param \EoneoPay\Webhooks\Payload\Interfaces\PayloadManagerInterface $payloadManager
-     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface $persister
+     * @param \EoneoPay\Webhooks\Payloads\Interfaces\PayloadManagerInterface $payloadManager
+     * @param \LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface $persister
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,

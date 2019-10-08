@@ -6,7 +6,7 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Webhooks\Bridge\Doctrine
 use DateTime;
 use LoyaltyCorp\Multitenancy\Database\Traits\HasProvider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Entities\Schemas\ProviderAwareActivitySchema;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\EntityStub;
 
 /**

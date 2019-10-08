@@ -8,8 +8,8 @@ use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Exceptions\ActivityNotFoundException;
 use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Handlers\Interfaces\ActivityHandlerInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Model\ProviderAwareActivityInterface;
-use LoyaltyCorp\Multitenancy\Services\Webhooks\Persister\Interfaces\ActivityPersisterInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Persisters\Interfaces\ActivityPersisterInterface;
 
 final class ActivityPersister implements ActivityPersisterInterface
 {

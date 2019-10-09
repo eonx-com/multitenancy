@@ -52,7 +52,7 @@ final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
             ])
         ));
 
-        $result = $helper->buildFailingRequest($provider, RequestStub::class, '');
+        $result = $helper->buildFailingRequest(RequestStub::class, $provider, '');
 
         self::assertSame($expected, $result);
     }
@@ -72,7 +72,7 @@ final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('There were no validation errors.');
 
-        $helper->buildFailingRequest($provider, RequestStub::class, '');
+        $helper->buildFailingRequest(RequestStub::class, $provider, '');
     }
 
     /**
@@ -107,7 +107,7 @@ final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 
         $helper = $this->getHelper($object);
 
-        $thing = $helper->buildUnvalidatedRequest($provider, RequestStub::class, '');
+        $thing = $helper->buildUnvalidatedRequest(RequestStub::class, $provider, '');
 
         self::assertSame($object, $thing);
     }
@@ -127,7 +127,7 @@ final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 
         $helper = $this->getHelper($object);
 
-        $thing = $helper->buildValidatedRequest($provider, RequestStub::class, '');
+        $thing = $helper->buildValidatedRequest(RequestStub::class, $provider, '');
 
         self::assertSame($object, $thing);
     }
@@ -151,7 +151,7 @@ final class ProviderAwareRequestObjectTestHelperTest extends AppTestCase
 
         $this->expectException(ValidationFailedException::class);
 
-        $helper->buildValidatedRequest($provider, RequestStub::class, '');
+        $helper->buildValidatedRequest(RequestStub::class, $provider, '');
     }
 
     /**

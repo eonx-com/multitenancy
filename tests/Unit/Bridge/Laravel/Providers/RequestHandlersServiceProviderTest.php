@@ -10,7 +10,6 @@ use LoyaltyCorp\Multitenancy\Services\Requests\ProviderAwareObjectBuilder;
 use LoyaltyCorp\Multitenancy\Services\Requests\RequestBodyContextConfigurator;
 use LoyaltyCorp\RequestHandlers\Request\Interfaces\ContextConfiguratorInterface;
 use LoyaltyCorp\RequestHandlers\Serializer\Interfaces\DoctrineDenormalizerEntityFinderInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\Symfony\SerializerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ServiceProviderTestCase;
 
@@ -38,7 +37,7 @@ final class RequestHandlersServiceProviderTest extends ServiceProviderTestCase
      */
     public function testBindings(): void
     {
-        $this->app->bind(SerializerInterface::class, SerializerStub::class);
+        $this->app->bind('requesthandlers_serializer', SerializerStub::class);
 
         parent::testBindings();
     }

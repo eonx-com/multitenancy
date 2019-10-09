@@ -20,16 +20,16 @@ interface ProviderAwareObjectBuilderInterface
      * Builds a valid Request Object given the supplied json and optional additional
      * context.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $objectClass
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $json
      * @param mixed[]|null $context
      *
      * @return \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface
      */
     public function build(
-        Provider $provider,
         string $objectClass,
+        Provider $provider,
         string $json,
         ?array $context = null
     ): RequestObjectInterface;
@@ -38,11 +38,11 @@ interface ProviderAwareObjectBuilderInterface
      * Used to build a request object with an array of context. Is used if there
      * is no point to providing JSON and properties are directly provided instead.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $objectClass
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param mixed[] $context
      *
      * @return \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface
      */
-    public function buildWithContext(Provider $provider, string $objectClass, array $context): RequestObjectInterface;
+    public function buildWithContext(string $objectClass, Provider $provider, array $context): RequestObjectInterface;
 }

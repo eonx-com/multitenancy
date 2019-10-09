@@ -62,21 +62,21 @@ final class ProviderAwareRequestObjectTestHelper
     /**
      * Builds a failing request and returns the validation errors raised by the failure.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $class
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $json
      * @param mixed[]|null $context
      *
      * @return mixed[]
      */
     public function buildFailingRequest(
-        Provider $provider,
         string $class,
+        Provider $provider,
         string $json,
         ?array $context = null
     ): array {
         try {
-            $this->buildValidatedRequest($provider, $class, $json, $context);
+            $this->buildValidatedRequest($class, $provider, $json, $context);
         } catch (ValidationFailedException $exception) {
             return $exception->getErrors();
         }
@@ -88,16 +88,16 @@ final class ProviderAwareRequestObjectTestHelper
      * Builds an unvalidated request object. The context property will set and overwrite
      * any properties on the request object with the supplied values.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $class
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $json
      * @param mixed[]|null $context
      *
      * @return \LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface
      */
     public function buildUnvalidatedRequest(
-        Provider $provider,
         string $class,
+        Provider $provider,
         string $json,
         ?array $context = null
     ): RequestObjectInterface {
@@ -120,8 +120,8 @@ final class ProviderAwareRequestObjectTestHelper
      * Builds a validated request object. The context property will set and overwrite
      * any properties on the request object with the supplied values.
      *
-     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $class
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider
      * @param string $json
      * @param mixed[]|null $context
      *
@@ -130,15 +130,15 @@ final class ProviderAwareRequestObjectTestHelper
      * @throws \LoyaltyCorp\RequestHandlers\TestHelper\Exceptions\ValidationFailedException
      */
     public function buildValidatedRequest(
-        Provider $provider,
         string $class,
+        Provider $provider,
         string $json,
         ?array $context = null
     ): RequestObjectInterface {
         try {
             return $this->objectBuilder->build(
-                $provider,
                 $class,
+                $provider,
                 $json,
                 $context
             );

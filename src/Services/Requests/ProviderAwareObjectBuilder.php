@@ -44,8 +44,8 @@ final class ProviderAwareObjectBuilder implements ProviderAwareObjectBuilderInte
      * @throws \LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException
      */
     public function build(
-        Provider $provider,
         string $objectClass,
+        Provider $provider,
         string $json,
         ?array $context = null
     ): RequestObjectInterface {
@@ -93,8 +93,8 @@ final class ProviderAwareObjectBuilder implements ProviderAwareObjectBuilderInte
      * @throws \LoyaltyCorp\RequestHandlers\Exceptions\RequestValidationException
      * @throws \LoyaltyCorp\RequestHandlers\Exceptions\UnsupportedClassException
      */
-    public function buildWithContext(Provider $provider, string $objectClass, array $context): RequestObjectInterface
+    public function buildWithContext(string $objectClass, Provider $provider, array $context): RequestObjectInterface
     {
-        return $this->build($provider, $objectClass, '{}', $context);
+        return $this->build($objectClass, $provider, '{}', $context);
     }
 }

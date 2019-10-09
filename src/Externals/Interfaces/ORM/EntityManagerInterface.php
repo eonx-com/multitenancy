@@ -3,12 +3,26 @@ declare(strict_types=1);
 
 namespace LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Database\Interfaces\HasProviderInterface;
 use LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Query\FilterCollectionInterface;
 
 interface EntityManagerInterface
 {
+    /**
+     * Finds an object by its identifier.
+     *
+     * This is just a convenient shortcut for getRepository($className)->find($id).
+     *
+     * @param \LoyaltyCorp\Multitenancy\Database\Entities\Provider $provider Provider who should own all entities in UOW
+     * @param string $className The class name of the object to find.
+     * @param mixed $entityId The identity of the object to find.
+     *
+     * @return object|null The found object.
+     */
+    public function find(Provider $provider, string $className, $entityId): ?object;
+
     /**
      * Finds an entity by its identifier.
      *
@@ -32,6 +46,18 @@ interface EntityManagerInterface
     public function flush(Provider $provider): void;
 
     /**
+     * Returns the ClassMetadata descriptor for a class.
+     *
+     * The class name must be the fully-qualified class name without a leading backslash
+     * (as it is returned by get_class($obj)).
+     *
+     * @param string $className
+     *
+     * @return \Doctrine\ORM\Mapping\ClassMetadata
+     */
+    public function getClassMetadata(string $className): ClassMetadata;
+
+    /**
      * Gets the filters attached to the entity manager.
      *
      * @return \LoyaltyCorp\Multitenancy\Externals\Interfaces\ORM\Query\FilterCollectionInterface
@@ -43,7 +69,7 @@ interface EntityManagerInterface
      *
      * @param string $class The class name of the entity to generate a repository for
      *
-     * @return mixed The instantiated repository
+     * @return mixed
      */
     public function getRepository(string $class);
 

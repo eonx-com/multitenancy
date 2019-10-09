@@ -12,7 +12,7 @@ use LoyaltyCorp\Multitenancy\Externals\ORM\Exceptions\RepositoryDoesNotImplement
 use ReflectionClass;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityHasCompositePrimaryKeyStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\Entities\EntityImplementsRepositoryInterfaceStub;
-use Tests\LoyaltyCorp\Multitenancy\Stubs\Database\RepositoryStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\RepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\DoctrineTestCase;
 
 /**

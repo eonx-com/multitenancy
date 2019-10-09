@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Database;
+namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM;
 
 use LoyaltyCorp\Multitenancy\Externals\ORM\Repository;
 

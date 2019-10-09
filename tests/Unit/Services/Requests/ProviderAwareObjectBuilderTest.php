@@ -38,7 +38,7 @@ final class ProviderAwareObjectBuilderTest extends AppTestCase
         $validator = new ObjectValidatorStub();
         $builder = $this->getBuilder($serializer, $validator);
 
-        $result = $builder->build($provider, RequestStub::class, '');
+        $result = $builder->build(RequestStub::class, $provider, '');
 
         self::assertSame($expected, $result);
     }
@@ -65,7 +65,7 @@ final class ProviderAwareObjectBuilderTest extends AppTestCase
             'The supplied class "stdClass" is not supported. It must be an instance of "LoyaltyCorp\RequestHandlers\Request\RequestObjectInterface"' // phpcs:ignore
         );
 
-        $builder->build($provider, stdClass::class, '');
+        $builder->build(stdClass::class, $provider, '');
     }
 
     /**
@@ -87,7 +87,7 @@ final class ProviderAwareObjectBuilderTest extends AppTestCase
         $validator = new ObjectValidatorStub();
         $builder = $this->getBuilder($serializer, $validator);
 
-        $result = $builder->buildWithContext($provider, RequestStub::class, []);
+        $result = $builder->buildWithContext(RequestStub::class, $provider, []);
 
         self::assertSame($expected, $result);
     }
@@ -114,7 +114,7 @@ final class ProviderAwareObjectBuilderTest extends AppTestCase
             'The serializer returned an object of type "stdClass" but it is not an instance of "Tests\LoyaltyCorp\Multitenancy\Stubs\Http\Requests\RequestStub"' // phpcs:ignore
         );
 
-        $builder->build($provider, RequestStub::class, '');
+        $builder->build(RequestStub::class, $provider, '');
     }
 
     /**

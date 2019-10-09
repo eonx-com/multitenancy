@@ -1,0 +1,16 @@
+services:
+    -
+        class: EoneoPay\Standards\Phpstan\FactoryMethodReturnTypeExtension
+        arguments:
+            - LoyaltyCorp\Multitenancy\Services\Requests\ProviderAwareObjectBuilderInterface
+            - ['build', 'buildWithContext']
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: EoneoPay\Standards\Phpstan\FactoryMethodReturnTypeExtension
+        arguments:
+            - LoyaltyCorp\Multitenancy\Services\Requests\TestHelper\ProviderAwareRequestObjectTestHelper
+            - ['buildFailingRequest', 'buildUnvalidatedRequest', 'buildValidatedRequest']
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension

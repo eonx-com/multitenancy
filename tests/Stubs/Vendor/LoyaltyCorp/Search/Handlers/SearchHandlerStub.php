@@ -4,12 +4,11 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\LoyaltyCorp\Search\Handlers;
 
 use LoyaltyCorp\Search\Interfaces\EntitySearchHandlerInterface;
-use LoyaltyCorp\Search\Interfaces\ProviderAwareInterface;
 
 /**
  * @coversNothing
  */
-final class ProviderAwareSearchHandlerStub implements EntitySearchHandlerInterface, ProviderAwareInterface
+final class SearchHandlerStub implements EntitySearchHandlerInterface
 {
     /**
      * {@inheritdoc}
@@ -40,7 +39,7 @@ final class ProviderAwareSearchHandlerStub implements EntitySearchHandlerInterfa
      */
     public function getIndexName(): string
     {
-        return 'provider-aware-index';
+        return 'search-index';
     }
 
     /**
@@ -57,13 +56,5 @@ final class ProviderAwareSearchHandlerStub implements EntitySearchHandlerInterfa
     public function transform($object = null): ?array
     {
         return \method_exists($object, 'toArray') ? $object->toArray() : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProviderId(object $object): string
-    {
-        return \method_exists($object, 'getExternalId') ? $object->getExternalId() : 'providerId';
     }
 }

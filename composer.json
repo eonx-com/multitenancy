@@ -18,6 +18,7 @@
     "eoneopay/webhooks": "^0.20",
     "loyaltycorp/flowconfig-wrapper": "^1.0",
     "loyaltycorp/requesthandlers": "^1.1",
+    "loyaltycorp/search": "^1.1",
     "symfony/validator": "^4.3"
   },
   "require-dev": {

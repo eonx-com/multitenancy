@@ -15,14 +15,14 @@ final class EntityManagerStub implements EntityManagerInterface
     /**
      * Entities.
      *
-     * @var \EoneoPay\Externals\ORM\Interfaces\EntityInterface[]|null
+     * @var object[]|null
      */
     private $entities;
 
     /**
      * EntityManagerStub constructor.
      *
-     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface[]|null $entities
+     * @param object[]|null $entities
      */
     public function __construct(?array $entities = null)
     {

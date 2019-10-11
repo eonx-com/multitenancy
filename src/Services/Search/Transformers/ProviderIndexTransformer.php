@@ -5,6 +5,8 @@ namespace LoyaltyCorp\Multitenancy\Services\Search\Transformers;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Search\Interfaces\EntitySearchHandlerInterface;
+use LoyaltyCorp\Search\Interfaces\ProviderAwareInterface;
 use LoyaltyCorp\Search\Interfaces\SearchHandlerInterface;
 use LoyaltyCorp\Search\Interfaces\Transformers\IndexTransformerInterface;
 
@@ -23,6 +25,18 @@ final class ProviderIndexTransformer implements IndexTransformerInterface
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transformIndexName(EntitySearchHandlerInterface $handler, object $object): string
+    {
+        if (($handler instanceof ProviderAwareInterface) === true) {
+            return \sprintf('%s_%s', $handler->getIndexName(), $handler->getProviderId($object));
+        }
+
+        return $handler->getIndexName();
     }
 
     /**

@@ -6,10 +6,29 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use EoneoPay\Externals\ORM\Interfaces\Query\FilterCollectionInterface;
+use EoneoPay\Externals\ORM\Interfaces\RepositoryInterface;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\Query\FilterCollectionStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\External\ORM\EntityRepositoryStub;
 
 final class EntityManagerStub implements EntityManagerInterface
 {
+    /**
+     * Entities.
+     *
+     * @var object[]|null
+     */
+    private $entities;
+
+    /**
+     * EntityManagerStub constructor.
+     *
+     * @param object[]|null $entities
+     */
+    public function __construct(?array $entities = null)
+    {
+        $this->entities = $entities;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,12 +55,15 @@ final class EntityManagerStub implements EntityManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getRepository(string $class)
+    public function getRepository(string $class): RepositoryInterface
     {
+        return new EntityRepositoryStub($this->entities);
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function merge(EntityInterface $entity): void
     {

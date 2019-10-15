@@ -48,7 +48,7 @@ final class ProviderIndexTransformerTest extends AppTestCase
         $entityManager = new EntityManagerStub([$object]);
         $transformer = $this->getTransformer($entityManager);
 
-        $expectedIndexName = 'provider-aware-index_acmeIncId';
+        $expectedIndexName = 'provider-aware-index_acmeincid';
 
         $actualIndexName = $transformer->transformIndexName($handler, $object);
 
@@ -69,7 +69,7 @@ final class ProviderIndexTransformerTest extends AppTestCase
         $transformer = $this->getTransformer($entityManager);
 
         $expectedIndexNames = [
-            'provider-aware-index_xyzCorpId',
+            'provider-aware-index_xyzcorpid',
         ];
 
         $actualIndexNames = $transformer->transformIndexNames($handler);

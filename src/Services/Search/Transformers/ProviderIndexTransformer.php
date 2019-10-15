@@ -33,10 +33,10 @@ final class ProviderIndexTransformer implements IndexTransformerInterface
     public function transformIndexName(EntitySearchHandlerInterface $handler, object $object): string
     {
         if (($handler instanceof ProviderAwareInterface) === true) {
-            return \sprintf('%s_%s', $handler->getIndexName(), \mb_strtolower($handler->getProviderId($object)));
+            return \mb_strtolower(\sprintf('%s_%s', $handler->getIndexName(), $handler->getProviderId($object)));
         }
 
-        return $handler->getIndexName();
+        return \mb_strtolower($handler->getIndexName());
     }
 
     /**
@@ -48,7 +48,7 @@ final class ProviderIndexTransformer implements IndexTransformerInterface
         $providerIds = $this->fetchAllProviderIds();
 
         foreach ($providerIds as $providerId) {
-            $indexNames[] = \sprintf('%s_%s', $searchHandler->getIndexName(), $providerId);
+            $indexNames[] = \mb_strtolower(\sprintf('%s_%s', $searchHandler->getIndexName(), $providerId));
         }
 
         return $indexNames;
@@ -65,7 +65,7 @@ final class ProviderIndexTransformer implements IndexTransformerInterface
         $providers = $this->entityManager->getRepository(Provider::class)->findAll();
 
         foreach ($providers as $provider) {
-            $providerIds[] = \mb_strtolower($provider->getExternalId());
+            $providerIds[] = $provider->getExternalId();
         }
 
         return $providerIds;

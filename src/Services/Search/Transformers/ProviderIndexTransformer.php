@@ -5,12 +5,11 @@ namespace LoyaltyCorp\Multitenancy\Services\Search\Transformers;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
-use LoyaltyCorp\Search\Interfaces\EntitySearchHandlerInterface;
 use LoyaltyCorp\Search\Interfaces\ProviderAwareInterface;
 use LoyaltyCorp\Search\Interfaces\SearchHandlerInterface;
-use LoyaltyCorp\Search\Interfaces\Transformers\IndexTransformerInterface;
+use LoyaltyCorp\Search\Interfaces\Transformers\IndexNameTransformerInterface;
 
-final class ProviderIndexTransformer implements IndexTransformerInterface
+final class ProviderIndexTransformer implements IndexNameTransformerInterface
 {
     /**
      * @var \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface
@@ -30,7 +29,7 @@ final class ProviderIndexTransformer implements IndexTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transformIndexName(EntitySearchHandlerInterface $handler, object $object): string
+    public function transformIndexName(SearchHandlerInterface $handler, object $object): string
     {
         if (($handler instanceof ProviderAwareInterface) === true) {
             return \mb_strtolower(\sprintf('%s_%s', $handler->getIndexName(), $handler->getProviderId($object)));

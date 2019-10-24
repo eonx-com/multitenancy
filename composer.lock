@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf814fc57890d62905ef00858f5e8bd7",
+    "content-hash": "744fbe95680e282a9ba153397703070b",
     "packages": [
         {
             "name": "code-foundation/flow-config",
@@ -7331,16 +7331,16 @@
         },
         {
             "name": "loyaltycorp/search",
-            "version": "v1.1.4",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/loyaltycorp/search.git",
-                "reference": "c6b1c59d7cc0e1a3fc0ee454115c822b4e8c0728"
+                "reference": "0e6be24ee7f2d137937fa8b23d5749e059badfa9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/loyaltycorp/search/zipball/c6b1c59d7cc0e1a3fc0ee454115c822b4e8c0728",
-                "reference": "c6b1c59d7cc0e1a3fc0ee454115c822b4e8c0728",
+                "url": "https://api.github.com/repos/loyaltycorp/search/zipball/0e6be24ee7f2d137937fa8b23d5749e059badfa9",
+                "reference": "0e6be24ee7f2d137937fa8b23d5749e059badfa9",
                 "shasum": ""
             },
             "require": {
@@ -7348,15 +7348,17 @@
                 "elasticsearch/elasticsearch": "^6.1",
                 "eoneopay/externals": "^1.1",
                 "guzzlehttp/guzzle": "^6.3",
-                "illuminate/console": "^5.8",
+                "illuminate/console": "^5.8|^6.0",
                 "php": ">=7.3"
             },
             "require-dev": {
                 "eoneopay/standards": "dev-master",
                 "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.15",
                 "guzzlehttp/psr7": "^1.5",
-                "illuminate/container": "^5.8",
-                "illuminate/support": "^5.8",
+                "illuminate/container": "^5.8|^6.0",
+                "illuminate/support": "^5.8|^6.0",
+                "loyaltycorp/easy-entity-change": "^0.10.4",
                 "loyaltycorp/multitenancy": "^1.0",
                 "monolog/monolog": "^1.24",
                 "phpmd/phpmd": "^2.6",
@@ -7368,6 +7370,7 @@
                 "vlucas/phpdotenv": "^3.0"
             },
             "suggest": {
+                "loyaltycorp/easy-entity-change": "Required when using the Laravel events bridge",
                 "loyaltycorp/multitenancy": "Required when using provider specific search handlers",
                 "monolog/monolog": "Required when using the Laravel bridge",
                 "vlucas/phpdotenv": "Required when using the Laravel bridge"
@@ -7388,7 +7391,7 @@
                 "loyaltycorp",
                 "search"
             ],
-            "time": "2019-10-11T00:33:16+00:00"
+            "time": "2019-10-24T02:51:04+00:00"
         },
         {
             "name": "myclabs/deep-copy",

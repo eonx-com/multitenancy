@@ -5,7 +5,7 @@ namespace LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use LoyaltyCorp\Multitenancy\Services\Search\Transformers\ProviderIndexTransformer;
-use LoyaltyCorp\Search\Interfaces\Transformers\IndexTransformerInterface;
+use LoyaltyCorp\Search\Interfaces\Transformers\IndexNameTransformerInterface;
 
 final class ProviderSearchServiceProvider extends ServiceProvider
 {
@@ -16,6 +16,6 @@ final class ProviderSearchServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IndexTransformerInterface::class, ProviderIndexTransformer::class);
+        $this->app->bind(IndexNameTransformerInterface::class, ProviderIndexTransformer::class);
     }
 }

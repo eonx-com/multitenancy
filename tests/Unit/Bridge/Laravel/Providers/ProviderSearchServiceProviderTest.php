@@ -8,7 +8,7 @@ use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use Illuminate\Container\Container;
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Providers\ProviderSearchServiceProvider;
 use LoyaltyCorp\Multitenancy\Services\Search\Transformers\ProviderIndexTransformer;
-use LoyaltyCorp\Search\Interfaces\Transformers\IndexTransformerInterface;
+use LoyaltyCorp\Search\Interfaces\Transformers\IndexNameTransformerInterface;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\ServiceProviderTestCase;
 
 /**
@@ -35,7 +35,7 @@ final class ProviderSearchServiceProviderTest extends ServiceProviderTestCase
     protected function getBindings(): array
     {
         return [
-            IndexTransformerInterface::class => ProviderIndexTransformer::class,
+            IndexNameTransformerInterface::class => ProviderIndexTransformer::class,
         ];
     }
 

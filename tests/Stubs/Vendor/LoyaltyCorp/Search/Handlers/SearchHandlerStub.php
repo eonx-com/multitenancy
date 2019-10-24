@@ -3,13 +3,21 @@ declare(strict_types=1);
 
 namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\LoyaltyCorp\Search\Handlers;
 
-use LoyaltyCorp\Search\Interfaces\EntitySearchHandlerInterface;
+use LoyaltyCorp\Search\Interfaces\TransformableSearchHandlerInterface;
 
 /**
  * @coversNothing
  */
-final class SearchHandlerStub implements EntitySearchHandlerInterface
+final class SearchHandlerStub implements TransformableSearchHandlerInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getFillIterable(): iterable
+    {
+        return [];
+    }
+
     /**
      * {@inheritdoc}
      */

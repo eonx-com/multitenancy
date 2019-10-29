@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Services\Search;
 
 use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
+use LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException;
 use LoyaltyCorp\Multitenancy\Services\Search\Interfaces\ProviderAwareRequestProxyFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -95,6 +96,8 @@ final class ProviderAwareRequestProxyFactory implements ProviderAwareRequestProx
      * @param string $searchPath Original search path
      *
      * @return string Provider specific search path
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     private function buildProviderSpecificPath(Provider $provider, string $searchPath): string
     {
@@ -102,7 +105,14 @@ final class ProviderAwareRequestProxyFactory implements ProviderAwareRequestProx
 
         // Here we are assuming that the first part of the path will be index name.
         if (\count($pathtokens) >= 2) {
-            $pathtokens[1] = \sprintf('%s_%s', $pathtokens[1], \mb_strtolower($provider->getExternalId()));
+            $this->isValidIndex($pathtokens[1]);
+            $indices = \explode(',', $pathtokens[1]);
+
+            $providerIndices = [];
+            foreach ($indices as $index) {
+                $providerIndices[] = \sprintf('%s_%s', $index, \mb_strtolower($provider->getExternalId()));
+            }
+            $pathtokens[1] = \implode(',', $providerIndices);
 
             return \implode('/', $pathtokens);
         }
@@ -127,5 +137,23 @@ final class ProviderAwareRequestProxyFactory implements ProviderAwareRequestProx
         }
 
         return $searchPath;
+    }
+
+    /**
+     * Validates that the thought index name is not _all or _search.
+     *
+     * @param string $index
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
+     */
+    private function isValidIndex(string $index): void
+    {
+        if ($index === '_all' || $index === '_search') {
+            throw new InvalidSearchPathException(
+                'Search path is invalid and does not contain an index name.'
+            );
+        }
     }
 }

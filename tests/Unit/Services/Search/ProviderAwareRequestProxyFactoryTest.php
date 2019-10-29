@@ -12,7 +12,7 @@ use function GuzzleHttp\Psr7\stream_for;
 /**
  * @covers \LoyaltyCorp\Multitenancy\Services\Search\ProviderAwareRequestProxyFactory
  */
-class ProviderAwareRequestProxyFactoryTest extends AppTestCase
+final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
 {
     /**
      * Tests the create createProxyRequest method when the configured elasticsearch
@@ -39,12 +39,12 @@ class ProviderAwareRequestProxyFactoryTest extends AppTestCase
 
         $result = $instance->createProxyRequest($provider, $request);
 
-        static::assertSame($expectedUri, (string)$result->getUri());
-        static::assertSame($expectedAuth, $result->getHeaderLine('Authorization'));
-        static::assertSame('request body', (string)$result->getBody());
-        static::assertInstanceOf(ServerRequest::class, $result);
+        self::assertSame($expectedUri, (string)$result->getUri());
+        self::assertSame($expectedAuth, $result->getHeaderLine('Authorization'));
+        self::assertSame('request body', (string)$result->getBody());
+        self::assertInstanceOf(ServerRequest::class, $result);
         /** @var \Zend\Diactoros\ServerRequest $result */
-        static::assertNull($result->getAttribute('_encoder'));
+        self::assertNull($result->getAttribute('_encoder'));
     }
 
     /**
@@ -71,12 +71,12 @@ class ProviderAwareRequestProxyFactoryTest extends AppTestCase
 
         $result = $instance->createProxyRequest($provider, $request);
 
-        static::assertSame($expectedUri, (string)$result->getUri());
-        static::assertSame('', $result->getHeaderLine('Authorization'));
-        static::assertSame('request body', (string)$result->getBody());
-        static::assertInstanceOf(ServerRequest::class, $result);
+        self::assertSame($expectedUri, (string)$result->getUri());
+        self::assertSame('', $result->getHeaderLine('Authorization'));
+        self::assertSame('request body', (string)$result->getBody());
+        self::assertInstanceOf(ServerRequest::class, $result);
         /** @var \Zend\Diactoros\ServerRequest $result */
-        static::assertNull($result->getAttribute('_encoder'));
+        self::assertNull($result->getAttribute('_encoder'));
     }
 
     /**
@@ -102,12 +102,12 @@ class ProviderAwareRequestProxyFactoryTest extends AppTestCase
 
         $result = $instance->createProxyRequest($provider, $request);
 
-        static::assertSame($expectedUri, (string)$result->getUri());
-        static::assertSame('', $result->getHeaderLine('Authorization'));
-        static::assertSame('request body', (string)$result->getBody());
-        static::assertInstanceOf(ServerRequest::class, $result);
+        self::assertSame($expectedUri, (string)$result->getUri());
+        self::assertSame('', $result->getHeaderLine('Authorization'));
+        self::assertSame('request body', (string)$result->getBody());
+        self::assertInstanceOf(ServerRequest::class, $result);
         /** @var \Zend\Diactoros\ServerRequest $result */
-        static::assertNull($result->getAttribute('_encoder'));
+        self::assertNull($result->getAttribute('_encoder'));
     }
 
     /**

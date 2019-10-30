@@ -14,7 +14,9 @@ final class CreateProviderCommand extends Command
     public function __construct()
     {
         $this->description = 'Create a new provider';
-        $this->signature = 'app:provider:create {--identifier} {--name}';
+        $this->signature = 'app:provider:create 
+        {--identifier: The unique identifier for the provider to be referenced by} 
+        {--name: Human friendly name of the provider}';
 
         parent::__construct();
     }

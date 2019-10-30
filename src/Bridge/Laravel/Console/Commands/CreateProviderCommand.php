@@ -14,7 +14,7 @@ final class CreateProviderCommand extends Command
     public function __construct()
     {
         $this->description = 'Create a new provider';
-        $this->signature = 'app:provider:create {identifier} {name}';
+        $this->signature = 'app:provider:create {--identifier} {--name}';
 
         parent::__construct();
     }
@@ -28,7 +28,7 @@ final class CreateProviderCommand extends Command
      */
     public function handle(ProviderServiceInterface $providerService): void
     {
-        [$identifier, $name] = [$this->argument('identifier'), $this->argument('name')];
+        [$identifier, $name] = [$this->option('identifier'), $this->option('name')];
 
         if (\is_string($identifier) === false || \is_string($name) === false) {
             $this->error('Provided inputs were not expected format');

@@ -6,8 +6,8 @@ namespace Tests\LoyaltyCorp\Multitenancy\Unit\Bridge\Laravel\Console\Commands;
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Commands\CreateProviderCommand;
 use ReflectionClass;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Providers\ProviderServiceStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\CommandTestCase;
@@ -46,8 +46,8 @@ final class CreateProviderCommandTest extends CommandTestCase
     public function testSuccessfulOutput(): void
     {
         $command = $this->createInstance([
-            'identifier' => 'test-provider',
-            'name' => 'Test Provider',
+            '--identifier' => 'test-provider',
+            '--name' => 'Test Provider',
         ]);
         /** @var \Symfony\Component\Console\Output\BufferedOutput $output */
         $output = $command->getOutput();
@@ -87,12 +87,12 @@ final class CreateProviderCommandTest extends CommandTestCase
         // Set input property options
         $inputProperty->setValue($instance, new ArrayInput(
             $input ?? [
-                'identifier' => '',
-                'name' => '',
+                '--identifier' => '',
+                '--name' => '',
             ],
             new InputDefinition([
-                new InputArgument('identifier'),
-                new InputArgument('name'),
+                new InputOption('--identifier'),
+                new InputOption('--name'),
             ])
         ));
         $outputProperty->setValue($instance, new BufferedOutput());

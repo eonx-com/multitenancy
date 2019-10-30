@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Bridge\Laravel\Console\Commands;
 
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Commands\CreateProviderCommand;
+use LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable;
 use ReflectionClass;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -22,18 +23,16 @@ final class CreateProviderCommandTest extends CommandTestCase
      *
      * @return void
      *
+     * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
      * @throws \ReflectionException
      */
     public function testErrorOutput(): void
     {
+        $this->expectException(CommandOptionUnusable::class);
+        $this->expectExceptionMessage('Option \'identifier\' could not be resolved to a usable value');
+
         $command = $this->createInstance([]);
         $command->handle(new ProviderServiceStub());
-
-        /** @var \Symfony\Component\Console\Output\BufferedOutput $output */
-        $output = $command->getOutput();
-        $text = $output->fetch();
-
-        self::assertStringContainsString('Provided inputs were not expected format', $text);
     }
 
     /**
@@ -41,6 +40,7 @@ final class CreateProviderCommandTest extends CommandTestCase
      *
      * @return void
      *
+     * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
      * @throws \ReflectionException
      */
     public function testSuccessfulOutput(): void
@@ -61,9 +61,34 @@ final class CreateProviderCommandTest extends CommandTestCase
     }
 
     /**
+     * Test the creation of provider under successful circumstances.
+     *
+     * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
+     * @throws \ReflectionException
+     */
+    public function testSuccessfulOutputWithArrayInputValues(): void
+    {
+        $command = $this->createInstance([
+            '--identifier' => ['test-provider'],
+            '--name' => ['Test Provider'],
+        ]);
+        /** @var \Symfony\Component\Console\Output\BufferedOutput $output */
+        $output = $command->getOutput();
+
+        $command->handle(new ProviderServiceStub());
+        $text = $output->fetch();
+
+        self::assertStringContainsString('Provider has been created.', $text);
+        // ProviderServiceStub yields the 'test-provider' details
+        self::assertStringContainsString('test-provider | Test Provider', $text);
+    }
+
+    /**
      * Create an instance of the command.
      *
-     * @param string[]|null $input
+     * @param mixed[]|null $input
      *
      * @return \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Commands\CreateProviderCommand
      *

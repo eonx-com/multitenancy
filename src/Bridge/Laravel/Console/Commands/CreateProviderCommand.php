@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Commands;
 
 use Illuminate\Console\Command;
+use LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
 
 final class CreateProviderCommand extends Command
@@ -27,16 +28,12 @@ final class CreateProviderCommand extends Command
      * @param \LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface $providerService
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
      */
     public function handle(ProviderServiceInterface $providerService): void
     {
-        [$identifier, $name] = [$this->option('identifier'), $this->option('name')];
-
-        if (\is_string($identifier) === false || \is_string($name) === false) {
-            $this->error('Provided inputs were not expected format');
-
-            return;
-        }
+        [$identifier, $name] = [$this->getOptionValue('identifier'), $this->getOptionValue('name')];
 
         $provider = $providerService->create($identifier, $name);
 
@@ -51,5 +48,30 @@ final class CreateProviderCommand extends Command
                 ],
             ]
         );
+    }
+
+    /**
+     * Resolve a supplied option to the string value.
+     *
+     * @param string $key
+     *
+     * @return string
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
+     */
+    private function getOptionValue(string $key): string
+    {
+        $value = $this->option($key);
+
+        if (\is_array($value) === true) {
+            // Try and resolve some usable value from the 'unexpected' array
+            $value = \reset($value);
+        }
+
+        if (\is_string($value) === true) {
+            return $value;
+        }
+
+        throw new CommandOptionUnusable(\sprintf('Option \'%s\' could not be resolved to a usable value', $key));
     }
 }

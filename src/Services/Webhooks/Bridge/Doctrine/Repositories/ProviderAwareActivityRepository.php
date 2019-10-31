@@ -4,13 +4,12 @@ declare(strict_types=1);
 namespace LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Repositories;
 
 use LoyaltyCorp\Multitenancy\Externals\ORM\Repository;
+use LoyaltyCorp\Multitenancy\Services\Webhooks\Bridge\Doctrine\Interfaces\Repositories\ProviderAwareActivityRepositoryInterface; // phpcs:ignore
 
-final class ProviderAwareActivityRepository extends Repository
+final class ProviderAwareActivityRepository extends Repository implements ProviderAwareActivityRepositoryInterface
 {
     /**
-     * Returns a fill iterable.
-     *
-     * @return \LoyaltyCorp\Multitenancy\Services\Webhooks\Models\ProviderAwareActivityInterface[]
+     * {@inheritdoc}
      *
      * @codeCoverageIgnore This method is exceptionally difficult to test given the incomplete
      * doctrine setup in this libraries test suite and the fact the query builder and query

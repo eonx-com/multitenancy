@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Commands;
 
+use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use Illuminate\Console\Command;
 use LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable;
 use LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface;
@@ -25,17 +26,20 @@ final class CreateProviderCommand extends Command
     /**
      * Extract exception codes.
      *
+     * @param \EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface $entityManager
      * @param \LoyaltyCorp\Multitenancy\Services\Providers\Interfaces\ProviderServiceInterface $providerService
      *
      * @return void
      *
      * @throws \LoyaltyCorp\Multitenancy\Bridge\Laravel\Console\Exceptions\CommandOptionUnusable
      */
-    public function handle(ProviderServiceInterface $providerService): void
+    public function handle(EntityManagerInterface $entityManager, ProviderServiceInterface $providerService): void
     {
         [$identifier, $name] = [$this->getOptionValue('identifier'), $this->getOptionValue('name')];
 
         $provider = $providerService->create($identifier, $name);
+
+        $entityManager->flush();
 
         $this->info('Provider has been created.');
         $this->table(

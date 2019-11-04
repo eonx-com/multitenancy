@@ -11,6 +11,7 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Services\Providers\ProviderServiceStub;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\Unit\CommandTestCase;
 
 /**
@@ -32,7 +33,7 @@ final class CreateProviderCommandTest extends CommandTestCase
         $this->expectExceptionMessage('Option \'identifier\' could not be resolved to a usable value');
 
         $command = $this->createInstance([]);
-        $command->handle(new ProviderServiceStub());
+        $command->handle(new EntityManagerStub(), new ProviderServiceStub());
     }
 
     /**
@@ -52,7 +53,7 @@ final class CreateProviderCommandTest extends CommandTestCase
         /** @var \Symfony\Component\Console\Output\BufferedOutput $output */
         $output = $command->getOutput();
 
-        $command->handle(new ProviderServiceStub());
+        $command->handle(new EntityManagerStub(), new ProviderServiceStub());
         $text = $output->fetch();
 
         self::assertStringContainsString('Provider has been created.', $text);
@@ -77,7 +78,7 @@ final class CreateProviderCommandTest extends CommandTestCase
         /** @var \Symfony\Component\Console\Output\BufferedOutput $output */
         $output = $command->getOutput();
 
-        $command->handle(new ProviderServiceStub());
+        $command->handle(new EntityManagerStub(), new ProviderServiceStub());
         $text = $output->fetch();
 
         self::assertStringContainsString('Provider has been created.', $text);

@@ -25,9 +25,33 @@ final class ProviderService implements ProviderServiceInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Create or find a provider based on external ID.
+     *
+     * @param string $providerId
+     * @param string $name
+     *
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function create(string $providerId, string $name): Provider
+    public function createOrFind(string $providerId, string $name): Provider
+    {
+        $provider = $this->entityManager->getRepository(Provider::class)->findOneBy(['externalId' => $providerId]);
+
+        if (($provider instanceof Provider) === true) {
+            return $provider;
+        }
+
+        return $this->createProviderEntity($providerId, $name);
+    }
+
+    /**
+     * Create an entity for provider.
+     *
+     * @param string $providerId
+     * @param string $name
+     *
+     * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
+     */
+    private function createProviderEntity(string $providerId, string $name): Provider
     {
         $provider = new Provider($providerId, $name);
 

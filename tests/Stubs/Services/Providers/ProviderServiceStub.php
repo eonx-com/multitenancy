@@ -16,7 +16,7 @@ final class ProviderServiceStub implements ProviderServiceInterface
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function create(string $providerId, string $name): Provider
+    public function createOrFind(string $providerId, string $name): Provider
     {
         return new Provider('test-provider', 'Test Provider');
     }

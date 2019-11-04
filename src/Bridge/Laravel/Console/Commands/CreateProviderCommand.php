@@ -37,7 +37,7 @@ final class CreateProviderCommand extends Command
     {
         [$identifier, $name] = [$this->getOptionValue('identifier'), $this->getOptionValue('name')];
 
-        $provider = $providerService->create($identifier, $name);
+        $provider = $providerService->createOrFind($identifier, $name);
 
         $entityManager->flush();
 

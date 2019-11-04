@@ -46,7 +46,7 @@ final class ProviderController extends BaseController
      */
     public function create(ProviderCreateRequest $request): FormattedApiResponseInterface
     {
-        $provider = $this->providerService->create($request->getId(), $request->getName());
+        $provider = $this->providerService->createOrFind($request->getId(), $request->getName());
 
         $this->entityManager->flush();
 

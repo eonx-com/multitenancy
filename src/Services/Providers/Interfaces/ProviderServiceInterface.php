@@ -15,5 +15,5 @@ interface ProviderServiceInterface
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
      */
-    public function create(string $providerId, string $name): Provider;
+    public function createOrFind(string $providerId, string $name): Provider;
 }

@@ -25,7 +25,7 @@ final class ProviderServiceTest extends AppTestCase
         $entityManagerSpy = new EntityManagerSpy();
         $service = $this->getServiceInstance($entityManagerSpy);
 
-        $provider = $service->create('test-provider', 'Test Provider');
+        $provider = $service->createOrFind('test-provider', 'Test Provider');
 
         self::assertSame('test-provider', $provider->getExternalId());
         self::assertSame('Test Provider', $provider->getName());
@@ -44,7 +44,7 @@ final class ProviderServiceTest extends AppTestCase
         $provider = new Provider('big-strong-id', 'Strong Provider');
         $entityManagerSpy->setRepositoryEntity($provider);
 
-        $createdProvider = $service->create('test-provider', 'Test Provider');
+        $createdProvider = $service->createOrFind('test-provider', 'Test Provider');
 
         self::assertFalse($entityManagerSpy->isPersisted());
         self::assertSame($provider, $createdProvider);

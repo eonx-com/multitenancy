@@ -31,10 +31,8 @@ final class ProviderService implements ProviderServiceInterface
      * @param string $name
      *
      * @return \LoyaltyCorp\Multitenancy\Database\Entities\Provider
-     *
-     * @throws \EoneoPay\Externals\ORM\Exceptions\ORMException
      */
-    public function create(string $providerId, string $name): Provider
+    public function createOrFind(string $providerId, string $name): Provider
     {
         $provider = $this->entityManager->getRepository(Provider::class)->findOneBy(['externalId' => $providerId]);
 

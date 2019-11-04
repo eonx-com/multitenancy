@@ -25,6 +25,39 @@ final class ProviderControllerTest extends ControllerTestCase
      *
      * @return void
      */
+    public function testProviderCreateExistingSuccess(): void
+    {
+        $entity = new Provider('test-provider', 'Test Provider');
+        $entityManager = new EntityManagerSpy();
+        $entityManager->setRepositoryEntity($entity);
+        $controller = $this->getControllerInstance($entityManager, new ProviderService($entityManager));
+        $json = <<<'JSON'
+{
+    "id": "test-provider",
+    "name": "Test Provider"
+}
+JSON;
+
+        $expected = [
+            'id' => 'test-provider',
+            'name' => 'Test Provider',
+        ];
+
+        /**
+         * @var \LoyaltyCorp\Multitenancy\Http\Requests\Providers\ProviderCreateRequest $request
+         */
+        $request = $this->requestTestHelper->buildUnvalidatedRequest(ProviderCreateRequest::class, $json);
+        $result = $controller->create($request);
+
+        self::assertSame($expected, $result->getContent());
+        self::assertCount(0, $entityManager->getPersisted());
+    }
+
+    /**
+     * Tests that the `create` method on the controller is successful.
+     *
+     * @return void
+     */
     public function testProviderCreateSuccess(): void
     {
         $entityManager = new EntityManagerSpy();

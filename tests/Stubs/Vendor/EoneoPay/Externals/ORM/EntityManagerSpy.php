@@ -6,10 +6,16 @@ namespace Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM;
 use EoneoPay\Externals\ORM\Interfaces\EntityInterface;
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
 use EoneoPay\Externals\ORM\Interfaces\Query\FilterCollectionInterface;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Externals\ORM\BaseRepositoryStub;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\Query\FilterCollectionStub;
 
 final class EntityManagerSpy implements EntityManagerInterface
 {
+    /**
+     * @var \EoneoPay\Externals\ORM\Interfaces\EntityInterface
+     */
+    private $entity;
+
     /**
      * If it's flushed.
      *
@@ -150,6 +156,7 @@ final class EntityManagerSpy implements EntityManagerInterface
      */
     public function getRepository(string $class)
     {
+        return new BaseRepositoryStub($this->entity);
     }
 
     /**
@@ -212,5 +219,17 @@ final class EntityManagerSpy implements EntityManagerInterface
         $this->persistedEntities = [];
         $this->flushedEntities = [];
         $this->removedEntities = [];
+    }
+
+    /**
+     * Set the entity to be yielded by a repository.
+     *
+     * @param \EoneoPay\Externals\ORM\Interfaces\EntityInterface $entity
+     *
+     * @return void
+     */
+    public function setRepositoryEntity(EntityInterface $entity): void
+    {
+        $this->entity = $entity;
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace Tests\LoyaltyCorp\Multitenancy\Unit\Services\Providers;
 
 use EoneoPay\Externals\ORM\Interfaces\EntityManagerInterface;
+use LoyaltyCorp\Multitenancy\Database\Entities\Provider;
 use LoyaltyCorp\Multitenancy\Services\Providers\ProviderService;
+use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerSpy;
 use Tests\LoyaltyCorp\Multitenancy\Stubs\Vendor\EoneoPay\Externals\ORM\EntityManagerStub;
 use Tests\LoyaltyCorp\Multitenancy\TestCases\AppTestCase;
 
@@ -20,12 +22,32 @@ final class ProviderServiceTest extends AppTestCase
      */
     public function testProviderCreation(): void
     {
-        $serivce = $this->getServiceInstance();
+        $entityManagerSpy = new EntityManagerSpy();
+        $service = $this->getServiceInstance($entityManagerSpy);
 
-        $provider = $serivce->create('test-provider', 'Test Provider');
+        $provider = $service->create('test-provider', 'Test Provider');
 
         self::assertSame('test-provider', $provider->getExternalId());
         self::assertSame('Test Provider', $provider->getName());
+        self::assertTrue($entityManagerSpy->isPersisted());
+    }
+
+    /**
+     * Tests that the provider service successfully returns existing entity when applicable.
+     *
+     * @return void
+     */
+    public function testProviderFindingInsteadOfCreation(): void
+    {
+        $entityManagerSpy = new EntityManagerSpy();
+        $service = $this->getServiceInstance($entityManagerSpy);
+        $provider = new Provider('big-strong-id', 'Strong Provider');
+        $entityManagerSpy->setRepositoryEntity($provider);
+
+        $createdProvider = $service->create('test-provider', 'Test Provider');
+
+        self::assertFalse($entityManagerSpy->isPersisted());
+        self::assertSame($provider, $createdProvider);
     }
 
     /**

@@ -20,6 +20,8 @@ final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
      * host contains a username and password.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function testCreateProxyRequestWithAuthentication(): void
     {
@@ -53,6 +55,8 @@ final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
      * host contains a username and password and multiple indices.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function testCreateProxyRequestWithAuthenticationOnMultipleIndices(): void
     {
@@ -86,6 +90,8 @@ final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
      * host has no authentication details.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function testCreateProxyRequestWithoutAuthentication(): void
     {
@@ -117,6 +123,8 @@ final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
      * Tests the create createProxyRequest method when no index provided.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function testCreateProxyRequestWithoutIndex(): void
     {
@@ -149,6 +157,8 @@ final class ProviderAwareRequestProxyFactoryTest extends AppTestCase
      * as first part of query throws exception.
      *
      * @return void
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function testFactoryThrowsExceptionWhenSearchPathDoesNotContainIndex(): void
     {

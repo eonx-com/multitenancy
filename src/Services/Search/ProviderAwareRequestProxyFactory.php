@@ -31,6 +31,8 @@ final class ProviderAwareRequestProxyFactory implements ProviderAwareRequestProx
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \LoyaltyCorp\Multitenancy\Services\Search\Exceptions\InvalidSearchPathException
      */
     public function createProxyRequest(Provider $provider, RequestInterface $request): RequestInterface
     {
@@ -133,7 +135,7 @@ final class ProviderAwareRequestProxyFactory implements ProviderAwareRequestProx
         $query = $request->getUri()->getQuery();
 
         if ($query !== '') {
-            $searchPath .= '?' . $request->getUri();
+            $searchPath .= '?' . $request->getUri()->getQuery();
         }
 
         return $searchPath;

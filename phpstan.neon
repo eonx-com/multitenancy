@@ -1,5 +1,5 @@
 includes:
-    - vendor/loyaltycorp/requesthandlers/src/Bridge/PhpStan/extension.neon
+    - vendor/eonx-com/requesthandlers/src/Bridge/PhpStan/extension.neon
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor/phpstan/phpstan-phpunit/rules.neon

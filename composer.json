@@ -15,9 +15,9 @@
     "eonx-com/externals": "^1.0",
     "eonx-com/flowconfig-wrapper": "^1.0.5",
     "eonx-com/framework": "^0.1",
+    "eonx-com/requesthandlers": "^1.1",
     "eonx-com/utils": "^1.0",
     "eonx-com/webhooks": "^0.20",
-    "loyaltycorp/requesthandlers": "^1.1",
     "symfony/validator": "^4.3"
   },
   "require-dev": {

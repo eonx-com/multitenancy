@@ -21,11 +21,11 @@
     "symfony/validator": "^4.3"
   },
   "require-dev": {
+    "eonx-com/search": "^2.0",
     "eonx-com/standards": "^0.2",
     "friendsofphp/php-cs-fixer": "^2.9",
     "indigophp/doctrine-annotation-autoload": "^0.1.0",
     "laravel/lumen-framework": "^5.8",
-    "loyaltycorp/search": "^2.0",
     "phpmd/phpmd": "^2.6",
     "phpstan/phpstan": "^0.11",
     "phpstan/phpstan-phpunit": "^0.11",

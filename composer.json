@@ -12,7 +12,7 @@
     "ext-json": "*",
     "doctrine/orm": "^2.6.3",
     "eonx-com/apiformats": "^1.0",
-    "eonx-com/externals": "^1.0",
+    "eonx-com/externals": "^1.0|^2.0",
     "eonx-com/flowconfig-wrapper": "^1.0.5",
     "eonx-com/framework": "^0.1",
     "eonx-com/requesthandlers": "^1.1",

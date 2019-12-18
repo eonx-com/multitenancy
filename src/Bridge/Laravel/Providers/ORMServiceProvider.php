@@ -17,7 +17,7 @@ final class ORMServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(EntityManagerInterface::class, static function (Container $app): EntityManager {
+        $this->app->singleton(EntityManagerInterface::class, static function (Container $app): EntityManager {
             $entityManager = $app->make('registry')->getManager();
 
             return new EntityManager($entityManager);

@@ -18,7 +18,7 @@ final class ProviderSearchServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(IndexNameTransformerInterface::class, ProviderIndexTransformer::class);
+        $this->app->singleton(IndexNameTransformerInterface::class, ProviderIndexTransformer::class);
 
         // Bind proxy factory
         $this->app->singleton(

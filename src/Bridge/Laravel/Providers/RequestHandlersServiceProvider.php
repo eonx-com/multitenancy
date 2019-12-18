@@ -22,15 +22,15 @@ final class RequestHandlersServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(
+        $this->app->singleton(
             ContextConfiguratorInterface::class,
             RequestBodyContextConfigurator::class
         );
-        $this->app->bind(
+        $this->app->singleton(
             DoctrineDenormalizerEntityFinderInterface::class,
             ProviderAwareEntityFinder::class
         );
-        $this->app->bind(
+        $this->app->singleton(
             ProviderAwareObjectBuilderInterface::class,
             static function (Container $app) {
                 return new ProviderAwareObjectBuilder(

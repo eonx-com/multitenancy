@@ -15,7 +15,7 @@
     "eonx-com/externals": "^1.0|^2.0",
     "eonx-com/flowconfig-wrapper": "^1.0.5",
     "eonx-com/framework": "^0.2",
-    "eonx-com/requesthandlers": "^1.1",
+    "eonx-com/requesthandlers": "^1.4",
     "eonx-com/utils": "^1.0",
     "eonx-com/webhooks": "^0.20",
     "symfony/validator": "^4.3"

@@ -65,7 +65,7 @@ final class ApplicationStub implements Application, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function basePath($basePath = ''): string
+    public function basePath($path = null): string
     {
         return \sprintf('%s/../../../../../', __DIR__);
     }

@@ -65,7 +65,7 @@ final class ApplicationStub implements Application, ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function basePath(): string
+    public function basePath($path = null): string
     {
         return \sprintf('%s/../../../../../', __DIR__);
     }
@@ -478,6 +478,14 @@ final class ApplicationStub implements Application, ArrayAccess
     public function singleton($abstract, $concrete = null): void
     {
         $this->callMethod('singleton', [$abstract, $concrete]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function singletonIf($abstract, $concrete = null)
+    {
+        $this->container->singletonIf($abstract, $concrete);
     }
 
     /**
